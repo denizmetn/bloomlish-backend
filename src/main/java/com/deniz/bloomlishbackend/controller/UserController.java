@@ -2,6 +2,7 @@ package com.deniz.bloomlishbackend.controller;
 
 
 import com.deniz.bloomlishbackend.dto.AuthResponse;
+import com.deniz.bloomlishbackend.dto.LoginRequest;
 import com.deniz.bloomlishbackend.dto.RegisterRequest;
 import com.deniz.bloomlishbackend.service.UserService;
 import jakarta.validation.Valid;
@@ -22,6 +23,10 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.ok(userService.register(request));
+    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest request){
+        return ResponseEntity.ok(userService.login(request));
     }
 
 }
