@@ -18,5 +18,7 @@ public class RegisterRequest {
     @NotBlank(message = "Password alanını boş bırakmayınız.")
     @Size(min = 6 , max = 12 , message = "Password alanı en az 6 en fazla 12 karakter olabilir.")
     private String password;
+    @NotBlank(message = "Role alanını boş bırakmayınız.")
+    private String role;
 
 }
