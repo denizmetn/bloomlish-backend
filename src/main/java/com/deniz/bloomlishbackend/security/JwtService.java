@@ -77,8 +77,8 @@ public class JwtService {
         return extractAllClaims(token).get("id", Long.class);
     }
 
-    public String extractUsername(String token) {// kullanıcı adı alanını alır. JWT token içinden subject olarak saklanan kullanıcı adını (username) çıkarmaya yarar.
-        return extractClaim(token,Claims::getSubject); // claim'in subject (yani kullanıcı adı) kısmını döndür.
+    public String extractUsername(String token) {
+        return extractClaim(token,Claims::getSubject);
     }
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
