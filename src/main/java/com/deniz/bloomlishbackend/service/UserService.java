@@ -6,6 +6,7 @@ import com.deniz.bloomlishbackend.dto.RegisterRequest;
 import com.deniz.bloomlishbackend.entity.User;
 import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.deniz.bloomlishbackend.security.JwtService;
+import jakarta.transaction.Transactional;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Builder
-
+@Transactional
 public class UserService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
@@ -35,7 +36,8 @@ public class UserService {
                 .username(request.getUsername())
                 .role(role)
                 .build();
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        System.out.println("Saved user ID: " + savedUser.getUserID());
        String token =jwtService.generateToken(user);
         return new AuthResponse(token);
 
@@ -51,7 +53,6 @@ public class UserService {
 
         User loginUser = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new RuntimeException("Email bulunamadı"));
-
 
         String token= jwtService.generateToken(loginUser);
         return new AuthResponse(token);
