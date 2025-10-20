@@ -52,10 +52,6 @@ public class UserService {
         User loginUser = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new RuntimeException("Email bulunamadı"));
 
-        String requestedRole = loginRequest.getRole() == null ? "" : loginRequest.getRole();
-        if (loginUser.getRole().equalsIgnoreCase(requestedRole)) {
-            throw new RuntimeException("Bu kullanıcı bu giriş tipine yetkili değil.");
-        }
 
         String token= jwtService.generateToken(loginUser);
         return new AuthResponse(token);
