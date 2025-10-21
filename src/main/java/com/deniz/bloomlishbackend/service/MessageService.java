@@ -15,23 +15,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessageService {
     private final MessageRepository messageRepository;
-private final MessageMapper messageMapper;
-    @Transactional(readOnly = true)
-    public List<MessageDto> getConversation(Long user1Id, Long user2Id) {
-        List<Message> entity = messageRepository.findConversation(user1Id, user2Id);
-        return messageMapper.messageToDtoList(entity);
-    }
+    private final MessageMapper messageMapper;
 
-    @Transactional()
+//    //mevcut sohbeti getirme
+//    @Transactional(readOnly = true)
+//    public List<MessageDto> getConversation(Long user1Id, Long user2Id) {
+//        List<Message> entity = messageRepository.findConversation(user1Id, user2Id);
+//        return messageMapper.messageToDtoList(entity);
+//    }
+    //mesaj gönder
+    @Transactional
     public MessageDto saveMessage(MessageDto messageDto) {
         if (messageDto.getSentAt() == null) {
             messageDto.setSentAt(LocalDateTime.now());
         }
-        Message message =messageMapper.DtoToMessage(messageDto);
+        Message message =messageMapper.dtoToMessage(messageDto);
         Message saved = messageRepository.save(message);
         return messageMapper.messageToDto(saved);
     }
-
+    //sohbet geçmişini getir
     @Transactional(readOnly = true)
     public List<MessageDto> getConversationHistory(Long user1Id, Long user2Id) {
         if (user1Id.equals(user2Id)) {
@@ -42,10 +44,11 @@ private final MessageMapper messageMapper;
         return messageMapper.messageToDtoList(conversation);
 
     }
-
+    /*
+    //Yeni sohbet başlat veya mevcut sohbeti getir
     @Transactional()
-    public List<MessageDto> createConversation(){
-
-    }
+    public List<MessageDto> createConversation(Long user1Id, Long user2Id){
+        return getConversationHistory(user1Id,user2Id);
+    }*/
 }
 

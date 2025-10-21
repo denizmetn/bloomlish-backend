@@ -60,6 +60,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User(Long userID){
+        this.userID=userID;
+    }
 }
 
 
