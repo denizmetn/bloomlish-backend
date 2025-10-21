@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface BlogPostMapper {
+public interface  BlogPostMapper {
 
     CommentDto commentToDto(Comment comment);
     Comment dtoToComment(CommentDto dto);
