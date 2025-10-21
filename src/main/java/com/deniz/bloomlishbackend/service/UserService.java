@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,13 +46,13 @@ public class UserService {
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
-        authenticationManager.authenticate(
+        Authentication authenticate=authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
-
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
         User loginUser = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new RuntimeException("Email bulunamadı"));
 

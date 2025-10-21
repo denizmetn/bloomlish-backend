@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,9 +28,12 @@ public class BlogPost {
 
     private int likes;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "blog_post_id")
+    @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+
     private LocalDateTime createdAt= LocalDateTime.now();
+
+    @ElementCollection
+    private Set<String> likedUsers = new HashSet<>();//kimlerin beğendiğini tutar.
 }
