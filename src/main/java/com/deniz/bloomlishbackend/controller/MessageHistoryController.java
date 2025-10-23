@@ -18,9 +18,9 @@ public class MessageHistoryController {
 
     //sohbet geçmişini getir
     @GetMapping("/get/{user1id}/{user2id}")
-    public ResponseEntity<List<MessageDto>>getConversationHistory( // Metot adı da değiştirilebilir
-                                                                   @PathVariable Long user1id,
-                                                                   @PathVariable Long user2id){
+    public ResponseEntity<List<MessageDto>>getConversationHistory(
+            @PathVariable Long user1id,
+            @PathVariable Long user2id){
         List<MessageDto> messages = messageService.getConversationHistory(user1id,user2id);
         return ResponseEntity.ok(messages);
     }

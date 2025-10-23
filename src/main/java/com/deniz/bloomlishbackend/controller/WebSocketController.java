@@ -8,6 +8,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
+
 public class WebSocketController {
     private final SimpMessagingTemplate messagingTemplate;
 

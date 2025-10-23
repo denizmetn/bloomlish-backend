@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository <Message, Long> {
     //sohbet geçmişini getirme sorgusu
-    @Query("SELECT m FROM Message m WHERE (m.sender.id = :user1id AND m.receiver.id = :user2id) OR (m.sender.id = :user2id AND m.receiver.id = :user1id) ORDER BY m.sentAt ASC")
+    @Query("SELECT m FROM Message m WHERE (m.sender.userID = :user1id AND m.receiver.userID = :user2id) OR (m.sender.userID = :user2id AND m.receiver.userID= :user1id) ORDER BY m.sentAt ASC")
         List<Message> findConversation(Long user1id,Long user2id);
 
 }
