@@ -7,13 +7,17 @@ import com.deniz.bloomlishbackend.entity.Comment;
 import com.deniz.bloomlishbackend.mapper.BlogPostMapper;
 import com.deniz.bloomlishbackend.repository.BlogPostRepository;
 import com.deniz.bloomlishbackend.repository.CommentRepository;
-import com.deniz.bloomlishbackend.security.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +25,7 @@ public class BlogPostService {
     private final BlogPostRepository blogPostRepository;
     private final CommentRepository commentRepository;
     private  final BlogPostMapper blogPostMapper;
-    private final JwtService jwtService;
+
 
     public BlogPostDto create(String content,String username) {
         BlogPost blogPost= BlogPost.builder()
@@ -35,13 +39,23 @@ public class BlogPostService {
         return blogPostMapper.toDto(saved);
     }
 
-    public List<BlogPostDto> getAll(){
-        return blogPostMapper.toDtoList(blogPostRepository.findAll());
+    public Page<BlogPostDto> getAll(int page, int size){
+        Pageable pageable= PageRequest.of(page,size, Sort.by("id").descending());
+        return blogPostRepository.findAll(pageable)
+                .map(blogPostMapper::toDto);
     }
     public BlogPostDto getById(Long id) {
         BlogPost blogPost = blogPostRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Post bulunmadı."));
         return blogPostMapper.toDto(blogPost);
+    }
+    public void delete(Long id,String username) {
+        BlogPost blogPost=blogPostRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+        if(!blogPost.getUsername().equals(username)){
+            throw new AccessDeniedException("Bu postu silme yetkiniz yoktur!");
+        }
+        blogPostRepository.delete(blogPost);
     }
     public int like(Long id,String username) {
         BlogPost blogPost = blogPostRepository.findById(id)
@@ -54,13 +68,15 @@ public class BlogPostService {
         blogPostRepository.save(blogPost);
         return blogPost.getLikes();
     }
-    public CommentDto createComment(Long postId,CommentDto commentDto,String token) {
+    public CommentDto createComment(Long postId,CommentDto commentDto,String username) {
         BlogPost post=blogPostRepository.findById(postId)
                 .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
-        String userEmail= jwtService.extractUsername(token);
-        Comment comment=blogPostMapper.dtoToComment(commentDto);
-        comment.setUsername(userEmail);
-        comment.setBlogPost(post);
+        Comment comment=Comment.builder()
+                .text(commentDto.getText())
+                .username(username)
+                .blogPost(post)
+                .build();
+
         Comment saved=commentRepository.save(comment);
         return blogPostMapper.commentToDto(saved);
 

@@ -25,14 +25,10 @@ public class BlogPost {
 
     private String username;
     private String content;
-
     private int likes;
-
+    private LocalDateTime createdAt= LocalDateTime.now();
     @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
-
-
-    private LocalDateTime createdAt= LocalDateTime.now();
 
     @ElementCollection
     private Set<String> likedUsers = new HashSet<>();//kimlerin beğendiğini tutar.
