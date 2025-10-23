@@ -1,8 +1,6 @@
 package com.deniz.bloomlishbackend.controller;
 
-import com.deniz.bloomlishbackend.dto.CommentDto;
 import com.deniz.bloomlishbackend.dto.DailyNoteDto;
-import com.deniz.bloomlishbackend.entity.DailyNote;
 import com.deniz.bloomlishbackend.service.DailyNoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,31 +20,34 @@ public class DailyNoteController {
             @RequestBody DailyNoteDto dailyNoteDto,
             @AuthenticationPrincipal UserDetails userdetails) {
         String username = userdetails.getUsername();
-        return ResponseEntity.ok(dailyNoteService.create(dailyNoteDto,username));
+        return ResponseEntity.ok(dailyNoteService.create(dailyNoteDto, username));
     }
+
     @GetMapping("/get-all")
     public ResponseEntity<Page<DailyNoteDto>> getAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @AuthenticationPrincipal UserDetails userdetails) {
         String username = userdetails.getUsername();
-        return ResponseEntity.ok(dailyNoteService.getAllMyNotes(page,size,username));
+        return ResponseEntity.ok(dailyNoteService.getAllMyNotes(page, size, username));
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable Long id,
-            @AuthenticationPrincipal UserDetails userdetails){
+            @AuthenticationPrincipal UserDetails userdetails) {
         String username = userdetails.getUsername();
-        dailyNoteService.delete(id,username);
+        dailyNoteService.delete(id, username);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<DailyNoteDto> update(
             @PathVariable Long id,
             @RequestBody DailyNoteDto dailyNoteDto,
             @AuthenticationPrincipal UserDetails userdetails) {
         String username = userdetails.getUsername();
-       return ResponseEntity.ok(dailyNoteService.update(id,dailyNoteDto,username));
+        return ResponseEntity.ok(dailyNoteService.update(id, dailyNoteDto, username));
 
     }
 

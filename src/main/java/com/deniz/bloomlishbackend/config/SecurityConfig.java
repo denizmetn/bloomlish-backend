@@ -25,12 +25,31 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {})
                 .authorizeHttpRequests(auth -> auth
+                        // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
+
+                        // Postları listeleme & görüntüleme herkese açık
                         .requestMatchers(HttpMethod.GET, "/api/posts/get-all").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/get/**").permitAll()
+
+                        // Yorumları listeleme & görüntüleme herkese açık
+                        .requestMatchers(HttpMethod.GET, "/api/comments/get-all").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/comments/get/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/comments/get/post/**").permitAll()
+
+                        // Post oluşturma, beğenme, yorum ekleme → sadece login
                         .requestMatchers(HttpMethod.POST, "/api/posts/create").authenticated()
                         .requestMatchers(HttpMethod.PATCH, "/api/posts/*/like").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/posts/*/comment").authenticated()
+
+                        // Yorum silme & güncelleme → sadece login
+                        .requestMatchers(HttpMethod.DELETE,"/api/comments/delete/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT,"/api/comments/update/**").authenticated()
+
+                        // Günlük işlemleri → sadece login
+                        .requestMatchers("/api/notes/**").authenticated()
+
+                        // Diğer her şey login ister
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
