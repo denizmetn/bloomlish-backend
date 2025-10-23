@@ -11,10 +11,10 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.deniz.bloomlishbackend.dto.UserDto;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,41 +41,23 @@ public class UserService {
         User savedUser = userRepository.save(user);
         System.out.println("Saved user ID: " + savedUser.getUserID());
        String token =jwtService.generateToken(user);
-        return AuthResponse.builder()
-                .token(token)
-                .userId(savedUser.getUserID())
-                .build();
+        return new AuthResponse(token);
+
     }
 
-    public AuthResponse login(LoginRequest request) {
-
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı!"));
-
-
-        authenticationManager.authenticate(
+    public AuthResponse login(LoginRequest loginRequest) {
+        Authentication authenticate=authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()
                 )
         );
-        String token = jwtService.generateToken(user);
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        User loginUser = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new RuntimeException("Email bulunamadı"));
 
-
-        return AuthResponse.builder()
-                .token(token)
-                .userId(user.getUserID())
-                .build();
+        String token= jwtService.generateToken(loginUser);
+        return new AuthResponse(token);
     }
-
-    public List<UserDto> getAllUsers() {
-        List<User> userList = userRepository.findAll();
-
-        // Şifre veya hassas alanları göndermiyoruz
-        return userList.stream()
-                .map(u -> new UserDto(u.getUserID(), u.getUsername(), u.getEmail()))
-                .toList();
-    }
-
 
 }
