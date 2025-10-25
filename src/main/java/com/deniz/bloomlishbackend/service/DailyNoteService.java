@@ -61,6 +61,7 @@ public class DailyNoteService {
             throw new AccessDeniedException("Bu postu değiştirme yetkiniz yoktur!");
         }
         dailyNote.setContent(dailyNoteDto.getContent());
+        dailyNote.setCreatedAt(LocalDateTime.now());
        return blogPostMapper.dailyToDto(dailyNoteRepository.save(dailyNote));
     }
 }

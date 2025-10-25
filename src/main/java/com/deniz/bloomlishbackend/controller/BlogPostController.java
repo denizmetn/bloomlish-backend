@@ -49,8 +49,8 @@ public class BlogPostController {
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails)
      {
-         String username=userDetails.getUsername();
-        return ResponseEntity.ok( blogPostService.like(id,username));
+         String email=userDetails.getUsername();
+        return ResponseEntity.ok( blogPostService.like(id,email));
     }
 
     @PostMapping("{postID}/comment")

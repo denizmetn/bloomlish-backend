@@ -57,13 +57,16 @@ public class BlogPostService {
         }
         blogPostRepository.delete(blogPost);
     }
-    public int like(Long id,String username) {
+    public int like(Long id,String email) {
         BlogPost blogPost = blogPostRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
-        if(blogPost.getLikedUsers().contains(username)){
+        if(blogPost.getLikedUsers().contains(email)){
             throw new RuntimeException("Bu kullanıcı zaten bu postu beğendi!");
         }
-        blogPost.getLikedUsers().add(username);
+        if(blogPost.getUsername().equals(email)){
+            throw new  RuntimeException("Kendi postunu beğenemezsin!");
+        }
+        blogPost.getLikedUsers().add(email);
         blogPost.setLikes(blogPost.getLikes() + 1);
         blogPostRepository.save(blogPost);
         return blogPost.getLikes();
