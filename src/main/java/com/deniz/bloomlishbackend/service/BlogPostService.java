@@ -57,19 +57,25 @@ public class BlogPostService {
         }
         blogPostRepository.delete(blogPost);
     }
-    public int like(Long id,String email) {
+    public BlogPostDto like(Long id,String email) {
         BlogPost blogPost = blogPostRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
-        if(blogPost.getLikedUsers().contains(email)){
-            throw new RuntimeException("Bu kullanıcı zaten bu postu beğendi!");
-        }
+
         if(blogPost.getUsername().equals(email)){
             throw new  RuntimeException("Kendi postunu beğenemezsin!");
         }
-        blogPost.getLikedUsers().add(email);
-        blogPost.setLikes(blogPost.getLikes() + 1);
-        blogPostRepository.save(blogPost);
-        return blogPost.getLikes();
+        if (blogPost.getLikedUsers().contains(email)) {
+            // zaten beğenmiş → geri çek
+            blogPost.getLikedUsers().remove(email);
+            blogPost.setLikes(blogPost.getLikes() - 1);
+        } else {
+            // ilk kez beğeniyor
+            blogPost.getLikedUsers().add(email);
+            blogPost.setLikes(blogPost.getLikes() + 1);
+        }
+
+        return blogPostMapper.toDto(  blogPostRepository.save(blogPost));
+
     }
     public CommentDto createComment(Long postId,CommentDto commentDto,String username) {
         BlogPost post=blogPostRepository.findById(postId)

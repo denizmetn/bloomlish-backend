@@ -45,7 +45,7 @@ public class BlogPostController {
         return ResponseEntity.noContent().build();
     }
     @PatchMapping("/{id}/like")
-    public ResponseEntity<Integer> like(
+    public ResponseEntity<BlogPostDto> like(
             @PathVariable Long id,
             @AuthenticationPrincipal UserDetails userDetails)
      {
