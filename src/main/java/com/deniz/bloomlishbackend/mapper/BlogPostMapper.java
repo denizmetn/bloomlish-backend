@@ -18,7 +18,7 @@ import java.util.List;
 public interface  BlogPostMapper {
 
     CommentDto commentToDto(Comment comment);
-    @Mapping(target = "createdAt", ignore = true)
+   
     Comment dtoToComment(CommentDto dto);
 
     @Mapping(target = "likedUsers", source = "likedUsers")

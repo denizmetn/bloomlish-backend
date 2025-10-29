@@ -27,6 +27,7 @@ public class BlogPost {
     private String content;
     private int likes;
     private LocalDateTime createdAt= LocalDateTime.now();
+    private LocalDateTime updatedAt;
     @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 

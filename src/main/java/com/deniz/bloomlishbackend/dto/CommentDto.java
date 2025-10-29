@@ -16,4 +16,5 @@ public class CommentDto {
     private String username;
     private String text;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

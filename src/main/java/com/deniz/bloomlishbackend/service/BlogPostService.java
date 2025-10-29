@@ -90,5 +90,15 @@ public class BlogPostService {
         return blogPostMapper.commentToDto(saved);
 
     }
+    public BlogPostDto update(Long id,BlogPostDto blogPostDto,String username) {
+        BlogPost post= blogPostRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+        if(!post.getUsername().equals(username)){
+            throw new AccessDeniedException("Bu postu değiştirme yetkiniz yoktur!");
+        }
+      post.setContent(blogPostDto.getContent());
+        post.setUpdatedAt(LocalDateTime.now());
+      return  blogPostMapper.toDto(blogPostRepository.save(post));
+    }
 
 }

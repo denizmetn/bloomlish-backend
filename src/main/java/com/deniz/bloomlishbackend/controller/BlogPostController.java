@@ -63,5 +63,15 @@ public class BlogPostController {
         return ResponseEntity.ok(blogPostService.createComment(postID,commentDto,username));
 
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BlogPostDto> update(
+            @PathVariable Long id,
+            @RequestBody BlogPostDto blogPostDto,
+            @AuthenticationPrincipal UserDetails userDetails ){
+        String username=userDetails.getUsername();
+        return ResponseEntity.ok(blogPostService.update(id,blogPostDto,username));
+
+    }
+
 
 }

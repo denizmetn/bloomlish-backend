@@ -18,5 +18,6 @@ public class BlogPostDto {
     private int likes;
     private List<CommentDto> comments;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Set<String> likedUsers;
 }
