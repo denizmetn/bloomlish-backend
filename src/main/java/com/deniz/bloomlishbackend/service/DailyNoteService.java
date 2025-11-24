@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class DailyNoteService {
@@ -21,18 +23,22 @@ public class DailyNoteService {
     private final BlogPostMapper blogPostMapper;
     private final UserRepository userRepository;
 
-    public DailyNoteDto create(DailyNoteDto dailyNoteDto, String username) {
-        User user = userRepository.findByUsername(username)
+    public DailyNoteDto create(DailyNoteDto dailyNoteDto, String email) {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
         DailyNote dailyNote = DailyNote.builder()
                 .content(dailyNoteDto.getContent())
                 .user(user)
+                .createdAt(LocalDateTime.now())
                 .build();
-        return blogPostMapper.dailyToDto(dailyNoteRepository.save(dailyNote));
+        DailyNote saved = dailyNoteRepository.save(dailyNote);
+        DailyNoteDto response = blogPostMapper.dailyToDto(saved);
+        response.setUserId(user.getUserID());
+        return response;
     }
 
-    public Page<DailyNoteDto> getAllMyNotes(int page, int size, String username) {
-        User user= userRepository.findByUsername(username)
+    public Page<DailyNoteDto> getAllMyNotes(int page, int size, String email) {
+        User user= userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
@@ -55,6 +61,7 @@ public class DailyNoteService {
             throw new AccessDeniedException("Bu postu değiştirme yetkiniz yoktur!");
         }
         dailyNote.setContent(dailyNoteDto.getContent());
+        dailyNote.setCreatedAt(LocalDateTime.now());
        return blogPostMapper.dailyToDto(dailyNoteRepository.save(dailyNote));
     }
 }

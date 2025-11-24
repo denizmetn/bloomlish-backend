@@ -19,8 +19,8 @@ public class DailyNoteController {
     public ResponseEntity<DailyNoteDto> create(
             @RequestBody DailyNoteDto dailyNoteDto,
             @AuthenticationPrincipal UserDetails userdetails) {
-        String username = userdetails.getUsername();
-        return ResponseEntity.ok(dailyNoteService.create(dailyNoteDto, username));
+        String email = userdetails.getUsername();
+        return ResponseEntity.ok(dailyNoteService.create(dailyNoteDto, email));
     }
 
     @GetMapping("/get-all")
@@ -28,8 +28,8 @@ public class DailyNoteController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @AuthenticationPrincipal UserDetails userdetails) {
-        String username = userdetails.getUsername();
-        return ResponseEntity.ok(dailyNoteService.getAllMyNotes(page, size, username));
+        String email = userdetails.getUsername();
+        return ResponseEntity.ok(dailyNoteService.getAllMyNotes(page, size, email));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -46,8 +46,8 @@ public class DailyNoteController {
             @PathVariable Long id,
             @RequestBody DailyNoteDto dailyNoteDto,
             @AuthenticationPrincipal UserDetails userdetails) {
-        String username = userdetails.getUsername();
-        return ResponseEntity.ok(dailyNoteService.update(id, dailyNoteDto, username));
+        String email = userdetails.getUsername();
+        return ResponseEntity.ok(dailyNoteService.update(id, dailyNoteDto, email));
 
     }
 

@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -50,6 +52,7 @@ public class CommentService {
             throw new AccessDeniedException("Bu yorumu silme yetkiniz yoktur!");
         }
         comment.setText(commentDto.getText());
+        comment.setUpdatedAt(LocalDateTime.now());
         return blogPostMapper.commentToDto(commentRepository.save(comment));
     }
 

@@ -22,7 +22,15 @@ public class Comment {
     private String username;
     private String text;
     private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_post_id")
     private BlogPost blogPost;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 }

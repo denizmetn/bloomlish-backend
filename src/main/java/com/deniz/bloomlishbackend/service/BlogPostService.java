@@ -57,16 +57,25 @@ public class BlogPostService {
         }
         blogPostRepository.delete(blogPost);
     }
-    public int like(Long id,String username) {
+    public BlogPostDto like(Long id,String email) {
         BlogPost blogPost = blogPostRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
-        if(blogPost.getLikedUsers().contains(username)){
-            throw new RuntimeException("Bu kullanıcı zaten bu postu beğendi!");
+
+        if(blogPost.getUsername().equals(email)){
+            throw new  RuntimeException("Kendi postunu beğenemezsin!");
         }
-        blogPost.getLikedUsers().add(username);
-        blogPost.setLikes(blogPost.getLikes() + 1);
-        blogPostRepository.save(blogPost);
-        return blogPost.getLikes();
+        if (blogPost.getLikedUsers().contains(email)) {
+            // zaten beğenmiş → geri çek
+            blogPost.getLikedUsers().remove(email);
+            blogPost.setLikes(blogPost.getLikes() - 1);
+        } else {
+            // ilk kez beğeniyor
+            blogPost.getLikedUsers().add(email);
+            blogPost.setLikes(blogPost.getLikes() + 1);
+        }
+
+        return blogPostMapper.toDto(  blogPostRepository.save(blogPost));
+
     }
     public CommentDto createComment(Long postId,CommentDto commentDto,String username) {
         BlogPost post=blogPostRepository.findById(postId)
@@ -80,6 +89,16 @@ public class BlogPostService {
         Comment saved=commentRepository.save(comment);
         return blogPostMapper.commentToDto(saved);
 
+    }
+    public BlogPostDto update(Long id,BlogPostDto blogPostDto,String username) {
+        BlogPost post= blogPostRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+        if(!post.getUsername().equals(username)){
+            throw new AccessDeniedException("Bu postu değiştirme yetkiniz yoktur!");
+        }
+      post.setContent(blogPostDto.getContent());
+        post.setUpdatedAt(LocalDateTime.now());
+      return  blogPostMapper.toDto(blogPostRepository.save(post));
     }
 
 }
