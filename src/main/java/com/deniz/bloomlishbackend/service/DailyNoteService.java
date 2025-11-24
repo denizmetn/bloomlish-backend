@@ -36,7 +36,7 @@ public class DailyNoteService {
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
-        return dailyNoteRepository.findByUserId(user.getUserID(),pageable)
+        return dailyNoteRepository.findByUserUserID(user.getUserID(),pageable)
                 .map(blogPostMapper::dailyToDto);
     }
 

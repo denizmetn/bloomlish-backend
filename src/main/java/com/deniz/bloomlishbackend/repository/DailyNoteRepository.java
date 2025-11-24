@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DailyNoteRepository extends JpaRepository<DailyNote, Long> {
-    Page<DailyNote> findByUserId(Long userId, Pageable pageable);
+    Page<DailyNote> findByUserUserID(Long userId, Pageable pageable);
 
 }
