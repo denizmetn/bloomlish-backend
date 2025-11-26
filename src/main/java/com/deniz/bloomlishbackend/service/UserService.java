@@ -31,8 +31,12 @@ public class UserService {
 
     public AuthResponse register(RegisterRequest request) {
 
-        String role = request.getRole() == null ? "" : request.getRole().toUpperCase();
-        if (!"STUDENT".equals(role) && !"TEACHER".equals(role)) {
+        String role = request.getRole();
+
+        if (!role.equals("ROLE_ADMIN") &&
+                !role.equals("ROLE_INSTRUCTOR") &&
+                !role.equals("ROLE_STUDENT")) {
+
             throw new IllegalArgumentException("Seçeneklerden birini seçiniz.");
         }
         User user = User.builder()
