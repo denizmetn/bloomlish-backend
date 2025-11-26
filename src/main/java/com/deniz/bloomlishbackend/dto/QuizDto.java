@@ -20,5 +20,5 @@ public class QuizDto {
     private LocalDateTime createdAt;
 
     private List<QuestionDto> questions;
-    private List<ResultsDto> results;
+    private List<QuizResultsDto> results;
 }

@@ -1,7 +1,7 @@
 package com.deniz.bloomlishbackend.controller;
 
+import com.deniz.bloomlishbackend.dto.QuizResultsDto;
 import com.deniz.bloomlishbackend.dto.QuizSubmitRequest;
-import com.deniz.bloomlishbackend.dto.ResultsDto;
 import com.deniz.bloomlishbackend.service.ResultsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ResultsController {
     private final ResultsService resultsService;
 
     @PostMapping("/submit/{quizId}")
-    public ResponseEntity<ResultsDto> submitQuiz(
+    public ResponseEntity<QuizResultsDto> submitQuiz(
             @PathVariable Long quizId,
             @RequestBody QuizSubmitRequest submitRequest,
             @AuthenticationPrincipal UserDetails userDetails
@@ -28,7 +28,7 @@ public class ResultsController {
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<ResultsDto>> getMyResults(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<List<QuizResultsDto>> getMyResults(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         return ResponseEntity.ok(resultsService.getResultsByUser(username));
     }

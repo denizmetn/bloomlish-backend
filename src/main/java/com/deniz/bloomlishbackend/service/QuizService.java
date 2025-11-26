@@ -1,34 +1,54 @@
 package com.deniz.bloomlishbackend.service;
 
-import com.deniz.bloomlishbackend.dto.QuizDto;
-import com.deniz.bloomlishbackend.entity.Quiz;
-import com.deniz.bloomlishbackend.mapper.QuestionMapper;
-import com.deniz.bloomlishbackend.repository.QuizRepository;
+import com.deniz.bloomlishbackend.dto.QuestionDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class QuizService {
+    private Map<String, List<QuestionDto>> datasets = new HashMap<>();
 
-    public final QuizRepository quizRepository;
-    private final QuestionMapper questionMapper;
+    @PostConstruct
+    public void init() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
 
-
-    public QuizDto create(QuizDto quizDto) {
-        Quiz quiz = Quiz.builder()
-                .quizType(quizDto.getQuizType())
-                .difficulty(quizDto.getDifficulty())
-                .duration(quizDto.getDuration())
-                .build();
-        Quiz saved = quizRepository.save(quiz);
-        return questionMapper.toDtoQuiz(saved);
-
+        datasets.put("kelime", readJson("data/words.json", mapper));
+       // datasets.put("dilbilgisi", readJson("data/grammar.json", mapper));
+        //datasets.put("okuma", readJson("data/reading.json", mapper));
+        //datasets.put("dinleme", readJson("data/listening.json", mapper));
+        //datasets.put("yazim", readJson("data/spelling.json", mapper));
     }
 
-    public QuizDto startQuiz(String quizType, String difficulty, Integer duration) {
-        Quiz quiz = quizRepository.findFirstByQuizTypeAndDifficultyAndDuration(quizType, difficulty, duration)
-                .orElseThrow(() -> new RuntimeException("Uygun quiz bulunamadı."));
-        return questionMapper.toDtoQuiz(quiz);
+    private List<QuestionDto> readJson(String path, ObjectMapper mapper) throws IOException {
+        InputStream is = new ClassPathResource(path).getInputStream();
+        return Arrays.asList(mapper.readValue(is, QuestionDto[].class));
+    }
+
+    public List<QuestionDto> startQuiz(String type, String difficulty, int count) {
+        // 1) Filtrele
+        List<QuestionDto> filtered = datasets.getOrDefault(type, List.of()).stream()
+                .filter(q -> q.getDifficulty() != null &&
+                        q.getDifficulty().equalsIgnoreCase(difficulty))
+                .toList(); // immutable olabilir
+
+        // 2) Mutable listeye kopyala
+        List<QuestionDto> all = new ArrayList<>(filtered);
+
+        // 3) Shuffle artık güvenli
+        Collections.shuffle(all);
+
+        // 4) İlk 'count' kadarını dön
+        return all.stream()
+                .limit(count)
+                .toList();
     }
 }
+

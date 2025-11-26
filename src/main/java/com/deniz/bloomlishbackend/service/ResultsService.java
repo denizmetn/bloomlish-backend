@@ -1,8 +1,8 @@
 package com.deniz.bloomlishbackend.service;
 
 import com.deniz.bloomlishbackend.dto.AnswerDto;
+import com.deniz.bloomlishbackend.dto.QuizResultsDto;
 import com.deniz.bloomlishbackend.dto.QuizSubmitRequest;
-import com.deniz.bloomlishbackend.dto.ResultsDto;
 import com.deniz.bloomlishbackend.entity.Question;
 import com.deniz.bloomlishbackend.entity.Quiz;
 import com.deniz.bloomlishbackend.entity.Results;
@@ -25,7 +25,7 @@ public class ResultsService {
     private final ResultsRepository resultsRepository;
     private final QuestionMapper questionMapper;
 
-    public ResultsDto submitQuiz(Long quizId, QuizSubmitRequest quizSubmitRequest, String username) {
+    public QuizResultsDto submitQuiz(Long quizId, QuizSubmitRequest quizSubmitRequest, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı."));
         Quiz quiz = quizRepository.findById(quizId)
@@ -61,7 +61,7 @@ public class ResultsService {
         return questionMapper.toDtoResults(result);
     }
 
-    public List<ResultsDto> getResultsByUser(String username) {
+    public List<QuizResultsDto> getResultsByUser(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı."));
         List<Results> results = resultsRepository.findByUser(user);

@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class QuestionOptionDto {
     private Long id;
     private String optionText;
-    private boolean correct;
 }

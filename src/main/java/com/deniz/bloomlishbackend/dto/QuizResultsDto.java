@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResultsDto {
+public class QuizResultsDto {
     private Long id;
     private Long userId;
     private Long quizId;
 
     private Integer score;
-    private Integer correct;
-    private Integer wrong;
+    private Integer correctCount;
+    private Integer wrongCount;
     private String level;
     private LocalDateTime takenAt;
 }
