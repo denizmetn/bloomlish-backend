@@ -54,12 +54,13 @@ public class SecurityConfig {
                         // Günlük işlemleri → sadece login
                         .requestMatchers("/api/notes/**").authenticated()
 
-                        //lessons
-                        .requestMatchers(HttpMethod.GET, "/api/lessons/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/lessons/create")
-                                .hasAuthority("ROLE_INSTRUCTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/quiz/start").authenticated()
+                        .requestMatchers("api/results/**").authenticated()
+                        .requestMatchers("api/quiz/start").authenticated()
+                        .requestMatchers("api/quiz/submit").authenticated()
 
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/lessons/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/lessons/**").authenticated()
 
 
                         // Diğer her şey login ister
@@ -88,4 +89,3 @@ public class SecurityConfig {
         return source;
     }
 }
-

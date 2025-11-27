@@ -67,4 +67,30 @@ public class LessonController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/my-lessons")
+    public List<LessonDto> getMyLessons(@AuthenticationPrincipal User instructor) {
+        return lessonService.getLessonsByInstructor(instructor);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteLesson(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User instructor
+    ){
+        lessonService.deleteLesson(id, instructor);
+
+        return ResponseEntity.ok("Ders başarıyla silindi");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<LessonDto> updateLesson(
+            @PathVariable Long id,
+            @RequestBody LessonDto dto,
+            @AuthenticationPrincipal User instructor
+    ) {
+        LessonDto updated = lessonService.updateLesson(id, dto, instructor);
+        return ResponseEntity.ok(updated);
+    }
+
 }

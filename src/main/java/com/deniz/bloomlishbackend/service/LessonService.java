@@ -105,4 +105,48 @@ public class LessonService {
         return lessonRepository.findById(id)
                 .map(lessonMapper:: toDto);
     }
+
+    //eğitmenin kendi derslerini getir
+    public List<LessonDto> getLessonsByInstructor(User instructor) {
+
+        List<Lesson> lessons = lessonRepository.findByInstructor(instructor);
+
+        return lessonMapper.toDtoList(lessons);
+    }
+
+    // 🔹 Eğitmenin kendi dersini silmesi için
+    public void deleteLesson(Long lessonId, User instructor) {
+
+        Lesson lesson = lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        if (!lesson.getInstructor().getUserID().equals(instructor.getUserID())) {
+            throw new RuntimeException("Bu dersi silme yetkiniz yok!");
+        }
+
+        lessonRepository.delete(lesson);
+    }
+
+    public LessonDto updateLesson(Long id, LessonDto dto, User instructor) {
+
+        Lesson lesson = lessonRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        if (!lesson.getInstructor().getUserID().equals(instructor.getUserID())) {
+            throw new RuntimeException("Bu dersi güncelleme yetkiniz yok!");
+        }
+
+        lesson.setName(dto.getName());
+        lesson.setDescription(dto.getDescription());
+        lesson.setDate(dto.getDate());
+        lesson.setStartTime(dto.getStartTime());
+        lesson.setEndTime(dto.getEndTime());
+        lesson.setPrice(dto.getPrice());
+        lesson.setCategory(dto.getCategory());
+        lesson.setLevel(dto.getLevel());
+
+        Lesson saved = lessonRepository.save(lesson);
+        return lessonMapper.toDto(saved);
+    }
+
 }
