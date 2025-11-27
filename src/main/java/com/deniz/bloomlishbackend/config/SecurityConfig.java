@@ -56,7 +56,8 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/api/quiz/start").authenticated()
                         .requestMatchers("api/results/**").authenticated()
-                        .requestMatchers("api/quiz/start").permitAll()
+                        .requestMatchers("api/quiz/start").authenticated()
+                        .requestMatchers("api/quiz/submit").authenticated()
 
                         // Diğer her şey login ister
                         .anyRequest().authenticated()

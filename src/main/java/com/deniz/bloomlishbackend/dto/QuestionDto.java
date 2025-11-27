@@ -26,6 +26,6 @@ public class QuestionDto {
     private Integer estimatedTimeSec;
     private boolean validated;
     private List<String> options;
-
+    private String answer;
     private Long quizId;
 }

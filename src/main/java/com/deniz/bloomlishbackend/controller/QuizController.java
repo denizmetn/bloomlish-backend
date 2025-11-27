@@ -1,7 +1,8 @@
 package com.deniz.bloomlishbackend.controller;
 
 import com.deniz.bloomlishbackend.dto.QuestionDto;
-import com.deniz.bloomlishbackend.dto.QuizDto;
+import com.deniz.bloomlishbackend.dto.QuizResultsDto;
+import com.deniz.bloomlishbackend.dto.QuizSubmitRequest;
 import com.deniz.bloomlishbackend.service.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +24,26 @@ public class QuizController {
             @RequestParam String difficulty,
             @RequestParam Integer limit,
             @AuthenticationPrincipal UserDetails userDetails
-    ){
+    ) {
         if (userDetails == null) {
             throw new RuntimeException("Bu işlemi yapmak için giriş yapmalısınız!");
         }
-        String username=userDetails.getUsername();
+        String username = userDetails.getUsername();
         System.out.println("Quiz başlatan kullanıcı: " + username);
-        return ResponseEntity.ok(quizService.startQuiz(testType,difficulty,limit));
+        return ResponseEntity.ok(quizService.startQuiz(testType, difficulty, limit));
+    }
+
+    @PostMapping("/submit")
+    public ResponseEntity<QuizResultsDto> submitQuiz(
+            @RequestBody QuizSubmitRequest request,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            throw new RuntimeException("Bu işlemi yapmak için giriş yapmalısınız!");
+        }
+        String username = userDetails.getUsername();
+        System.out.println("Quiz çözen kullanıcı: " + username);
+
+        QuizResultsDto result = quizService.evaluateQuiz(username, request.getAnswers());
+        return ResponseEntity.ok(result);
     }
 }
