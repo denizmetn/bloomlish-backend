@@ -54,6 +54,14 @@ public class SecurityConfig {
                         // Günlük işlemleri → sadece login
                         .requestMatchers("/api/notes/**").authenticated()
 
+                        //lessons
+                        .requestMatchers(HttpMethod.GET, "/api/lessons/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/lessons/create")
+                                .hasAuthority("ROLE_INSTRUCTOR")
+
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+
                         // Diğer her şey login ister
                         .anyRequest().authenticated()
                 )

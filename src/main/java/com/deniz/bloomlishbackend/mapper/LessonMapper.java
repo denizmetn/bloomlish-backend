@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface LessonMapper {
 
-    @Mapping(source = "instructor.username", target="instructorName")
+    @Mapping(source = "instructor.username", target = "instructorName")
     LessonDto toDto(Lesson lesson);
 
     Lesson toEntity(LessonDto dto);

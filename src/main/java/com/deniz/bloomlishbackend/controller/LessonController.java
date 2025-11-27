@@ -9,9 +9,11 @@ import com.deniz.bloomlishbackend.service.LessonService;
 import com.deniz.bloomlishbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,12 +27,14 @@ public class LessonController {
     private final LessonService lessonService;
 
     //Yeni ders oluşturma(eğitmen)
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<LessonDto> createLesson(
-            @RequestBody LessonDto lessonDto,
+            @RequestPart("dto") LessonDto lessonDto,
+            @RequestPart(value = "files", required = false) List<MultipartFile> files,
             @AuthenticationPrincipal User instructor
-    ) {
-        LessonDto savedLesson = lessonService.createLesson(lessonDto, instructor);
+    )
+    {
+        LessonDto savedLesson = lessonService.createLesson(lessonDto, files, instructor);
         return ResponseEntity.ok(savedLesson);
     }
 
