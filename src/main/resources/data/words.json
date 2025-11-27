@@ -1,0 +1,483 @@
+[
+  {
+    "id": 1,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means the same as 'big'?",
+    "options": ["Tiny", "Large", "Short", "Weak"],
+    "answer": "Large"
+  },
+  {
+    "id": 2,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means the same as 'fast'?",
+    "options": ["Slow", "Quick", "Cold", "Light"],
+    "answer": "Quick"
+  },
+  {
+    "id": 3,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "What is the synonym of 'happy'?",
+    "options": ["Sad", "Angry", "Joyful", "Hungry"],
+    "answer": "Joyful"
+  },
+  {
+    "id": 4,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means 'not difficult'?",
+    "options": ["Easy", "Hard", "Heavy", "Wrong"],
+    "answer": "Easy"
+  },
+  {
+    "id": 5,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which option means 'correct'?",
+    "options": ["Wrong", "Right", "Empty", "Late"],
+    "answer": "Right"
+  },
+  {
+    "id": 6,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "What is the synonym of 'child'?",
+    "options": ["Kid", "Adult", "Teacher", "Parent"],
+    "answer": "Kid"
+  },
+  {
+    "id": 7,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means 'small'?",
+    "options": ["Huge", "Tiny", "Tall", "Strong"],
+    "answer": "Tiny"
+  },
+  {
+    "id": 8,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which option means the same as 'hungry'?",
+    "options": ["Full", "Thirsty", "Starving", "Tired"],
+    "answer": "Starving"
+  },
+  {
+    "id": 9,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which option means the same as 'beautiful'?",
+    "options": ["Ugly", "Pretty", "Noisy", "Strong"],
+    "answer": "Pretty"
+  },
+  {
+    "id": 10,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "What is the synonym of 'home'?",
+    "options": ["Car", "House", "Store", "Park"],
+    "answer": "House"
+  },
+  {
+    "id": 11,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means 'cold'?",
+    "options": ["Hot", "Warm", "Freezing", "Sweet"],
+    "answer": "Freezing"
+  },
+  {
+    "id": 12,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which option is similar to 'friend'?",
+    "options": ["Enemy", "Buddy", "Stranger", "Boss"],
+    "answer": "Buddy"
+  },
+  {
+    "id": 13,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means 'buy'?",
+    "options": ["Sell", "Purchase", "Cook", "Drive"],
+    "answer": "Purchase"
+  },
+  {
+    "id": 14,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "What is the synonym of 'begin'?",
+    "options": ["End", "Start", "Stop", "Forget"],
+    "answer": "Start"
+  },
+  {
+    "id": 15,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means 'quickly'?",
+    "options": ["Slowly", "Fast", "Quietly", "Loudly"],
+    "answer": "Fast"
+  },
+  {
+    "id": 16,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means the same as 'smart'?",
+    "options": ["Intelligent", "Lazy", "Weak", "Silly"],
+    "answer": "Intelligent"
+  },
+  {
+    "id": 17,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "What is the synonym of 'job'?",
+    "options": ["Hobby", "Work", "Holiday", "Sleep"],
+    "answer": "Work"
+  },
+  {
+    "id": 18,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which word means the same as 'angry'?",
+    "options": ["Calm", "Furious", "Happy", "Relaxed"],
+    "answer": "Furious"
+  },
+  {
+    "id": 19,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "What is the synonym of 'book'?",
+    "options": ["Story", "Phone", "Ball", "Food"],
+    "answer": "Story"
+  },
+  {
+    "id": 20,
+    "type": "kelime",
+    "difficulty": "easy",
+    "question": "Which option means the same as 'fast food'?",
+    "options": ["Homemade food", "Quick meal", "Vegetables", "Breakfast"],
+    "answer": "Quick meal"
+  },
+  {
+    "id": 21,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word is closest in meaning to 'increase'?",
+    "options": ["Reduce", "Grow", "Forget", "Remove"],
+    "answer": "Grow"
+  },
+  {
+    "id": 22,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'improve'?",
+    "options": ["Worsen", "Enhance", "Ignore", "Delay"],
+    "answer": "Enhance"
+  },
+  {
+    "id": 23,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which option is closest to 'suggest'?",
+    "options": ["Propose", "Refuse", "Hide", "Accept"],
+    "answer": "Propose"
+  },
+  {
+    "id": 24,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'require'?",
+    "options": ["Avoid", "Need", "Check", "Destroy"],
+    "answer": "Need"
+  },
+  {
+    "id": 25,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word means 'to make something smaller'?",
+    "options": ["Increase", "Reduce", "Produce", "Imagine"],
+    "answer": "Reduce"
+  },
+  {
+    "id": 26,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which option means the same as 'ability'?",
+    "options": ["Skill", "Time", "Game", "Chance"],
+    "answer": "Skill"
+  },
+  {
+    "id": 27,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'behavior'?",
+    "options": ["Action", "Feeling", "Mistake", "Reason"],
+    "answer": "Action"
+  },
+  {
+    "id": 28,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word is closest in meaning to 'common'?",
+    "options": ["Rare", "Usual", "Difficult", "Private"],
+    "answer": "Usual"
+  },
+  {
+    "id": 29,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word means 'a strong wish or hope'?",
+    "options": ["Desire", "Noise", "Fear", "Plan"],
+    "answer": "Desire"
+  },
+  {
+    "id": 30,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'describe'?",
+    "options": ["Explain", "Forget", "Hide", "Refuse"],
+    "answer": "Explain"
+  },
+  {
+    "id": 31,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which option is similar to 'attend'?",
+    "options": ["Miss", "Join", "Cancel", "Sleep"],
+    "answer": "Join"
+  },
+  {
+    "id": 32,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word means 'almost'?",
+    "options": ["Exactly", "Nearly", "Never", "Already"],
+    "answer": "Nearly"
+  },
+  {
+    "id": 33,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'create'?",
+    "options": ["Destroy", "Make", "Search", "Compare"],
+    "answer": "Make"
+  },
+  {
+    "id": 34,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word means 'finally'?",
+    "options": ["Eventually", "Quickly", "Sadly", "Often"],
+    "answer": "Eventually"
+  },
+  {
+    "id": 35,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which option is closest in meaning to 'protect'?",
+    "options": ["Hurt", "Defend", "Break", "Follow"],
+    "answer": "Defend"
+  },
+  {
+    "id": 36,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word means 'to think deeply about something'?",
+    "options": ["Repeat", "Reflect", "Arrive", "Share"],
+    "answer": "Reflect"
+  },
+  {
+    "id": 37,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'positive'?",
+    "options": ["Hopeful", "Angry", "Unfair", "Lazy"],
+    "answer": "Hopeful"
+  },
+  {
+    "id": 38,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which word means 'very important'?",
+    "options": ["Minor", "Serious", "Useful", "Optional"],
+    "answer": "Serious"
+  },
+  {
+    "id": 39,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "Which option is closest to 'prepare'?",
+    "options": ["Plan", "Forget", "Remove", "Hide"],
+    "answer": "Plan"
+  },
+  {
+    "id": 40,
+    "type": "kelime",
+    "difficulty": "medium",
+    "question": "What is the synonym of 'effect'?",
+    "options": ["Result", "Noise", "Size", "Price"],
+    "answer": "Result"
+  },
+
+    {
+      "id": 41,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word is closest in meaning to 'substantial'?",
+      "options": ["Tiny", "Minimal", "Significant", "Weak"],
+      "answer": "Significant"
+    },
+    {
+      "id": 42,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'anticipate'?",
+      "options": ["Expect", "Forget", "Avoid", "Pretend"],
+      "answer": "Expect"
+    },
+    {
+      "id": 43,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which option is closest to 'justify'?",
+      "options": ["Prove", "Ignore", "Hide", "Replace"],
+      "answer": "Prove"
+    },
+    {
+      "id": 44,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'interpret'?",
+      "options": ["Explain", "Protect", "Collect", "Remove"],
+      "answer": "Explain"
+    },
+    {
+      "id": 45,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word means 'to make something larger or more extensive'?",
+      "options": ["Expand", "Limit", "Refuse", "Repair"],
+      "answer": "Expand"
+    },
+    {
+      "id": 46,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which option is closest in meaning to 'maintain'?",
+      "options": ["Support", "Reduce", "Lose", "Guess"],
+      "answer": "Support"
+    },
+    {
+      "id": 47,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'focus'?",
+      "options": ["Concentrate", "Disagree", "Escape", "Collect"],
+      "answer": "Concentrate"
+    },
+    {
+      "id": 48,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word means 'to provide support or help to something'?",
+      "options": ["Contribute", "Prevent", "Judge", "Hide"],
+      "answer": "Contribute"
+    },
+    {
+      "id": 49,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which option is closest in meaning to 'derive'?",
+      "options": ["Obtain", "Continue", "Exchange", "Destroy"],
+      "answer": "Obtain"
+    },
+    {
+      "id": 50,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'significant'?",
+      "options": ["Important", "Silent", "Random", "Uncertain"],
+      "answer": "Important"
+    },
+    {
+      "id": 51,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word means 'to present or describe something in detail'?",
+      "options": ["Outline", "Ignore", "Pretend", "Release"],
+      "answer": "Outline"
+    },
+    {
+      "id": 52,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which option is a synonym of 'evaluate'?",
+      "options": ["Assess", "Break", "Repeat", "Avoid"],
+      "answer": "Assess"
+    },
+    {
+      "id": 53,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word is closest to 'enhance'?",
+      "options": ["Improve", "End", "Forget", "Hide"],
+      "answer": "Improve"
+    },
+    {
+      "id": 54,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'persuade'?",
+      "options": ["Convince", "Delay", "Divide", "Predict"],
+      "answer": "Convince"
+    },
+    {
+      "id": 55,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which option is closest in meaning to 'considerable'?",
+      "options": ["Large", "Minor", "Cheap", "Empty"],
+      "answer": "Large"
+    },
+    {
+      "id": 56,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word means 'to remove or take away something'?",
+      "options": ["Eliminate", "Collect", "Increase", "Produce"],
+      "answer": "Eliminate"
+    },
+    {
+      "id": 57,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'challenge'?",
+      "options": ["Difficulty", "Peace", "Choice", "Permission"],
+      "answer": "Difficulty"
+    },
+    {
+      "id": 58,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which option means 'exact and detailed'?",
+      "options": ["Accurate", "Flexible", "Hidden", "Temporary"],
+      "answer": "Accurate"
+    },
+    {
+      "id": 59,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "What is the synonym of 'impact'?",
+      "options": ["Effect", "Wish", "Border", "Purpose"],
+      "answer": "Effect"
+    },
+    {
+      "id": 60,
+      "type": "kelime",
+      "difficulty": "hard",
+      "question": "Which word means 'based on facts rather than feelings'?",
+      "options": ["Objective", "Personal", "Random", "Basic"],
+      "answer": "Objective"
+    }
+  ]
