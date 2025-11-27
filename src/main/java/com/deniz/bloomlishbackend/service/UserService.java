@@ -47,7 +47,7 @@ public class UserService {
                 .build();
         User savedUser = userRepository.save(user);
         System.out.println("Saved user ID: " + savedUser.getUserID());
-       String token =jwtService.generateToken(user);
+        String token =jwtService.generateToken(user);
         return  AuthResponse.builder()
                 .token(token)
                 .userId(savedUser.getUserID())
@@ -76,7 +76,6 @@ public class UserService {
                 .email(loginUser.getEmail())
                 .build();
     }
-
     public List<UserDto> getAllUsers() {
         List<User> userList = userRepository.findAll();
 
