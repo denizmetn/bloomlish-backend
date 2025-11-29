@@ -1,0 +1,454 @@
+[
+  {
+    "id": 2401,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What did Anna do yesterday morning?",
+    "options": [
+      "She visited a museum.",
+      "She went to the gym.",
+      "She cooked breakfast.",
+      "She watched a movie."
+    ],
+    "answer": "She visited a museum."
+  },
+  {
+    "id": 2402,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Where did Anna listen to live music?",
+    "options": [
+      "At a music festival.",
+      "At Pete's house.",
+      "At her office.",
+      "At the gym."
+    ],
+    "answer": "At a music festival."
+  },
+  {
+    "id": 2403,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What did Pete do yesterday?",
+    "options": [
+      "He exercised at the gym.",
+      "He went to a concert.",
+      "He visited a museum.",
+      "He traveled to another city."
+    ],
+    "answer": "He exercised at the gym."
+  },
+  {
+    "id": 2404,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "How does Anna describe the festival she saw?",
+    "options": [
+      "Amazing",
+      "Boring",
+      "Short",
+      "Confusing"
+    ],
+    "answer": "Amazing"
+  },
+  {
+    "id": 2405,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Why is Pete surprised?",
+    "options": [
+      "Because Anna did many things in one day.",
+      "Because Anna forgot her schedule.",
+      "Because Anna didn't go to work.",
+      "Because he didn’t see her yesterday."
+    ],
+    "answer": "Because Anna did many things in one day."
+  },
+  {
+    "id": 2406,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Where was Anna at the beginning of the story?",
+    "options": [
+      "At home",
+      "At work",
+      "At the festival",
+      "On the bus"
+    ],
+    "answer": "At work"
+  },
+  {
+    "id": 2407,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Why did Anna go for a walk?",
+    "options": [
+      "She wanted a break",
+      "She was going to meet a friend",
+      "She needed to go shopping",
+      "She got lost in the city"
+    ],
+    "answer": "She wanted a break"
+  },
+  {
+    "id": 2408,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What did Anna find when she was walking?",
+    "options": [
+      "A concert",
+      "A big festival",
+      "A museum",
+      "A sports game"
+    ],
+    "answer": "A big festival"
+  },
+  {
+    "id": 2409,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Which culture was shown at the festival?",
+    "options": [
+      "Italian culture",
+      "Basque culture",
+      "French culture",
+      "Chinese culture"
+    ],
+    "answer": "Basque culture"
+  },
+  {
+    "id": 2410,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What is the name of the handball game they played?",
+    "options": [
+      "Tennis",
+      "Soccer",
+      "Pilota",
+      "Baseball"
+    ],
+    "answer": "Pilota"
+  },
+
+  {
+    "id": 2411,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Why are Anna and Marsha trying to make plans together?",
+    "options": [
+      "Because they both want to spend time together despite their busy schedules.",
+      "Because they have a lot of free time.",
+      "Because Marsha suggested a new movie.",
+      "Because Anna loves the cinema."
+    ],
+    "answer": "Because they both want to spend time together despite their busy schedules."
+  },
+  {
+    "id": 2412,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Why is Anna busy on Thursday night?",
+    "options": [
+      "She teaches ukulele classes.",
+      "She will do tap dancing with her friends.",
+      "She is visiting her family.",
+      "She is attending a concert."
+    ],
+    "answer": "She will do tap dancing with her friends."
+  },
+  {
+    "id": 2413,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "What is Marsha planning to do on Friday night?",
+    "options": [
+      "Watch a movie.",
+      "Visit her family.",
+      "Go shopping.",
+      "Go running in the park."
+    ],
+    "answer": "Visit her family."
+  },
+  {
+    "id": 2414,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Which board game does Anna say is her favorite?",
+    "options": [
+      "Monopoly",
+      "Connect Four",
+      "Scrabble",
+      "Uno"
+    ],
+    "answer": "Scrabble"
+  },
+  {
+    "id": 2415,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Which board game does Marsha say she likes the most?",
+    "options": [
+      "Monopoly",
+      "Scrabble",
+      "Connect Four",
+      "Uno"
+    ],
+    "answer": "Connect Four"
+  },
+  {
+    "id": 2416,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "What does Marsha plan to do on Monday night?",
+    "options": [
+      "Teach ukulele.",
+      "Jog in the park.",
+      "Shop for groceries.",
+      "Watch a movie."
+    ],
+    "answer": "Jog in the park."
+  },
+  {
+    "id": 2417,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "What will Anna do this Wednesday evening?",
+    "options": [
+      "Watch a movie.",
+      "Teach ukulele.",
+      "Go shopping.",
+      "Go running."
+    ],
+    "answer": "Teach ukulele."
+  },
+  {
+    "id": 2418,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "When does Marsha usually do her shopping?",
+    "options": [
+      "Sunday",
+      "Saturday",
+      "Friday",
+      "Wednesday"
+    ],
+    "answer": "Saturday"
+  },
+  {
+    "id": 2419,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "When does the new Star Wars movie start?",
+    "options": [
+      "In 30 minutes.",
+      "In one hour.",
+      "Tonight.",
+      "Tomorrow morning."
+    ],
+    "answer": "In 30 minutes."
+  },
+  {
+    "id": 2420,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "According to the conversation, why should people try to make time for friends?",
+    "options": [
+      "Because going to the cinema is fun.",
+      "Because being busy all the time is healthy.",
+      "Because having social time is important.",
+      "Because games are more fun with friends."
+    ],
+    "answer": "Because having social time is important."
+  },
+
+  {
+    "id": 2421,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "Why did Anna go shopping in this lesson?",
+    "options": [
+      "Because she was hungry.",
+      "Because Marsha asked her to buy the ingredients.",
+      "Because she had extra money.",
+      "Because she wanted to return something."
+    ],
+    "answer": "Because Marsha asked her to buy the ingredients."
+  },
+  {
+    "id": 2422,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Marsha tell Anna before she went shopping?",
+    "options": [
+      "Buy more snacks than needed.",
+      "Buy only some of the items.",
+      "Buy all ingredients on the list and don’t spend too much time.",
+      "Buy drinks, not food."
+    ],
+    "answer": "Buy all ingredients on the list and don’t spend too much time."
+  },
+  {
+    "id": 2423,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What mistake did Anna make when returning from shopping?",
+    "options": [
+      "She forgot to shop at all.",
+      "She bought food for breakfast instead of dinner.",
+      "She lost the shopping list.",
+      "She spent too much money."
+    ],
+    "answer": "She bought food for breakfast instead of dinner."
+  },
+  {
+    "id": 2424,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "Which of these items did Anna buy that was NOT suitable for the dinner party?",
+    "options": [
+      "Peanut butter in a jar",
+      "Rice bag",
+      "Bottle of wine",
+      "Fresh vegetables"
+    ],
+    "answer": "Peanut butter in a jar"
+  },
+  {
+    "id": 2425,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Marsha say was wrong when she checked the groceries?",
+    "options": [
+      "They were too expensive.",
+      "They were the wrong ingredients (shopping list was for breakfast).",
+      "They were expired.",
+      "They were missing."
+    ],
+    "answer": "They were the wrong ingredients (shopping list was for breakfast)."
+  },
+  {
+    "id": 2426,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "How much time did they have before guests arrive?",
+    "options": [
+      "10 minutes",
+      "20 minutes",
+      "30 minutes",
+      "An hour"
+    ],
+    "answer": "30 minutes"
+  },
+  {
+    "id": 2427,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What does the lesson emphasize about English grammar / vocabulary?",
+    "options": [
+      "Use of tenses",
+      "Countable and uncountable nouns with measure words",
+      "Future tense forms",
+      "Comparatives"
+    ],
+    "answer": "Countable and uncountable nouns with measure words"
+  },
+  {
+    "id": 2428,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Anna think when she went shopping — according to her words?",
+    "options": [
+      "Marsha worries too much.",
+      "Shopping is boring.",
+      "They don’t need many ingredients.",
+      "She will cook alone."
+    ],
+    "answer": "Marsha worries too much."
+  },
+  {
+    "id": 2429,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Anna actually end up doing wrong in terms of time or planning?",
+    "options": [
+      "She spent too much time shopping.",
+      "She forgot to shop.",
+      "She lost money.",
+      "She forgot to invite guests."
+    ],
+    "answer": "She spent too much time shopping."
+  },
+  {
+    "id": 2430,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What problem are they facing at the end of the dialogue?",
+    "options": [
+      "They have no food at all.",
+      "Guests canceled their visit.",
+      "They bought wrong ingredients and guests will arrive soon.",
+      "They lost the groceries."
+    ],
+    "answer": "They bought wrong ingredients and guests will arrive soon."
+  }
+]

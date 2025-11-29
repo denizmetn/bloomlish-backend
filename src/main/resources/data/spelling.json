@@ -1,0 +1,466 @@
+[
+  {
+    "id": 300,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a small, furry animal that says 'meow'.",
+    "options": ["cat", "cot", "kat", "cut"],
+    "answer": "cat"
+  },
+  {
+    "id": 301,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for the hot drink made from roasted beans.",
+    "options": ["coffe", "coffee", "cofy", "cofee"],
+    "answer": "coffee"
+  },
+  {
+    "id": 302,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a yellow fruit often eaten as a snack.",
+    "options": ["banana", "bananna", "bannana", "banan"],
+    "answer": "banana"
+  },
+  {
+    "id": 303,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for the opposite of 'day'.",
+    "options": ["nite", "night", "nigt", "niht"],
+    "answer": "night"
+  },
+  {
+    "id": 304,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a common body part used for walking.",
+    "options": ["fot", "foot", "fut", "foott"],
+    "answer": "foot"
+  },
+  {
+    "id": 305,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a hot season after spring.",
+    "options": ["summer", "sumer", "summer", "sommer"],
+    "answer": "summer"
+  },
+  {
+    "id": 306,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for the liquid we drink to stay hydrated.",
+    "options": ["water", "watr", "woter", "waater"],
+    "answer": "water"
+  },
+  {
+    "id": 307,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for the color of the sky on a clear day.",
+    "options": ["blue", "bloo", "blou", "bleu"],
+    "answer": "blue"
+  },
+  {
+    "id": 308,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a sweet food made from cocoa.",
+    "options": ["chocolate", "choklate", "choclate", "chocolat"],
+    "answer": "chocolate"
+  },
+  {
+    "id": 309,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for the first meal of the day.",
+    "options": ["breakfast", "brekfast", "breakfest", "breakfist"],
+    "answer": "breakfast"
+  },
+  {
+    "id": 310,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a vehicle that travels on roads and has four wheels.",
+    "options": ["car", "kar", "carr", "care"],
+    "answer": "car"
+  },
+  {
+    "id": 311,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a large animal with a trunk.",
+    "options": ["elefant", "elephant", "elephent", "eliphant"],
+    "answer": "elephant"
+  },
+  {
+    "id": 312,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a device that rings to wake you up.",
+    "options": ["alarm", "alram", "alrm", "alaarm"],
+    "answer": "alarm"
+  },
+  {
+    "id": 313,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a tool used to write on paper.",
+    "options": ["pen", "penn", "pin", "pan"],
+    "answer": "pen"
+  },
+  {
+    "id": 314,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a device to talk to someone far away.",
+    "options": ["phone", "fone", "phonne", "phun"],
+    "answer": "phone"
+  },
+  {
+    "id": 315,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a place where students learn.",
+    "options": ["school", "shcool", "skool", "schoool"],
+    "answer": "school"
+  },
+  {
+    "id": 316,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for the opposite of 'cold'.",
+    "options": ["hot", "hott", "haat", "hoat"],
+    "answer": "hot"
+  },
+  {
+    "id": 317,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a small, red fruit often used in desserts.",
+    "options": ["strawbery", "strawberry", "strawberri", "strawbary"],
+    "answer": "strawberry"
+  },
+  {
+    "id": 318,
+    "type": "yazim",
+    "difficulty": "easy",
+    "question": "Spell the word for a pet that barks.",
+    "options": ["dog", "dawg", "dug", "dogg"],
+    "answer": "dog"
+  },
+  {
+    "id": 320,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a place where people watch movies.",
+    "options": ["cinema", "sinema", "cinima", "cinimaa"],
+    "answer": "cinema"
+  },
+  {
+    "id": 321,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for the season after winter.",
+    "options": ["spring", "spriing", "sprng", "sprinng"],
+    "answer": "spring"
+  },
+  {
+    "id": 322,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a person who writes books.",
+    "options": ["author", "auther", "awthor", "authur"],
+    "answer": "author"
+  },
+  {
+    "id": 323,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for an area in a city where many shops are located.",
+    "options": ["market", "markett", "marcket", "merkett"],
+    "answer": "market"
+  },
+  {
+    "id": 324,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a place where you can borrow books.",
+    "options": ["library", "libary", "librery", "librrary"],
+    "answer": "library"
+  },
+  {
+    "id": 325,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a piece of clothing worn on the feet.",
+    "options": ["socks", "sox", "sokcs", "sockss"],
+    "answer": "socks"
+  },
+  {
+    "id": 326,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a large area covered by trees.",
+    "options": ["forest", "forrest", "forst", "forrrest"],
+    "answer": "forest"
+  },
+  {
+    "id": 327,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for an electrical device used to cook food.",
+    "options": ["microwave", "microwawe", "microwave", "mickrowave"],
+    "answer": "microwave"
+  },
+  {
+    "id": 328,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a person who travels to different countries for pleasure.",
+    "options": ["tourist", "tuerist", "tourisst", "touristt"],
+    "answer": "tourist"
+  },
+  {
+    "id": 329,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a drink made from leaves, often hot.",
+    "options": ["tea", "tee", "tae", "thea"],
+    "answer": "tea"
+  },
+  {
+    "id": 330,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a person who teaches at a school.",
+    "options": ["teacher", "techer", "teachar", "teachur"],
+    "answer": "teacher"
+  },
+  {
+    "id": 331,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a building where people live in apartments.",
+    "options": ["apartment", "apartament", "aprtment", "apartmant"],
+    "answer": "apartment"
+  },
+  {
+    "id": 332,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a device used to take photographs.",
+    "options": ["camera", "kamara", "camerra", "camara"],
+    "answer": "camera"
+  },
+  {
+    "id": 333,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for an animal known for its long neck.",
+    "options": ["giraffe", "girafe", "giraff", "jirafe"],
+    "answer": "giraffe"
+  },
+  {
+    "id": 334,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a vehicle that flies in the sky.",
+    "options": ["airplane", "aeroplane", "airplan", "airplaine"],
+    "answer": "airplane"
+  },
+  {
+    "id": 335,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for the season when leaves fall from trees.",
+    "options": ["autumn", "autum", "autmn", "autumm"],
+    "answer": "autumn"
+  },
+  {
+    "id": 336,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a sweet baked food often eaten for dessert.",
+    "options": ["cake", "caake", "cace", "cak"],
+    "answer": "cake"
+  },
+  {
+    "id": 337,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for the opposite of 'begin'.",
+    "options": ["end", "and", "ened", "ennd"],
+    "answer": "end"
+  },
+  {
+    "id": 338,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a natural satellite that orbits the Earth.",
+    "options": ["moon", "mun", "moone", "mone"],
+    "answer": "moon"
+  },
+  {
+    "id": 339,
+    "type": "yazim",
+    "difficulty": "medium",
+    "question": "Spell the word for a vehicle that travels on water.",
+    "options": ["boat", "boatt", "boet", "boate"],
+    "answer": "boat"
+  },
+  {
+    "id": 340,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a government official who makes laws.",
+    "options": ["legislator", "legislater", "legislator", "lesislator"],
+    "answer": "legislator"
+  },
+  {
+    "id": 341,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a study of past events.",
+    "options": ["history", "histry", "histtory", "histroy"],
+    "answer": "history"
+  },
+  {
+    "id": 342,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a scientist who studies space and planets.",
+    "options": ["astronomer", "astronomar", "astronomer", "astronummer"],
+    "answer": "astronomer"
+  },
+  {
+    "id": 343,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a person who writes music.",
+    "options": ["composer", "composser", "compuser", "composar"],
+    "answer": "composer"
+  },
+  {
+    "id": 344,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a large book of maps.",
+    "options": ["atlas", "atlaz", "atlass", "atles"],
+    "answer": "atlas"
+  },
+  {
+    "id": 345,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a person who studies human societies and cultures.",
+    "options": ["anthropologist", "antropologist", "anthropoligist", "anthropologiest"],
+    "answer": "anthropologist"
+  },
+  {
+    "id": 346,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a government system ruled by a king or queen.",
+    "options": ["monarchy", "monarcy", "monarcky", "monarky"],
+    "answer": "monarchy"
+  },
+  {
+    "id": 347,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for the study of numbers and calculations.",
+    "options": ["mathematics", "matematics", "mathmatics", "mathemathics"],
+    "answer": "mathematics"
+  },
+  {
+    "id": 348,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for an animal that lives both in water and on land.",
+    "options": ["amphibian", "amfibian", "amfibean", "amphibien"],
+    "answer": "amphibian"
+  },
+  {
+    "id": 349,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a scientist who studies plants.",
+    "options": ["botanist", "botanest", "botanistt", "botanisst"],
+    "answer": "botanist"
+  },
+  {
+    "id": 350,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for the study of the human mind and behavior.",
+    "options": ["psychology", "psichology", "psycology", "psycholgy"],
+    "answer": "psychology"
+  },
+  {
+    "id": 351,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a building where artworks are displayed.",
+    "options": ["museum", "musem", "musium", "museaum"],
+    "answer": "museum"
+  },
+  {
+    "id": 352,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a person who travels to new places for adventure.",
+    "options": ["explorer", "explorrer", "exploorer", "explorerr"],
+    "answer": "explorer"
+  },
+  {
+    "id": 353,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for the system of organizing a country's laws.",
+    "options": ["judiciary", "judicary", "judicery", "judicciary"],
+    "answer": "judiciary"
+  },
+  {
+    "id": 354,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a professional who examines and treats teeth.",
+    "options": ["dentist", "dentisst", "dentest", "dentestt"],
+    "answer": "dentist"
+  },
+  {
+    "id": 355,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a person who acts in movies or theater.",
+    "options": ["actor", "akctor", "aktorr", "actorr"],
+    "answer": "actor"
+  },
+  {
+    "id": 356,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a government official responsible for finances.",
+    "options": ["treasurer", "treasurrer", "treasuerer", "tresurer"],
+    "answer": "treasurer"
+  },
+  {
+    "id": 357,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a professional who defends or prosecutes in court.",
+    "options": ["lawyer", "lawar", "lawyerr", "lowyer"],
+    "answer": "lawyer"
+  },
+  {
+    "id": 358,
+    "type": "yazim",
+    "difficulty": "hard",
+    "question": "Spell the word for a scientist who studies earthquakes.",
+    "options": ["seismologist", "seismologyst", "seismologistt", "seismoligist"],
+    "answer": "seismologist"
+  }
+]

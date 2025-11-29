@@ -1,8 +1,6 @@
 package com.deniz.bloomlishbackend.service;
 
-import com.deniz.bloomlishbackend.dto.AnswerDto;
-import com.deniz.bloomlishbackend.dto.QuestionDto;
-import com.deniz.bloomlishbackend.dto.QuizResultsDto;
+import com.deniz.bloomlishbackend.dto.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +42,63 @@ public class QuizService {
                 .limit(count)
                 .toList();
     }
+    public ListeningQuizResponse startListeningQuiz(String difficulty, int totalLimit) {
+        // 1) Sadece dinleme sorularını al ve zorluk filtresi uygula
+        List<QuestionDto> listeningQs = datasets
+                .getOrDefault("dinleme", List.of()).stream()
+                .filter(q -> q.getDifficulty() != null &&
+                        q.getDifficulty().equalsIgnoreCase(difficulty))
+                .toList();
 
+        // 2) Aynı audioUrl'e sahip soruları grupla
+        Map<String, List<QuestionDto>> groupedByAudio =
+                listeningQs.stream()
+                        .filter(q -> q.getAudioUrl() != null)
+                        .collect(java.util.stream.Collectors.groupingBy(QuestionDto::getAudioUrl));
+
+        List<ListeningAudioGroupDto> audioGroups = new ArrayList<>();
+        long audioIdCounter = 1L;
+
+        // 3) toplam soru limitini kaba şekilde uygula (istersen ilerde ince ayar yaparız)
+        int remaining = totalLimit > 0 ? totalLimit : Integer.MAX_VALUE;
+        List<Map.Entry<String, List<QuestionDto>>> groupEntries =
+                new ArrayList<>(groupedByAudio.entrySet());
+        Collections.shuffle(groupEntries);
+
+        for (Map.Entry<String, List<QuestionDto>> entry : groupedByAudio.entrySet()) {
+            if (remaining <= 0) break;
+
+            String audioUrl = entry.getKey();
+            List<QuestionDto> qs = new ArrayList<>(entry.getValue());
+            String topic = qs.stream()
+                    .map(QuestionDto::getTopic)
+                    .filter(Objects::nonNull)
+                    .findFirst()
+                    .orElse(null);
+
+            Collections.shuffle(qs);
+            List<QuestionDto> chosen;
+            if (remaining < qs.size()) {
+                chosen = qs.subList(0, remaining);
+            } else {
+                chosen = qs;
+            }
+            remaining -= chosen.size();
+
+            ListeningAudioGroupDto group = new ListeningAudioGroupDto();
+            group.setAudioId(audioIdCounter++);
+            group.setAudioUrl(audioUrl);
+            group.setTopic(topic);
+            group.setQuestions(chosen);
+
+            audioGroups.add(group);
+        }
+
+        ListeningQuizResponse response = new ListeningQuizResponse();
+        response.setDifficulty(difficulty);
+        response.setAudioGroups(audioGroups);
+        return response;
+    }
     @PostConstruct
     public void init() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -52,13 +106,21 @@ public class QuizService {
         List<QuestionDto> kelime = readJson("data/words.json", mapper);
         datasets.put("kelime", kelime);
 
-        // İleride diğer tipler:
-        // List<QuestionDto> dil = readJson("data/grammar.json", mapper);
-        // datasets.put("dilbilgisi", dil);
+         List<QuestionDto> dil = readJson("data/grammar.json", mapper);
+         datasets.put("dilbilgisi", dil);
+        List<QuestionDto> okuma = readJson("data/reading.json", mapper);
+        datasets.put("okuma", okuma);
+        List<QuestionDto> yazim = readJson("data/spelling.json", mapper);
+        datasets.put("yazim", yazim);
+       List<QuestionDto> listening = readJson("data/listening.json", mapper);
+        datasets.put("dinleme", listening);
 
-        // Tüm soruları id → QuestionDto map'ine koy
+
         kelime.forEach(q -> questionIndex.put(q.getId(), q));
-        // dil.forEach(q -> questionIndex.put(q.getId(), q)); // vs...
+         dil.forEach(q -> questionIndex.put(q.getId(), q));
+         okuma.forEach(q -> questionIndex.put(q.getId(), q));
+         yazim.forEach(q -> questionIndex.put(q.getId(), q));
+       listening.forEach(q -> questionIndex.put(q.getId(), q));
     }
 
     public QuizResultsDto evaluateQuiz(String username, List<AnswerDto> answers) {

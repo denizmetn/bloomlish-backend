@@ -1,0 +1,475 @@
+[
+  {
+    "id": 200,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Tom wakes up at 7 a.m. every day. He eats breakfast and then walks to school. He enjoys learning new things in his classes.",
+    "options": ["He wakes up early.", "He stays home all day.", "He dislikes school.", "He drives to school."],
+    "answer": "He wakes up early."
+  },
+  {
+    "id": 201,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Sarah has a small dog named Milo. She takes him to the park every afternoon. Milo loves running and playing with other dogs.",
+    "options": ["Milo enjoys the park.", "Milo is a cat.", "Milo never goes outside.", "Milo hates other dogs."],
+    "answer": "Milo enjoys the park."
+  },
+  {
+    "id": 202,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Alex drinks a cup of tea every morning. He says it helps him feel relaxed before starting work.",
+    "options": ["Tea relaxes Alex.", "Alex drinks tea only at night.", "Alex hates tea.", "Tea makes Alex stressed."],
+    "answer": "Tea relaxes Alex."
+  },
+  {
+    "id": 203,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Maria loves cooking. Every weekend she tries a new recipe. Her family enjoys eating her meals.",
+    "options": ["Maria likes cooking.", "Maria dislikes cooking.", "Her family hates her meals.", "Maria cooks only once a year."],
+    "answer": "Maria likes cooking."
+  },
+  {
+    "id": 204,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "The weather is warm today. Many people are at the beach swimming and relaxing.",
+    "options": ["The weather is warm.", "It is snowing today.", "People are staying home.", "No one is at the beach."],
+    "answer": "The weather is warm."
+  },
+  {
+    "id": 205,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Emma reads a book every night before bed. It helps her sleep better.",
+    "options": ["Emma reads before bed.", "Emma never reads.", "Reading keeps her awake.", "Emma reads only in the morning."],
+    "answer": "Emma reads before bed."
+  },
+  {
+    "id": 206,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "David works in a café. He makes sandwiches and coffee for customers.",
+    "options": ["David works at a café.", "David is a doctor.", "David does not serve food.", "David hates coffee."],
+    "answer": "David works at a café."
+  },
+  {
+    "id": 207,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Lisa rides her bicycle to school. She says it is fun and good exercise.",
+    "options": ["Lisa rides a bike.", "Lisa drives a car.", "Lisa hates exercise.", "Lisa never attends school."],
+    "answer": "Lisa rides a bike."
+  },
+  {
+    "id": 208,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "James drinks water during the day to stay healthy. He always carries a water bottle.",
+    "options": ["James drinks water to stay healthy.", "James never drinks water.", "James drinks only soda.", "James forgets his water bottle."],
+    "answer": "James drinks water to stay healthy."
+  },
+  {
+    "id": 209,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Nina visits her grandmother every Sunday. They talk, cook together, and watch movies.",
+    "options": ["Nina visits her grandmother weekly.", "Nina never visits her grandmother.", "They never talk.", "They only play games."],
+    "answer": "Nina visits her grandmother weekly."
+  },
+
+  {
+    "id": 210,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Mark likes playing basketball after school. He usually plays with his best friend at the local court.",
+    "options": ["Mark plays basketball.", "Mark plays tennis.", "Mark hates sports.", "Mark plays alone."],
+    "answer": "Mark plays basketball."
+  },
+  {
+    "id": 211,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Jenny drinks orange juice every morning. She says it gives her energy.",
+    "options": ["Jenny drinks orange juice.", "Jenny hates juice.", "She drinks juice only at night.", "Juice makes her tired."],
+    "answer": "Jenny drinks orange juice."
+  },
+  {
+    "id": 212,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Paul studies English for an hour every day. He wants to speak fluently.",
+    "options": ["Paul studies English daily.", "Paul never studies.", "Paul studies only once a year.", "Paul wants to stop studying."],
+    "answer": "Paul studies English daily."
+  },
+  {
+    "id": 213,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Emily has a small garden. She grows tomatoes, cucumbers, and flowers.",
+    "options": ["Emily has a garden.", "Emily lives in a city with no plants.", "Emily hates gardening.", "Emily grows nothing."],
+    "answer": "Emily has a garden."
+  },
+  {
+    "id": 214,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Kevin listens to music when he studies. It helps him concentrate.",
+    "options": ["Music helps Kevin focus.", "Kevin never listens to music.", "Music distracts Kevin.", "Kevin listens only at night."],
+    "answer": "Music helps Kevin focus."
+  },
+  {
+    "id": 215,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Sophie drinks coffee every morning before work. It helps her wake up.",
+    "options": ["Sophie drinks coffee in the morning.", "Sophie never drinks coffee.", "Coffee makes her sleepy.", "Sophie drinks only water."],
+    "answer": "Sophie drinks coffee in the morning."
+  },
+  {
+    "id": 216,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Olivia visits the library once a week. She borrows books to read at home.",
+    "options": ["Olivia goes to the library weekly.", "Olivia never reads books.", "Olivia hates libraries.", "She buys new books every day."],
+    "answer": "Olivia goes to the library weekly."
+  },
+  {
+    "id": 217,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Lucas loves swimming in the summer. He goes to the pool with his friends.",
+    "options": ["Lucas enjoys swimming.", "Lucas hates the pool.", "Lucas swims only in winter.", "Lucas swims alone."],
+    "answer": "Lucas enjoys swimming."
+  },
+  {
+    "id": 218,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Hannah eats fruit every day. She believes it keeps her healthy.",
+    "options": ["Hannah eats fruit daily.", "Hannah eats only junk food.", "Fruit makes her sick.", "Hannah never eats fruit."],
+    "answer": "Hannah eats fruit daily."
+  },
+  {
+    "id": 219,
+    "type": "okuma",
+    "difficulty": "easy",
+    "question": "Ben walks his cat in the garden every morning. The cat enjoys exploring.",
+    "options": ["Ben walks his cat.", "Ben walks a dog.", "The cat stays inside all the time.", "Ben never goes outside."],
+    "answer": "Ben walks his cat."
+  },
+  {
+    "id": 220,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Anna went to the supermarket yesterday. She bought apples, bread, and some cheese. After shopping, she met her friend and they had a coffee together.",
+    "options": ["Anna met her friend after shopping.", "Anna bought only vegetables.", "Anna went to the park.", "Anna stayed home all day."],
+    "answer": "Anna met her friend after shopping."
+  },
+  {
+    "id": 221,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Tom has been learning English for three years. He practices every day and sometimes watches English movies to improve his listening skills.",
+    "options": ["Tom practices English every day.", "Tom does not practice.", "Tom only reads English books.", "Tom started learning English last month."],
+    "answer": "Tom practices English every day."
+  },
+  {
+    "id": 222,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Lucy enjoys travelling. Last summer she visited France and Italy. She likes exploring new cities and trying local foods.",
+    "options": ["Lucy likes visiting new places.", "Lucy hates travelling.", "Lucy only stays at home.", "Lucy visited Japan."],
+    "answer": "Lucy likes visiting new places."
+  },
+  {
+    "id": 223,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "David went to the doctor because he had a cold. The doctor advised him to rest and drink plenty of water.",
+    "options": ["David should rest and drink water.", "David ignored the doctor.", "David was fine and didn’t visit the doctor.", "The doctor told him to exercise."],
+    "answer": "David should rest and drink water."
+  },
+  {
+    "id": 224,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Samantha works in a bank. She helps clients with their accounts and answers their questions. She enjoys helping people with financial advice.",
+    "options": ["Samantha works in a bank.", "Samantha is a teacher.", "Samantha hates helping clients.", "Samantha works at a café."],
+    "answer": "Samantha works in a bank."
+  },
+  {
+    "id": 225,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Mike was late for the meeting because he missed the bus. He apologized to his colleagues for arriving late.",
+    "options": ["Mike apologized for being late.", "Mike was on time.", "Mike missed a flight.", "Mike enjoyed being late."],
+    "answer": "Mike apologized for being late."
+  },
+  {
+    "id": 226,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Jessica likes reading novels in her free time. She usually reads in the evening before going to bed.",
+    "options": ["Jessica reads novels in the evening.", "Jessica hates reading.", "Jessica reads only in the morning.", "Jessica reads newspapers only."],
+    "answer": "Jessica reads novels in the evening."
+  },
+  {
+    "id": 227,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Robert enjoys hiking. Last weekend, he went to the mountains with his friends and spent the day exploring nature.",
+    "options": ["Robert went hiking last weekend.", "Robert stayed home.", "Robert went skiing.", "Robert went to the beach."],
+    "answer": "Robert went hiking last weekend."
+  },
+  {
+    "id": 228,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Maria bought a new laptop. She plans to use it for studying and doing her school projects.",
+    "options": ["Maria bought a laptop for school projects.", "Maria doesn’t study.", "Maria bought a tablet.", "Maria bought a phone."],
+    "answer": "Maria bought a laptop for school projects."
+  },
+  {
+    "id": 229,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Peter is learning to play the guitar. He practices every day for at least one hour and enjoys it very much.",
+    "options": ["Peter practices guitar daily.", "Peter never practices.", "Peter plays piano.", "Peter practices only once a month."],
+    "answer": "Peter practices guitar daily."
+  },
+  {
+    "id": 230,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Emma went to the cinema yesterday. She watched a comedy movie and really enjoyed it.",
+    "options": ["Emma enjoyed the movie.", "Emma stayed home.", "Emma watched a drama movie.", "Emma didn’t like the movie."],
+    "answer": "Emma enjoyed the movie."
+  },
+  {
+    "id": 231,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "John goes to the gym three times a week. He says it keeps him healthy and energetic.",
+    "options": ["John goes to the gym regularly.", "John never exercises.", "John goes to the gym once a year.", "John hates gyms."],
+    "answer": "John goes to the gym regularly."
+  },
+  {
+    "id": 232,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Alice is learning French. She attends classes twice a week and studies at home every day.",
+    "options": ["Alice studies French daily.", "Alice never studies.", "Alice only speaks English.", "Alice studies French once a month."],
+    "answer": "Alice studies French daily."
+  },
+  {
+    "id": 233,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Mark went shopping last Saturday. He bought a new pair of shoes and some clothes for the party.",
+    "options": ["Mark went shopping last Saturday.", "Mark stayed home.", "Mark bought only a hat.", "Mark bought groceries."],
+    "answer": "Mark went shopping last Saturday."
+  },
+  {
+    "id": 234,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Sophie enjoys painting. She usually paints landscapes and portraits in her free time.",
+    "options": ["Sophie paints landscapes and portraits.", "Sophie hates painting.", "Sophie only draws sketches.", "Sophie paints at work."],
+    "answer": "Sophie paints landscapes and portraits."
+  },
+  {
+    "id": 235,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Henry takes his dog for a walk every evening. He enjoys spending time outside.",
+    "options": ["Henry walks his dog every evening.", "Henry never walks his dog.", "Henry walks a cat.", "Henry stays inside all day."],
+    "answer": "Henry walks his dog every evening."
+  },
+  {
+    "id": 236,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Olivia went to the park to have a picnic with her friends. They played games and ate sandwiches.",
+    "options": ["Olivia had a picnic.", "Olivia stayed home.", "Olivia went shopping.", "Olivia studied in the park."],
+    "answer": "Olivia had a picnic."
+  },
+  {
+    "id": 237,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Paul likes watching documentaries. He says he learns a lot from them.",
+    "options": ["Paul learns from documentaries.", "Paul hates documentaries.", "Paul only watches movies.", "Paul never watches TV."],
+    "answer": "Paul learns from documentaries."
+  },
+  {
+    "id": 238,
+    "type": "okuma",
+    "difficulty": "medium",
+    "question": "Lucy goes to the library to study. She finds it quiet and peaceful there.",
+    "options": ["Lucy studies at the library.", "Lucy never goes to the library.", "Lucy finds the library noisy.", "Lucy studies only at home."],
+    "answer": "Lucy studies at the library."
+  },
+  {
+    "id": 240,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Climate change is affecting weather patterns all over the world. Scientists warn that rising temperatures and changing rainfall could lead to more frequent droughts and floods.",
+    "options": ["Climate change can cause droughts and floods.", "Climate change is not real.", "Weather patterns remain the same.", "Scientists are not concerned about temperatures."],
+    "answer": "Climate change can cause droughts and floods."
+  },
+  {
+    "id": 241,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Many cities around the world are investing in public transportation to reduce traffic congestion and pollution. Buses, trains, and bike-sharing programs are becoming increasingly popular.",
+    "options": ["Public transportation helps reduce traffic and pollution.", "Cities are eliminating public transportation.", "Bikes are rarely used.", "Trains are being removed from cities."],
+    "answer": "Public transportation helps reduce traffic and pollution."
+  },
+  {
+    "id": 242,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Renewable energy sources such as solar and wind power are becoming more efficient and cheaper. Governments encourage their use to decrease dependence on fossil fuels.",
+    "options": ["Renewable energy reduces reliance on fossil fuels.", "Renewable energy is more expensive than coal.", "Fossil fuels are renewable.", "Governments discourage renewable energy."],
+    "answer": "Renewable energy reduces reliance on fossil fuels."
+  },
+  {
+    "id": 243,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Artificial intelligence is being used in many sectors, from healthcare to finance. It can improve efficiency but also raises ethical concerns about privacy and employment.",
+    "options": ["AI is useful but raises ethical concerns.", "AI is only used in factories.", "AI has no impact on employment.", "AI is completely safe and unproblematic."],
+    "answer": "AI is useful but raises ethical concerns."
+  },
+  {
+    "id": 244,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Urbanization has led to the growth of megacities. While they offer economic opportunities, they also face challenges such as overcrowding, pollution, and insufficient infrastructure.",
+    "options": ["Megacities face overcrowding and pollution.", "Urbanization has no challenges.", "Megacities are shrinking.", "Infrastructure is always sufficient."],
+    "answer": "Megacities face overcrowding and pollution."
+  },
+  {
+    "id": 245,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Recycling programs are designed to reduce waste and conserve resources. Citizens are encouraged to sort their trash into different categories for proper processing.",
+    "options": ["Recycling helps conserve resources.", "Recycling increases waste.", "People should throw everything together.", "Recycling has no environmental benefit."],
+    "answer": "Recycling helps conserve resources."
+  },
+  {
+    "id": 246,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Space exploration has advanced significantly over the last decades. Satellites provide essential information about our planet and other celestial bodies.",
+    "options": ["Satellites give information about Earth and space.", "Space exploration has stopped.", "Satellites are useless.", "We know nothing about other planets."],
+    "answer": "Satellites give information about Earth and space."
+  },
+  {
+    "id": 247,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Nutrition experts suggest eating a balanced diet including fruits, vegetables, proteins, and grains to maintain a healthy lifestyle.",
+    "options": ["A balanced diet keeps you healthy.", "Experts recommend only eating meat.", "Fruits are unhealthy.", "Vegetables should be avoided."],
+    "answer": "A balanced diet keeps you healthy."
+  },
+  {
+    "id": 248,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Global tourism has both positive and negative impacts. It creates jobs and promotes cultural exchange, but excessive tourism can damage the environment.",
+    "options": ["Tourism has both benefits and drawbacks.", "Tourism only harms the environment.", "Tourism has no benefits.", "Tourism is declining everywhere."],
+    "answer": "Tourism has both benefits and drawbacks."
+  },
+  {
+    "id": 249,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Mental health awareness has increased in recent years. Many people now understand the importance of seeking help for stress, anxiety, and depression.",
+    "options": ["Mental health awareness is growing.", "Mental health is ignored.", "People never seek help.", "Stress is not a real issue."],
+    "answer": "Mental health awareness is growing."
+  },
+  {
+    "id": 250,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Climate scientists study the effects of greenhouse gases on global warming. Reducing carbon emissions is crucial to limit temperature rise.",
+    "options": ["Reducing carbon emissions helps slow global warming.", "Carbon emissions have no effect.", "Global warming is natural only.", "Scientists ignore greenhouse gases."],
+    "answer": "Reducing carbon emissions helps slow global warming."
+  },
+  {
+    "id": 251,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Digital technology allows people to communicate instantly across the world. However, it also presents challenges such as misinformation and cyber security threats.",
+    "options": ["Digital technology has benefits and risks.", "Digital technology is always safe.", "People cannot communicate digitally.", "Technology is irrelevant today."],
+    "answer": "Digital technology has benefits and risks."
+  },
+  {
+    "id": 252,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Electric vehicles are becoming more common. They reduce pollution and reliance on fossil fuels, but infrastructure such as charging stations is still developing.",
+    "options": ["Electric cars reduce pollution.", "Electric vehicles increase fossil fuel use.", "Charging stations are everywhere.", "EVs are harmful to the environment."],
+    "answer": "Electric cars reduce pollution."
+  },
+  {
+    "id": 253,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Education systems worldwide are adopting online learning. It provides flexibility but may also lead to less social interaction among students.",
+    "options": ["Online learning offers flexibility but less interaction.", "Online learning is exactly the same as classroom learning.", "Students interact more online.", "Online learning has no advantages."],
+    "answer": "Online learning offers flexibility but less interaction."
+  },
+  {
+    "id": 254,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Water scarcity is a growing problem in many regions. Efficient use of water and sustainable management are essential to address this issue.",
+    "options": ["Water scarcity needs sustainable management.", "Water is abundant everywhere.", "Water scarcity is not a concern.", "Wasting water is acceptable."],
+    "answer": "Water scarcity needs sustainable management."
+  },
+  {
+    "id": 255,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Renewable energy investments can create jobs and stimulate economic growth. Governments are increasingly supporting green energy projects.",
+    "options": ["Renewable energy can create jobs.", "Renewable energy reduces employment.", "Green energy projects are discouraged.", "Investments have no economic impact."],
+    "answer": "Renewable energy can create jobs."
+  },
+  {
+    "id": 256,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Biodiversity is essential for ecosystem stability. Human activities such as deforestation and pollution threaten many species worldwide.",
+    "options": ["Human actions threaten biodiversity.", "Biodiversity is unimportant.", "All species are safe.", "Pollution helps species."],
+    "answer": "Human actions threaten biodiversity."
+  },
+  {
+    "id": 257,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Renewable resources like wind and solar energy are key to sustainable development. Investing in them reduces dependence on non-renewable fuels.",
+    "options": ["Renewables reduce dependence on fossil fuels.", "Renewables increase pollution.", "Wind energy is harmful.", "Solar energy is expensive and useless."],
+    "answer": "Renewables reduce dependence on fossil fuels."
+  },
+  {
+    "id": 258,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Urban planning is crucial to prevent overcrowding and traffic congestion. Proper city design improves the quality of life for residents.",
+    "options": ["Good urban planning improves life.", "Urban planning has no effect.", "Overcrowding is not a problem.", "Traffic congestion is unavoidable."],
+    "answer": "Good urban planning improves life."
+  },
+  {
+    "id": 259,
+    "type": "okuma",
+    "difficulty": "hard",
+    "question": "Scientific research relies on observation and experimentation. Sharing results allows others to verify findings and advance knowledge.",
+    "options": ["Research depends on observation and experiments.", "Sharing results is useless.", "Experiments are unnecessary.", "Scientific knowledge does not advance."],
+    "answer": "Research depends on observation and experiments."
+  }
+]
