@@ -11,9 +11,9 @@ public class CheckoutRequest {
 
     private String planType;         // MONTHLY / YEARLY
     private String cardHolderName;
-    private String cardNumber;       // ✔ Düzeltildi
-    private int expiryMonth;         // ✔ Düzeltilmiş
-    private int expiryYear;          // ✔ Düzeltilmiş
+    private String cardNumber;
+    private int expiryMonth;
+    private int expiryYear;
     private String cvc;
     private String billingAddress;
 }
