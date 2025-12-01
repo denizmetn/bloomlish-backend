@@ -62,6 +62,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/lessons/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/lessons/**").authenticated()
 
+                        //ödeme
+                        .requestMatchers(HttpMethod.POST, "/api/payments/lesson-callback").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/payments/lesson/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/payments/my-lessons").authenticated()
 
                         // Diğer her şey login ister
                         .anyRequest().authenticated()
@@ -84,7 +88,16 @@ public class SecurityConfig {
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
+        // CALLBACK için full serbest CORS
+        CorsConfiguration callbackConfig = new CorsConfiguration();
+        callbackConfig.addAllowedOriginPattern("*");
+        callbackConfig.setAllowedMethods(List.of("POST"));
+        callbackConfig.setAllowedHeaders(List.of("*"));
+        callbackConfig.setAllowCredentials(false);
+
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/payments/lesson-callback", callbackConfig);
         source.registerCorsConfiguration("/**", config);
         return source;
     }
