@@ -25,6 +25,10 @@ public class QuizService {
     }
 
     public List<QuestionDto> startQuiz(String type, String difficulty, int count) {
+        // Eğer karışık test istendiyse özel metoda yönlendir
+        if ("karisik".equalsIgnoreCase(type)) {
+            return startMixedQuiz(difficulty, count);
+        }
         // 1) Filtrele
         List<QuestionDto> filtered = datasets.getOrDefault(type, List.of()).stream()
                 .filter(q -> q.getDifficulty() != null &&
@@ -98,6 +102,27 @@ public class QuizService {
         response.setDifficulty(difficulty);
         response.setAudioGroups(audioGroups);
         return response;
+    }
+    public List<QuestionDto> startMixedQuiz(String difficulty, int limit) {
+        // Hangi tipler karışıkta olsun?
+        List<String> types = List.of("kelime", "dilbilgisi", "okuma", "yazim", "dinleme");
+
+        List<QuestionDto> pool = new ArrayList<>();
+
+        for (String type : types) {
+            List<QuestionDto> list = datasets.getOrDefault(type, List.of()).stream()
+                    .filter(q -> q.getDifficulty() != null &&
+                            q.getDifficulty().equalsIgnoreCase(difficulty))
+                    .toList();
+            pool.addAll(list);
+        }
+
+        // Karıştır ve ilk limit kadarını dön
+        Collections.shuffle(pool);
+
+        return pool.stream()
+                .limit(limit)
+                .toList();
     }
     @PostConstruct
     public void init() throws IOException {

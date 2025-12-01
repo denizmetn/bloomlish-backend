@@ -59,6 +59,7 @@ public class SecurityConfig {
                         .requestMatchers("api/quiz/start").authenticated()
                         .requestMatchers("api/quiz/submit").authenticated()
                         .requestMatchers("/audio/**").permitAll()
+                        .requestMatchers("api/results/summary/me").authenticated()
 
 
                         // Diğer her şey login ister

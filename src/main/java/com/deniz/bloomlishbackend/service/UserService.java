@@ -21,7 +21,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Builder
 @Transactional
 public class UserService {
     private final AuthenticationManager authenticationManager;
@@ -80,6 +79,10 @@ public class UserService {
         return userList.stream()
                 .map(u -> new UserDto(u.getUserID(), u.getUsername(), u.getEmail()))
                 .toList();
+    }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Email ile kullanıcı bulunamadı: " + email));
     }
 
 }
