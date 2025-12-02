@@ -11,7 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-public class UserListController {
+public class
+UserListController {
 
     private final UserService userService;
 
@@ -19,5 +20,10 @@ public class UserListController {
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/students")
+    public ResponseEntity<List<UserDto>> getAllStudents() {
+        return ResponseEntity.ok(userService.getAllStudents());
     }
 }

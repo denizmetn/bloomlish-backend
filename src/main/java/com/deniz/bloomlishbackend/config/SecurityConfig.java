@@ -28,10 +28,26 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> {})
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
                 .authorizeHttpRequests(auth -> auth
+
+                        // WebSocket → HERKESE AÇIK OLMALI
+                        .requestMatchers("/socket/**").permitAll()
+                        .requestMatchers("/socket").permitAll()
+
                         // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
+
+
+
+                        .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")
+
+                        //chat ve admin kısmı için liste erişimi
+                        .requestMatchers("/api/users/all").hasRole("ADMIN")
+                        .requestMatchers("/api/users/students").hasAnyRole("STUDENT", "ADMIN")
+
 
                         // Postları listeleme & görüntüleme herkese açık
                         .requestMatchers(HttpMethod.GET, "/api/posts/get-all").permitAll()
@@ -54,21 +70,29 @@ public class SecurityConfig {
                         // Günlük işlemleri → sadece login
                         .requestMatchers("/api/notes/**").authenticated()
 
+
                         .requestMatchers(HttpMethod.GET, "/api/quiz/start").authenticated()
                         .requestMatchers("api/results/**").authenticated()
                         .requestMatchers("api/quiz/start").authenticated()
                         .requestMatchers("api/quiz/submit").authenticated()
 
-                        .requestMatchers(HttpMethod.GET, "/api/lessons/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/api/lessons/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/lessons/create").hasRole("INSTRUCTOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/lessons/**").hasRole("INSTRUCTOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/lessons/**").hasRole("INSTRUCTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/lessons/**").permitAll()
+
 
                         //ödeme
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson-callback").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/payments/my-lessons").authenticated()
 
+
                         // Diğer her şey login ister
                         .anyRequest().authenticated()
+
+
+
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -79,11 +103,10 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173")); // frontend adresin
+        config.addAllowedOriginPattern("http://localhost:5173");
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
@@ -97,6 +120,19 @@ public class SecurityConfig {
 
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration wsConfig = new CorsConfiguration();
+        wsConfig.addAllowedOriginPattern("*");
+        wsConfig.addAllowedMethod("*");
+        wsConfig.addAllowedHeader("*");
+        wsConfig.setAllowCredentials(true);
+
+        source.registerCorsConfiguration("/socket/**", wsConfig);
+        source.registerCorsConfiguration("/socket", wsConfig);
+
+
+
+
         source.registerCorsConfiguration("/api/payments/lesson-callback", callbackConfig);
         source.registerCorsConfiguration("/**", config);
         return source;

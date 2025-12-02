@@ -21,12 +21,6 @@ public class MessageService {
 
     private final UserRepository userRepository;
 
-//    //mevcut sohbeti getirme
-//    @Transactional(readOnly = true)
-//    public List<MessageDto> getConversation(Long user1Id, Long user2Id) {
-//        List<Message> entity = messageRepository.findConversation(user1Id, user2Id);
-//        return messageMapper.messageToDtoList(entity);
-//    }
     //mesaj gönder
     @Transactional
     public MessageDto saveMessage(MessageDto messageDto) {
@@ -37,6 +31,11 @@ public class MessageService {
                 .orElseThrow(() -> new RuntimeException("Gönderen kullanıcı bulunamadı"));
         User receiver= userRepository.findById(messageDto.getReceiverId())
                 .orElseThrow(() -> new RuntimeException("Alıcı kullanıcı bulunamadı"));
+
+        if (!sender.getRole().contains("STUDENT") || !receiver.getRole().contains("STUDENT")) {
+            throw new RuntimeException("Mesajlaşma sadece öğrenciler arasında yapılabilir.");
+        }
+
 
         Message messageNote=Message.builder()
                 .content(messageDto.getContent())
@@ -57,11 +56,6 @@ public class MessageService {
         return messageMapper.messageToDtoList(conversation);
 
     }
-    /*
-    //Yeni sohbet başlat veya mevcut sohbeti getir
-    @Transactional()
-    public List<MessageDto> createConversation(Long user1Id, Long user2Id){
-        return getConversationHistory(user1Id,user2Id);
-    }*/
+
 }
 

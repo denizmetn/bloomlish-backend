@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,7 @@ public class LessonController {
     private final LessonService lessonService;
 
     //Yeni ders oluşturma(eğitmen)
+    @PreAuthorize("hasRole('INSTRUCTOR')")
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<LessonDto> createLesson(
             @RequestPart("dto") LessonDto lessonDto,
@@ -68,11 +70,13 @@ public class LessonController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("hasRole('INSTRUCTOR')")
     @GetMapping("/my-lessons")
     public List<LessonDto> getMyLessons(@AuthenticationPrincipal User instructor) {
         return lessonService.getLessonsByInstructor(instructor);
     }
 
+    @PreAuthorize("hasRole('INSTRUCTOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLesson(
             @PathVariable Long id,
@@ -83,6 +87,7 @@ public class LessonController {
         return ResponseEntity.ok("Ders başarıyla silindi");
     }
 
+    @PreAuthorize("hasRole('INSTRUCTOR')")
     @PutMapping("/{id}")
     public ResponseEntity<LessonDto> updateLesson(
             @PathVariable Long id,

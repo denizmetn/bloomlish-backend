@@ -85,4 +85,15 @@ public class UserService {
                 .toList();
     }
 
+    public List<UserDto> getAllStudents() {
+        List<User> students = userRepository.findAll()
+                .stream()
+                .filter(u -> "ROLE_STUDENT".equals(u.getRole()))
+                .toList();
+
+        return students.stream()
+                .map(u -> new UserDto(u.getUserID(), u.getUsername(), u.getEmail()))
+                .toList();
+    }
+
 }
