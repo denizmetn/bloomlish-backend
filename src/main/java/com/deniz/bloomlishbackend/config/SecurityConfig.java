@@ -64,6 +64,7 @@ public class SecurityConfig {
 
                         //ödeme
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson-callback").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/billing/checkout-callback").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/payments/my-lessons").authenticated()
 
@@ -82,23 +83,30 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        // Frontend için normal CORS
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173")); // frontend adresin
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS"));
+        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
-        // CALLBACK için full serbest CORS
+        // Iyzi callback'leri için full serbest (server-to-server geliyor)
         CorsConfiguration callbackConfig = new CorsConfiguration();
         callbackConfig.addAllowedOriginPattern("*");
-        callbackConfig.setAllowedMethods(List.of("POST"));
+        callbackConfig.setAllowedMethods(List.of("GET", "POST", "OPTIONS")); // emin olmak için GET de ekledik
         callbackConfig.setAllowedHeaders(List.of("*"));
         callbackConfig.setAllowCredentials(false);
 
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // ders ödeme callback
         source.registerCorsConfiguration("/api/payments/lesson-callback", callbackConfig);
+        // abonelik ödeme callback
+        source.registerCorsConfiguration("/api/billing/checkout-callback", callbackConfig);
+        // diğer her şey
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
+
+
 }
