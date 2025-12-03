@@ -1,0 +1,1054 @@
+[
+  {
+    "id": 2401,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What did Anna do yesterday morning?",
+    "options": [
+      "She visited a museum.",
+      "She went to the gym.",
+      "She cooked breakfast.",
+      "She watched a movie."
+    ],
+    "answer": "She visited a museum."
+  },
+  {
+    "id": 2402,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Where did Anna listen to live music?",
+    "options": [
+      "At a music festival.",
+      "At Pete's house.",
+      "At her office.",
+      "At the gym."
+    ],
+    "answer": "At a music festival."
+  },
+  {
+    "id": 2403,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What did Pete do yesterday?",
+    "options": [
+      "He exercised at the gym.",
+      "He went to a concert.",
+      "He visited a museum.",
+      "He traveled to another city."
+    ],
+    "answer": "He exercised at the gym."
+  },
+  {
+    "id": 2404,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "How does Anna describe the festival she saw?",
+    "options": [
+      "Amazing",
+      "Boring",
+      "Short",
+      "Confusing"
+    ],
+    "answer": "Amazing"
+  },
+  {
+    "id": 2405,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Why is Pete surprised?",
+    "options": [
+      "Because Anna did many things in one day.",
+      "Because Anna forgot her schedule.",
+      "Because Anna didn't go to work.",
+      "Because he didn’t see her yesterday."
+    ],
+    "answer": "Because Anna did many things in one day."
+  },
+  {
+    "id": 2406,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Where was Anna at the beginning of the story?",
+    "options": [
+      "At home",
+      "At work",
+      "At the festival",
+      "On the bus"
+    ],
+    "answer": "At work"
+  },
+  {
+    "id": 2407,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Why did Anna go for a walk?",
+    "options": [
+      "She wanted a break",
+      "She was going to meet a friend",
+      "She needed to go shopping",
+      "She got lost in the city"
+    ],
+    "answer": "She wanted a break"
+  },
+  {
+    "id": 2408,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What did Anna find when she was walking?",
+    "options": [
+      "A concert",
+      "A big festival",
+      "A museum",
+      "A sports game"
+    ],
+    "answer": "A big festival"
+  },
+  {
+    "id": 2409,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "Which culture was shown at the festival?",
+    "options": [
+      "Italian culture",
+      "Basque culture",
+      "French culture",
+      "Chinese culture"
+    ],
+    "answer": "Basque culture"
+  },
+  {
+    "id": 2410,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson24_conversation.mp3",
+    "topic": "Yesterday Was Amazing!",
+    "question": "What is the name of the handball game they played?",
+    "options": [
+      "Tennis",
+      "Soccer",
+      "Pilota",
+      "Baseball"
+    ],
+    "answer": "Pilota"
+  },
+
+  {
+    "id": 2411,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Why are Anna and Marsha trying to make plans together?",
+    "options": [
+      "Because they both want to spend time together despite their busy schedules.",
+      "Because they have a lot of free time.",
+      "Because Marsha suggested a new movie.",
+      "Because Anna loves the cinema."
+    ],
+    "answer": "Because they both want to spend time together despite their busy schedules."
+  },
+  {
+    "id": 2412,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Why is Anna busy on Thursday night?",
+    "options": [
+      "She teaches ukulele classes.",
+      "She will do tap dancing with her friends.",
+      "She is visiting her family.",
+      "She is attending a concert."
+    ],
+    "answer": "She will do tap dancing with her friends."
+  },
+  {
+    "id": 2413,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "What is Marsha planning to do on Friday night?",
+    "options": [
+      "Watch a movie.",
+      "Visit her family.",
+      "Go shopping.",
+      "Go running in the park."
+    ],
+    "answer": "Visit her family."
+  },
+  {
+    "id": 2414,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Which board game does Anna say is her favorite?",
+    "options": [
+      "Monopoly",
+      "Connect Four",
+      "Scrabble",
+      "Uno"
+    ],
+    "answer": "Scrabble"
+  },
+  {
+    "id": 2415,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "Which board game does Marsha say she likes the most?",
+    "options": [
+      "Monopoly",
+      "Scrabble",
+      "Connect Four",
+      "Uno"
+    ],
+    "answer": "Connect Four"
+  },
+  {
+    "id": 2416,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "What does Marsha plan to do on Monday night?",
+    "options": [
+      "Teach ukulele.",
+      "Jog in the park.",
+      "Shop for groceries.",
+      "Watch a movie."
+    ],
+    "answer": "Jog in the park."
+  },
+  {
+    "id": 2417,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "What will Anna do this Wednesday evening?",
+    "options": [
+      "Watch a movie.",
+      "Teach ukulele.",
+      "Go shopping.",
+      "Go running."
+    ],
+    "answer": "Teach ukulele."
+  },
+  {
+    "id": 2418,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "When does Marsha usually do her shopping?",
+    "options": [
+      "Sunday",
+      "Saturday",
+      "Friday",
+      "Wednesday"
+    ],
+    "answer": "Saturday"
+  },
+  {
+    "id": 2419,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "When does the new Star Wars movie start?",
+    "options": [
+      "In 30 minutes.",
+      "In one hour.",
+      "Tonight.",
+      "Tomorrow morning."
+    ],
+    "answer": "In 30 minutes."
+  },
+  {
+    "id": 2420,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson17_conversation.mp3",
+    "topic": "Are You Free on Friday?",
+    "question": "According to the conversation, why should people try to make time for friends?",
+    "options": [
+      "Because going to the cinema is fun.",
+      "Because being busy all the time is healthy.",
+      "Because having social time is important.",
+      "Because games are more fun with friends."
+    ],
+    "answer": "Because having social time is important."
+  },
+
+  {
+    "id": 2421,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "Why did Anna go shopping in this lesson?",
+    "options": [
+      "Because she was hungry.",
+      "Because Marsha asked her to buy the ingredients.",
+      "Because she had extra money.",
+      "Because she wanted to return something."
+    ],
+    "answer": "Because Marsha asked her to buy the ingredients."
+  },
+  {
+    "id": 2422,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Marsha tell Anna before she went shopping?",
+    "options": [
+      "Buy more snacks than needed.",
+      "Buy only some of the items.",
+      "Buy all ingredients on the list and don’t spend too much time.",
+      "Buy drinks, not food."
+    ],
+    "answer": "Buy all ingredients on the list and don’t spend too much time."
+  },
+  {
+    "id": 2423,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What mistake did Anna make when returning from shopping?",
+    "options": [
+      "She forgot to shop at all.",
+      "She bought food for breakfast instead of dinner.",
+      "She lost the shopping list.",
+      "She spent too much money."
+    ],
+    "answer": "She bought food for breakfast instead of dinner."
+  },
+  {
+    "id": 2424,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "Which of these items did Anna buy that was NOT suitable for the dinner party?",
+    "options": [
+      "Peanut butter in a jar",
+      "Rice bag",
+      "Bottle of wine",
+      "Fresh vegetables"
+    ],
+    "answer": "Peanut butter in a jar"
+  },
+  {
+    "id": 2425,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Marsha say was wrong when she checked the groceries?",
+    "options": [
+      "They were too expensive.",
+      "They were the wrong ingredients (shopping list was for breakfast).",
+      "They were expired.",
+      "They were missing."
+    ],
+    "answer": "They were the wrong ingredients (shopping list was for breakfast)."
+  },
+  {
+    "id": 2426,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "How much time did they have before guests arrive?",
+    "options": [
+      "10 minutes",
+      "20 minutes",
+      "30 minutes",
+      "An hour"
+    ],
+    "answer": "30 minutes"
+  },
+  {
+    "id": 2427,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What does the lesson emphasize about English grammar / vocabulary?",
+    "options": [
+      "Use of tenses",
+      "Countable and uncountable nouns with measure words",
+      "Future tense forms",
+      "Comparatives"
+    ],
+    "answer": "Countable and uncountable nouns with measure words"
+  },
+  {
+    "id": 2428,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Anna think when she went shopping — according to her words?",
+    "options": [
+      "Marsha worries too much.",
+      "Shopping is boring.",
+      "They don’t need many ingredients.",
+      "She will cook alone."
+    ],
+    "answer": "Marsha worries too much."
+  },
+  {
+    "id": 2429,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What did Anna actually end up doing wrong in terms of time or planning?",
+    "options": [
+      "She spent too much time shopping.",
+      "She forgot to shop.",
+      "She lost money.",
+      "She forgot to invite guests."
+    ],
+    "answer": "She spent too much time shopping."
+  },
+  {
+    "id": 2430,
+    "type": "dinleme",
+    "difficulty": "Easy",
+    "audioUrl": "/audio/voa/lesson35_conversation.mp3",
+    "topic": "Let’s Make Dinner!",
+    "question": "What problem are they facing at the end of the dialogue?",
+    "options": [
+      "They have no food at all.",
+      "Guests canceled their visit.",
+      "They bought wrong ingredients and guests will arrive soon.",
+      "They lost the groceries."
+    ],
+    "answer": "They bought wrong ingredients and guests will arrive soon."
+  },
+  {
+    "id": 2431,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/saying_no_at_work_can_be_good_for_your_health.mp3",
+    "topic": "Saying ‘No’ at Work Can Be Good for Your Health",
+    "question": "Why did Justin Stewart quit his side jobs?",
+    "options": [
+      "He moved to another city.",
+      "He became too busy with his main job.",
+      "He was hospitalized due to extreme tiredness and stress.",
+      "He didn’t like working at the airport anymore."
+    ],
+    "answer": "He was hospitalized due to extreme tiredness and stress."
+  },
+  {
+    "id": 2432,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/saying_no_at_work_can_be_good_for_your_health.mp3",
+    "topic": "Saying ‘No’ at Work Can Be Good for Your Health",
+    "question": "According to experts, what is one benefit of saying “no” at work?",
+    "options": [
+      "It always leads to more free weekends.",
+      "It helps protect physical and mental health.",
+      "It guarantees a promotion.",
+      "It increases your monthly income."
+    ],
+    "answer": "It helps protect physical and mental health."
+  },
+  {
+    "id": 2433,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/saying_no_at_work_can_be_good_for_your_health.mp3",
+    "topic": "Saying ‘No’ at Work Can Be Good for Your Health",
+    "question": "What is one suggested method to make saying “no” easier, according to the article?",
+    "options": [
+      "Refusing requests immediately without thinking.",
+      "Explain in detail why you are saying no.",
+      "Write down what to say beforehand and practice it.",
+      "Ignore the request and hope the requester forgets."
+    ],
+    "answer": "Write down what to say beforehand and practice it."
+  },
+  {
+    "id": 2434,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/saying_no_at_work_can_be_good_for_your_health.mp3",
+    "topic": "Saying ‘No’ at Work Can Be Good for Your Health",
+    "question": "What strategy did the founder of event-production company GBM6 say he uses to avoid becoming too busy?",
+    "options": [
+      "He works extra hours on weekends.",
+      "He plans his most likely delayed task every Monday at 2 p.m.",
+      "He always says yes to his colleagues.",
+      "He takes on many small tasks instead of one big one."
+    ],
+    "answer": "He plans his most likely delayed task every Monday at 2 p.m."
+  },
+  {
+    "id": 2435,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/saying_no_at_work_can_be_good_for_your_health.mp3",
+    "topic": "Saying ‘No’ at Work Can Be Good for Your Health",
+    "question": "Why might some workers find it difficult to say no to additional work requests?",
+    "options": [
+      "They are paid more if they say no.",
+      "They want to feel needed or please others.",
+      "They know they will get the next day off anyway.",
+      "They enjoy working long hours."
+    ],
+    "answer": "They want to feel needed or please others."
+  },
+  {
+    "id": 2436,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/what_is_the_super_bowl.mp3",
+    "topic": "What Is the Super Bowl?",
+    "question": "What is the Super Bowl according to the article?",
+    "options": [
+      "The final concert of the year in the United States",
+      "The championship game of professional American football",
+      "A festival held every spring in New Orleans",
+      "The annual meeting of all American football teams"
+    ],
+    "answer": "The championship game of professional American football"
+  },
+  {
+    "id": 2437,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/what_is_the_super_bowl.mp3",
+    "topic": "What Is the Super Bowl?",
+    "question": "How many teams are in the National Football League (NFL)?",
+    "options": [
+      "16",
+      "24",
+      "32",
+      "40"
+    ],
+    "answer": "32"
+  },
+  {
+    "id": 2438,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/what_is_the_super_bowl.mp3",
+    "topic": "What Is the Super Bowl?",
+    "question": "When was the first Super Bowl played?",
+    "options": [
+      "1965",
+      "1967",
+      "1970",
+      "1973"
+    ],
+    "answer": "1967"
+  },
+  {
+    "id": 2439,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/what_is_the_super_bowl.mp3",
+    "topic": "What Is the Super Bowl?",
+    "question": "Which two leagues merged that eventually led to the creation of the Super Bowl?",
+    "options": [
+      "NFC and AFC",
+      "NBA and NFL",
+      "NFL and AFL",
+      "MLB and NFL"
+    ],
+    "answer": "NFL and AFL"
+  },
+  {
+    "id": 2440,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/what_is_the_super_bowl.mp3",
+    "topic": "What Is the Super Bowl?",
+    "question": "After the merger and first Super Bowls, how are the teams organized for the game now?",
+    "options": [
+      "By geographic regions East and West",
+      "By two conferences: AFC and NFC",
+      "By win–loss record throughout the season",
+      "By alphabetical order of team names"
+    ],
+    "answer": "By two conferences: AFC and NFC"
+  },
+  {
+    "id": 2441,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/my_ukraine.mp3",
+    "topic": "My Ukraine",
+    "question": "According to the article, when was “My Ukraine” first mentioned in historical documents?",
+    "options": [
+      "In 1018",
+      "In 1187",
+      "In 1453",
+      "In 1772"
+    ],
+    "answer": "In 1187"
+  },
+  {
+    "id": 2442,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/my_ukraine.mp3",
+    "topic": "My Ukraine",
+    "question": "Which famous song is mentioned in the article as representing 'My Ukraine'?",
+    "options": [
+      "Kalinka",
+      "Shchedryk (Carol of the Bells)",
+      "Ochi Chernye",
+      "Moscow Nights"
+    ],
+    "answer": "Shchedryk (Carol of the Bells)"
+  },
+  {
+    "id": 2443,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/my_ukraine.mp3",
+    "topic": "My Ukraine",
+    "question": "Which Ukrainian mountain is described as a 'Carpathian pearl' in the article?",
+    "options": [
+      "Hoverla",
+      "Petros",
+      "Gorgany",
+      "Pip Ivan"
+    ],
+    "answer": "Hoverla"
+  },
+  {
+    "id": 2444,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/my_ukraine.mp3",
+    "topic": "My Ukraine",
+    "question": "What does the article say about the town of Starokostyantyniv?",
+    "options": [
+      "It is the capital of Ukraine.",
+      "It is the hometown of great airmen defending the country.",
+      "It is a coastal resort town.",
+      "It is the birthplace of Mykola Leontovych."
+    ],
+    "answer": "It is the hometown of great airmen defending the country."
+  },
+  {
+    "id": 2445,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/my_ukraine.mp3",
+    "topic": "My Ukraine",
+    "question": "In the essay, what everyday scene reflects 'My Ukraine' in the present war context?",
+    "options": [
+      "Children making bracelets and candles to raise money for charity",
+      "Elderly people traveling abroad",
+      "Large festivals held in major cities",
+      "Foreign tourists visiting Kyiv"
+    ],
+    "answer": "Children making bracelets and candles to raise money for charity"
+  },
+  {
+    "id": 2446,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/sake_makers_hope_for_unesco_listing.mp3",
+    "topic": "Sake Makers Hope for UNESCO Listing",
+    "question": "What does the article say is the origin period of the brewing methods used for sake?",
+    "options": [
+      "About 200 years ago",
+      "More than 500 years ago",
+      "More than 1,000 years ago",
+      "Since the 20th century"
+    ],
+    "answer": "More than 1,000 years ago"
+  },
+  {
+    "id": 2447,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/sake_makers_hope_for_unesco_listing.mp3",
+    "topic": "Sake Makers Hope for UNESCO Listing",
+    "question": "Who is the 18th-generation leader of the brewery founded in 1702 mentioned in the article?",
+    "options": [
+      "Hitoshi Utsunomiya",
+      "Junichiro Ozawa",
+      "Nami Goto",
+      "Koichi Maesako"
+    ],
+    "answer": "Junichiro Ozawa"
+  },
+  {
+    "id": 2448,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/sake_makers_hope_for_unesco_listing.mp3",
+    "topic": "Sake Makers Hope for UNESCO Listing",
+    "question": "According to the article, what two ingredients are necessary (in addition to rice) for traditional sake production?",
+    "options": [
+      "Grapes and yeast",
+      "Water and koji mold",
+      "Barley and hops",
+      "Sugar and yeast"
+    ],
+    "answer": "Water and koji mold"
+  },
+  {
+    "id": 2449,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/sake_makers_hope_for_unesco_listing.mp3",
+    "topic": "Sake Makers Hope for UNESCO Listing",
+    "question": "How have Japan’s sake exports changed since 2018, according to the article?",
+    "options": [
+      "They have halved.",
+      "They have stayed the same.",
+      "They have almost doubled.",
+      "They are banned."
+    ],
+    "answer": "They have almost doubled."
+  },
+  {
+    "id": 2450,
+    "type": "dinleme",
+    "difficulty": "Medium",
+    "audioUrl": "/audio/voa/sake_makers_hope_for_unesco_listing.mp3",
+    "topic": "Sake Makers Hope for UNESCO Listing",
+    "question": "Why do sake producers hope UNESCO will list sake-making as intangible cultural heritage?",
+    "options": [
+      "Because they want to raise the alcohol content.",
+      "Because they believe it will boost global interest and help preserve the tradition.",
+      "Because they want to reduce rice usage.",
+      "Because they want to change the taste completely."
+    ],
+    "answer": "Because they believe it will boost global interest and help preserve the tradition."
+  },
+  {
+    "id": 2451,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/education_tips_improve_critical_thinking_ask_questions.mp3",
+    "topic": "Improve Critical Thinking – Ask Questions",
+    "question": "According to Suzanne Meyer, what is the first thing students must learn in order to develop critical thinking?",
+    "options": [
+      "To memorize vocabulary lists quickly",
+      "To collect information and then evaluate it and apply it to a new context.",
+      "To speak English with native-like pronunciation",
+      "To write long essays regularly"
+    ],
+    "answer": "To collect information and then evaluate it and apply it to a new context."
+  },
+  {
+    "id": 2452,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/education_tips_improve_critical_thinking_ask_questions.mp3",
+    "topic": "Improve Critical Thinking – Ask Questions",
+    "question": "What type of questions does Meyer suggest students should progress toward for critical thinking development?",
+    "options": [
+      "Only concrete factual questions about the text.",
+      "Questions starting concrete, then asking how the text relates to their lives, then abstract questions.",
+      "Yes/no questions only.",
+      "Spelling-focused questions."
+    ],
+    "answer": "Questions starting concrete, then asking how the text relates to their lives, then abstract questions."
+  },
+  {
+    "id": 2453,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/education_tips_improve_critical_thinking_ask_questions.mp3",
+    "topic": "Improve Critical Thinking – Ask Questions",
+    "question": "Which benefit is mentioned for English learners who practise question-asking activities?",
+    "options": [
+      "They learn grammar rules faster.",
+      "They become better language learners and more confident in interactions.",
+      "They can pass exams without studying.",
+      "They speak with perfect accent immediately."
+    ],
+    "answer": "They become better language learners and more confident in interactions."
+  },
+  {
+    "id": 2454,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/education_tips_improve_critical_thinking_ask_questions.mp3",
+    "topic": "Improve Critical Thinking – Ask Questions",
+    "question": "In the example question-asking activity described, after students ask about text information, what is the next step in the three-step question process?",
+    "options": [
+      "Ask about the writer’s favorite food.",
+      "Create questions about how the information connects to their own life.",
+      "Translate the text to their native language.",
+      "Draw a picture about the text."
+    ],
+    "answer": "Create questions about how the information connects to their own life."
+  },
+  {
+    "id": 2455,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/education_tips_improve_critical_thinking_ask_questions.mp3",
+    "topic": "Improve Critical Thinking – Ask Questions",
+    "question": "According to the article, why might telling students exactly which questions to answer limit their critical-thinking development?",
+    "options": [
+      "Because they will do the work faster.",
+      "Because students are less likely to be creative about the kinds of questions they ask.",
+      "Because grammar mistakes will increase.",
+      "Because they will always ask the same questions."
+    ],
+    "answer": "Because students are less likely to be creative about the kinds of questions they ask."
+  },
+  {
+    "id": 2456,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/how_to_dish_up_something_good.mp3",
+    "topic": "How to 'Dish Up' Something Good",
+    "question": "In the article, what does a “signature dish” mean?",
+    "options": [
+      "A dish served only on special occasions.",
+      "A dish that someone is especially known for making well.",
+      "The last dish served at a meal.",
+      "A dish that contains many different ingredients."
+    ],
+    "answer": "A dish that someone is especially known for making well."
+  },
+  {
+    "id": 2457,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/how_to_dish_up_something_good.mp3",
+    "topic": "How to 'Dish Up' Something Good",
+    "question": "Besides food, what is another meaning of the verb “to dish” that the article explains?",
+    "options": [
+      "To prepare a formal dinner.",
+      "To serve soup in a bowl.",
+      "To share private or personal information (often gossip).",
+      "To cook quickly under pressure."
+    ],
+    "answer": "To share private or personal information (often gossip)."
+  },
+  {
+    "id": 2458,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/how_to_dish_up_something_good.mp3",
+    "topic": "How to 'Dish Up' Something Good",
+    "question": "What does the phrase “dish out” refer to, according to the article?",
+    "options": [
+      "To eat a big portion of food.",
+      "To serve food politely to guests.",
+      "To deliver jokes, insults, or comments (not necessarily positive).",
+      "To share a recipe with friends."
+    ],
+    "answer": "To deliver jokes, insults, or comments (not necessarily positive)."
+  },
+  {
+    "id": 2459,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/how_to_dish_up_something_good.mp3",
+    "topic": "How to 'Dish Up' Something Good",
+    "question": "What saying does the article mention about people who can ‘dish it out’ but cannot ‘take it’?",
+    "options": [
+      "They are good cooks but bad eaters.",
+      "They can criticize others but cannot accept criticism themselves.",
+      "They only cook, never eat.",
+      "They are generous with food but stingy with compliments."
+    ],
+    "answer": "They can criticize others but cannot accept criticism themselves."
+  },
+  {
+    "id": 2460,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/how_to_dish_up_something_good.mp3",
+    "topic": "How to 'Dish Up' Something Good",
+    "question": "According to the article, besides meaning 'food on a dish', what is another meaning of the noun 'dish' when referring to a person?",
+    "options": [
+      "A person who is a good cook.",
+      "A person who likes to eat a lot.",
+      "A good-looking person (slang).",
+      "A food critic."
+    ],
+    "answer": "A good-looking person (slang)."
+  },
+  {
+    "id": 2461,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/when_in_rome.mp3",
+    "topic": "When in Rome …",
+    "question": "What does the expression “When in Rome, do as the Romans do” primarily mean according to the article?",
+    "options": [
+      "You must speak Latin when in Rome.",
+      "You should follow the local customs and norms when you visit a place.",
+      "You can act however you like because you are a visitor.",
+      "You only need to follow the rules if you are staying permanently."
+    ],
+    "answer": "You should follow the local customs and norms when you visit a place."
+  },
+  {
+    "id": 2462,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/when_in_rome.mp3",
+    "topic": "When in Rome …",
+    "question": "According to the article, what is another situation (not a foreign country) where the proverb “When in Rome …” can apply?",
+    "options": [
+      "When visiting a museum or library.",
+      "When cooking a meal at home.",
+      "When talking with close friends.",
+      "When travelling by car."
+    ],
+    "answer": "When visiting a museum or library."
+  },
+  {
+    "id": 2463,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/when_in_rome.mp3",
+    "topic": "When in Rome …",
+    "question": "What historical story does the article mention as a possible origin of the expression?",
+    "options": [
+      "That Roman emperors said it during public speeches.",
+      "That a church leader changed his fasting habits depending on the city he visited.",
+      "That it was written in a medieval poem.",
+      "That it comes from a Roman law code."
+    ],
+    "answer": "That a church leader changed his fasting habits depending on the city he visited."
+  },
+  {
+    "id": 2464,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/when_in_rome.mp3",
+    "topic": "When in Rome …",
+    "question": "According to the article, how long ago does the possible origin story of the expression date back to?",
+    "options": [
+      "About 500 years ago.",
+      "More than 1500 years ago.",
+      "About 200 years ago.",
+      "One hundred years ago."
+    ],
+    "answer": "More than 1500 years ago."
+  },
+  {
+    "id": 2465,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/when_in_rome.mp3",
+    "topic": "When in Rome …",
+    "question": "Why do some word experts believe this expression appeared in English about 500 years ago?",
+    "options": [
+      "Because it was first recorded in a 16th-century English text.",
+      "Because it was used in ancient Roman inscriptions translated then.",
+      "Because it was invented by Renaissance poets.",
+      "Because it came with Latin textbooks published then."
+    ],
+    "answer": "Because it was first recorded in a 16th-century English text."
+  },
+  {
+    "id": 2466,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/exploring_the_butterfly_effect.mp3",
+    "topic": "Exploring the 'Butterfly Effect'",
+    "question": "According to the article, what is the core idea of the \"butterfly effect\"?",
+    "options": [
+      "A butterfly causes a storm every time it flaps its wings.",
+      "Very small changes can lead to large and unpredictable changes over time.",
+      "Weather is completely predictable if we know the butterfly's location.",
+      "Dominoes always fall on their own without external force."
+    ],
+    "answer": "Very small changes can lead to large and unpredictable changes over time."
+  },
+  {
+    "id": 2467,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/exploring_the_butterfly_effect.mp3",
+    "topic": "Exploring the 'Butterfly Effect'",
+    "question": "Which analogy does the article use besides 'butterfly effect' to illustrate a chain reaction of events?",
+    "options": [
+      "Ripple effect in water",
+      "Domino effect",
+      "Snowball effect",
+      "Echo effect"
+    ],
+    "answer": "Domino effect"
+  },
+  {
+    "id": 2468,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/exploring_the_butterfly_effect.mp3",
+    "topic": "Exploring the 'Butterfly Effect'",
+    "question": "In the example given in the article, what small event triggered a chain of big consequences?",
+    "options": [
+      "A referee making a wrong call in a match.",
+      "A group of writers demanding higher pay and going on strike.",
+      "A butterfly landing on a tree.",
+      "A weather forecast being announced incorrectly."
+    ],
+    "answer": "A group of writers demanding higher pay and going on strike."
+  },
+  {
+    "id": 2469,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/exploring_the_butterfly_effect.mp3",
+    "topic": "Exploring the 'Butterfly Effect'",
+    "question": "What does the article say about predictability when it comes to systems described by the butterfly effect?",
+    "options": [
+      "Such systems remain predictable indefinitely.",
+      "Small initial differences make long-term prediction impossible or unreliable.",
+      "The outcome is always the same no matter the initial conditions.",
+      "You can always reverse the effects if you know the original starting point."
+    ],
+    "answer": "Small initial differences make long-term prediction impossible or unreliable."
+  },
+  {
+    "id": 2470,
+    "type": "dinleme",
+    "difficulty": "Hard",
+    "audioUrl": "/audio/voa/exploring_the_butterfly_effect.mp3",
+    "topic": "Exploring the 'Butterfly Effect'",
+    "question": "According to the article, besides natural events like storms, where else can the butterfly effect idea apply?",
+    "options": [
+      "Only in weather forecasting",
+      "In social events, business, and everyday decisions that lead to larger consequences",
+      "Only in scientific experiments with butterflies",
+      "Only in physics or mathematics"
+    ],
+    "answer": "In social events, business, and everyday decisions that lead to larger consequences"
+  }
+]

@@ -75,6 +75,9 @@ public class SecurityConfig {
                         .requestMatchers("api/results/**").authenticated()
                         .requestMatchers("api/quiz/start").authenticated()
                         .requestMatchers("api/quiz/submit").authenticated()
+                        .requestMatchers("/audio/**").permitAll()
+                        .requestMatchers("api/results/summary/me").authenticated()
+
 
                         .requestMatchers(HttpMethod.POST, "/api/lessons/create").hasRole("INSTRUCTOR")
                         .requestMatchers(HttpMethod.PUT, "/api/lessons/**").hasRole("INSTRUCTOR")

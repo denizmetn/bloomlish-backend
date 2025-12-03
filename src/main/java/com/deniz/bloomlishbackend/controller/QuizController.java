@@ -1,5 +1,6 @@
 package com.deniz.bloomlishbackend.controller;
 
+import com.deniz.bloomlishbackend.dto.ListeningQuizResponse;
 import com.deniz.bloomlishbackend.dto.QuestionDto;
 import com.deniz.bloomlishbackend.dto.QuizResultsDto;
 import com.deniz.bloomlishbackend.dto.QuizSubmitRequest;
@@ -33,6 +34,22 @@ public class QuizController {
         return ResponseEntity.ok(quizService.startQuiz(testType, difficulty, limit));
     }
 
+    @GetMapping("/start/listening")
+    public ResponseEntity<ListeningQuizResponse> startListeningQuiz(
+            @RequestParam String difficulty,
+            @RequestParam Integer limit,
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        if (userDetails == null) {
+            throw new RuntimeException("Bu işlemi yapmak için giriş yapmalısınız!");
+        }
+        String username = userDetails.getUsername();
+        System.out.println("Listening quiz başlatan kullanıcı: " + username);
+
+        ListeningQuizResponse response = quizService.startListeningQuiz(difficulty, limit);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/submit")
     public ResponseEntity<QuizResultsDto> submitQuiz(
             @RequestBody QuizSubmitRequest request,
@@ -47,3 +64,6 @@ public class QuizController {
         return ResponseEntity.ok(result);
     }
 }
+
+
+

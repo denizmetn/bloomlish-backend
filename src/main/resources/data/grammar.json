@@ -1,0 +1,485 @@
+[
+  {
+    "id": 100,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "She ___ a teacher.",
+    "options": ["am", "is", "are", "be"],
+    "answer": "is"
+  },
+  {
+    "id": 101,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "They ___ from Spain.",
+    "options": ["is", "are", "am", "be"],
+    "answer": "are"
+  },
+  {
+    "id": 102,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "Choose the correct plural: 'mouse' → ___",
+    "options": ["mouses", "mice", "mousees", "mices"],
+    "answer": "mice"
+  },
+  {
+    "id": 103,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "I ___ coffee every morning.",
+    "options": ["drink", "drinks", "drinking", "drank"],
+    "answer": "drink"
+  },
+  {
+    "id": 104,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "She ___ like pizza.",
+    "options": ["don't", "doesn't", "isn't", "not"],
+    "answer": "doesn't"
+  },
+  {
+    "id": 105,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "Which article is correct? '___ apple'",
+    "options": ["A", "An", "The", "No article"],
+    "answer": "An"
+  },
+  {
+    "id": 106,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "He ___ TV now.",
+    "options": ["watch", "is watching", "watches", "watched"],
+    "answer": "is watching"
+  },
+  {
+    "id": 107,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "We ___ to school every day.",
+    "options": ["go", "goes", "are going", "went"],
+    "answer": "go"
+  },
+  {
+    "id": 108,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "This is ___ book.",
+    "options": ["me", "my", "mine", "I"],
+    "answer": "my"
+  },
+  {
+    "id": 109,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "There ___ a cat on the roof.",
+    "options": ["is", "are", "be", "am"],
+    "answer": "is"
+  },
+  {
+    "id": 110,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "She ___ to music right now.",
+    "options": ["listen", "listens", "is listening", "listened"],
+    "answer": "is listening"
+  },
+  {
+    "id": 111,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "We ___ hungry.",
+    "options": ["is", "am", "are", "be"],
+    "answer": "are"
+  },
+  {
+    "id": 112,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "He ___ a car.",
+    "options": ["have", "has", "having", "haves"],
+    "answer": "has"
+  },
+  {
+    "id": 113,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "I ___ English.",
+    "options": ["study", "studies", "studying", "studied"],
+    "answer": "study"
+  },
+  {
+    "id": 114,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "She ___ tall.",
+    "options": ["am", "are", "is", "be"],
+    "answer": "is"
+  },
+  {
+    "id": 115,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "The opposite of 'big' is ___.",
+    "options": ["small", "long", "tall", "short"],
+    "answer": "small"
+  },
+  {
+    "id": 116,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "They ___ at home yesterday.",
+    "options": ["are", "were", "is", "was"],
+    "answer": "were"
+  },
+  {
+    "id": 117,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "He ___ football last weekend.",
+    "options": ["play", "plays", "played", "playing"],
+    "answer": "played"
+  },
+  {
+    "id": 118,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "I ___ breakfast every day.",
+    "options": ["eat", "eats", "eating", "ate"],
+    "answer": "eat"
+  },
+  {
+    "id": 119,
+    "type": "dilbilgisi",
+    "difficulty": "easy",
+    "question": "Which sentence is correct?",
+    "options": ["He don't like tea.", "He doesn't like tea.", "He not like tea.", "He no like tea."],
+    "answer": "He doesn't like tea."
+  },
+
+    {
+      "id": 200,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "If it ___ tomorrow, we will stay home.",
+      "options": ["rains", "rain", "rained", "is raining"],
+      "answer": "rains"
+    },
+    {
+      "id": 201,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "She has lived here ___ 2010.",
+      "options": ["for", "since", "from", "by"],
+      "answer": "since"
+    },
+    {
+      "id": 202,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "The house ___ by workers yesterday.",
+      "options": ["is cleaned", "was cleaned", "cleaned", "is cleaning"],
+      "answer": "was cleaned"
+    },
+    {
+      "id": 203,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "She said she ___ the movie before.",
+      "options": ["sees", "saw", "had seen", "has seen"],
+      "answer": "had seen"
+    },
+    {
+      "id": 204,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "I ___ to Paris twice.",
+      "options": ["have been", "was", "am", "being"],
+      "answer": "have been"
+    },
+    {
+      "id": 205,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "You ___ smoke here. It’s forbidden.",
+      "options": ["must", "mustn't", "can", "should"],
+      "answer": "mustn't"
+    },
+    {
+      "id": 206,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "She asked me where I ___.",
+      "options": ["live", "lived", "am living", "was live"],
+      "answer": "lived"
+    },
+    {
+      "id": 207,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "They ___ when I arrived.",
+      "options": ["eat", "ate", "were eating", "eating"],
+      "answer": "were eating"
+    },
+    {
+      "id": 208,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "This is the restaurant ___ we met.",
+      "options": ["when", "where", "which", "that"],
+      "answer": "where"
+    },
+    {
+      "id": 209,
+      "type": "dilbilgisi",
+      "difficulty": "medium",
+      "question": "The film was ___ than I expected.",
+      "options": ["more interesting", "most interesting", "interestinger", "interestingest"],
+      "answer": "more interesting"
+    },
+  {
+    "id": 210,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "He asked me if I ___ the homework.",
+    "options": ["finished", "have finished", "had finished", "finish"],
+    "answer": "had finished"
+  },
+  {
+    "id": 211,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "She ___ to work when her phone rang.",
+    "options": ["drives", "was driving", "drove", "is driving"],
+    "answer": "was driving"
+  },
+  {
+    "id": 212,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "I will call you when I ___ home.",
+    "options": ["get", "will get", "got", "getting"],
+    "answer": "get"
+  },
+  {
+    "id": 213,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "We used ___ in this park when we were kids.",
+    "options": ["play", "to play", "playing", "played"],
+    "answer": "to play"
+  },
+  {
+    "id": 214,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "She promised ___ me later.",
+    "options": ["call", "to call", "calling", "called"],
+    "answer": "to call"
+  },
+  {
+    "id": 215,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "The book ___ by a famous writer.",
+    "options": ["wrote", "is written", "writes", "was writing"],
+    "answer": "is written"
+  },
+  {
+    "id": 216,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "If I were you, I ___ more.",
+    "options": ["study", "would study", "studied", "will study"],
+    "answer": "would study"
+  },
+  {
+    "id": 217,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "She is ___ to pass the exam.",
+    "options": ["enough smart", "smart enough", "too smart enough", "smart too"],
+    "answer": "smart enough"
+  },
+  {
+    "id": 218,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "By the time we arrived, the movie ___.",
+    "options": ["started", "was starting", "had started", "starts"],
+    "answer": "had started"
+  },
+  {
+    "id": 219,
+    "type": "dilbilgisi",
+    "difficulty": "medium",
+    "question": "I asked her ___ she liked ice cream.",
+    "options": ["what", "if", "although", "because"],
+    "answer": "if"
+  },
+  {
+    "id": 300,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Had she known about the meeting, she ___ earlier.",
+    "options": ["would come", "would have come", "will come", "came"],
+    "answer": "would have come"
+  },
+  {
+    "id": 301,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "No sooner ___ the phone than it rang again.",
+    "options": ["I hung up", "had I hung up", "I have hung up", "I was hanging up"],
+    "answer": "had I hung up"
+  },
+  {
+    "id": 302,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Hardly ___ the room when the lights went out.",
+    "options": ["I entered", "had I entered", "I had entered", "enter I"],
+    "answer": "had I entered"
+  },
+  {
+    "id": 303,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "If he ___ harder, he might have passed the exam.",
+    "options": ["studied", "had studied", "has studied", "was studying"],
+    "answer": "had studied"
+  },
+  {
+    "id": 304,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "The more you practice, the ___ you become.",
+    "options": ["more confident", "most confident", "confident", "confidentest"],
+    "answer": "more confident"
+  },
+  {
+    "id": 305,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "She acts as though she ___ everything.",
+    "options": ["knows", "knew", "had known", "knowing"],
+    "answer": "knew"
+  },
+  {
+    "id": 306,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Not only ___ responsible, but she also apologized.",
+    "options": ["she was", "was she", "has she been", "she has been"],
+    "answer": "was she"
+  },
+  {
+    "id": 307,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "He suggested that she ___ earlier next time.",
+    "options": ["comes", "come", "came", "will come"],
+    "answer": "come"
+  },
+  {
+    "id": 308,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Despite ___ tired, he continued working.",
+    "options": ["he is", "being", "to be", "been"],
+    "answer": "being"
+  },
+  {
+    "id": 309,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "She denied ___ the documents.",
+    "options": ["steal", "to steal", "stealing", "stolen"],
+    "answer": "stealing"
+  },
+  {
+    "id": 310,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "She would rather you ___ earlier next time.",
+    "options": ["come", "came", "will come", "had come"],
+    "answer": "came"
+  },
+  {
+    "id": 311,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Rarely ___ such an interesting idea.",
+    "options": ["he has heard", "has he heard", "he heard", "he is hearing"],
+    "answer": "has he heard"
+  },
+  {
+    "id": 312,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "If only he ___ more careful!",
+    "options": ["is", "was", "were", "had been"],
+    "answer": "were"
+  },
+  {
+    "id": 313,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "By this time next year, they ___ the project.",
+    "options": ["finish", "will finish", "will have finished", "have finished"],
+    "answer": "will have finished"
+  },
+  {
+    "id": 314,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "The manager demanded that everyone ___ on time.",
+    "options": ["is", "be", "was", "will be"],
+    "answer": "be"
+  },
+  {
+    "id": 315,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Scarcely ___ the door when the dog ran out.",
+    "options": ["he opened", "had he opened", "he had opened", "opens he"],
+    "answer": "had he opened"
+  },
+  {
+    "id": 316,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "She is believed ___ the best candidate for the position.",
+    "options": ["to be", "be", "being", "been"],
+    "answer": "to be"
+  },
+  {
+    "id": 317,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Under no circumstances ___ the door unattended.",
+    "options": ["you leave", "leave you", "you should leave", "should you leave"],
+    "answer": "should you leave"
+  },
+  {
+    "id": 318,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "He admitted ___ the mistake, but he promised to fix it.",
+    "options": ["to make", "making", "make", "to making"],
+    "answer": "making"
+  },
+  {
+    "id": 319,
+    "type": "dilbilgisi",
+    "difficulty": "hard",
+    "question": "Not until the lights came on ___ the problem.",
+    "options": ["they noticed", "did they notice", "they had noticed", "they notice"],
+    "answer": "did they notice"
+  }
+  ]
+
+
