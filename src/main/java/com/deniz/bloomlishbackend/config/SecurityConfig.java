@@ -72,11 +72,11 @@ public class SecurityConfig {
 
 
                         .requestMatchers(HttpMethod.GET, "/api/quiz/start").authenticated()
-                        .requestMatchers("api/results/**").authenticated()
-                        .requestMatchers("api/quiz/start").authenticated()
-                        .requestMatchers("api/quiz/submit").authenticated()
+                        .requestMatchers("/api/results/**").authenticated()
+                        .requestMatchers("/api/quiz/start").authenticated()
+                        .requestMatchers("/api/quiz/submit").authenticated()
                         .requestMatchers("/audio/**").permitAll()
-                        .requestMatchers("api/results/summary/me").authenticated()
+                        .requestMatchers("/api/results/summary/me").authenticated()
 
 
                         .requestMatchers(HttpMethod.POST, "/api/lessons/create").hasRole("INSTRUCTOR")
