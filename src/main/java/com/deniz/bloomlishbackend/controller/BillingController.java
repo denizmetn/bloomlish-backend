@@ -1,7 +1,6 @@
 package com.deniz.bloomlishbackend.controller;
 
 import com.deniz.bloomlishbackend.dto.CheckoutRequest;
-import com.deniz.bloomlishbackend.dto.CheckoutResponse;
 import com.deniz.bloomlishbackend.dto.PaymentHistoryItemDto;
 import com.deniz.bloomlishbackend.dto.SubscriptionDto;
 import com.deniz.bloomlishbackend.service.BillingService;
@@ -12,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/billing")
@@ -20,34 +20,65 @@ public class BillingController {
 
     private final BillingService billingService;
 
-    // 1) ÖDEME ALMA (CHECKOUT)
-    @PostMapping("/checkout")
-    public ResponseEntity<CheckoutResponse> checkout(
+    // ⭐ 1) ÖDEME SAYFASI LİNKİ OLUŞTURMA (IYZICO CHECKOUT)
+    @PostMapping("/start-checkout")
+    public ResponseEntity<?> startCheckout(
             @RequestBody CheckoutRequest request,
             @AuthenticationPrincipal UserDetails userDetails
     ) {
-        String email = userDetails.getUsername(); // bizim User.getUsername() email döndürüyordu
-        CheckoutResponse response = billingService.checkout(request, email);
-        return ResponseEntity.ok(response);
+        String email = userDetails.getUsername();
+        String paymentUrl = billingService.createCheckoutFormToken(request, email);
+
+        // Frontend buradaki URL'e redirect olacak
+        return ResponseEntity.ok(Map.of("paymentUrl", paymentUrl));
     }
 
-    // 2) AKTİF ABONELİK BİLGİSİ (PREMIUM SAYFASI ÜST KART)
+    // ⭐ 2) Iyzico callback → ödeme sonucu
+    // Iyzico bu endpoint'e POST ile token gönderir, userId URL'den gelir
+    @PostMapping("/checkout-callback")
+    public ResponseEntity<?> checkoutCallback(
+            @RequestParam("token") String token,
+            @RequestParam("userId") Long userId
+    ) {
+        System.out.println(">>> IYZI CALLBACK GELDİ token=" + token + " userId=" + userId);
+        billingService.handleCheckoutResult(token, userId);
+
+        String html = """
+                <html>
+                  <head>
+                    <meta http-equiv="refresh" content="0; URL='http://localhost:5173/payment-success'" />
+                  </head>
+                  <body>
+                    <p>Abonelik ödemeniz başarılı, yönlendiriliyorsunuz...</p>
+                  </body>
+                </html>
+                """;
+
+        return ResponseEntity
+                .ok()
+                .header("Content-Type", "text/html")
+                .body(html);
+    }
+
+    // (İstersen bunu silebilirsin, debug için bırakılabilir)
+    @PostMapping("/callback")
+    public ResponseEntity<?> iyzicoCallback(@RequestBody Map<String, Object> payload) {
+        return ResponseEntity.ok(Map.of("message", "Callback alındı", "payload", payload));
+    }
+
     @GetMapping("/subscription")
     public ResponseEntity<SubscriptionDto> getCurrentSubscription(
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         String email = userDetails.getUsername();
-        SubscriptionDto dto = billingService.getCurrentSubscription(email);
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(billingService.getCurrentSubscription(email));
     }
 
-    // 3) ÖDEME GEÇMİŞİ (PREMIUM SAYFASI TABLOSU)
     @GetMapping("/payments")
     public ResponseEntity<List<PaymentHistoryItemDto>> getPaymentHistory(
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         String email = userDetails.getUsername();
-        List<PaymentHistoryItemDto> history = billingService.getPaymentHistory(email);
-        return ResponseEntity.ok(history);
+        return ResponseEntity.ok(billingService.getPaymentHistory(email));
     }
 }
