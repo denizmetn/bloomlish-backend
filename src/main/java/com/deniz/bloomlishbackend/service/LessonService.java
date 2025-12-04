@@ -10,10 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,27 +25,34 @@ public class LessonService {
     private final LessonMapper lessonMapper;
 
     //yeni ders oluşturma
-    public LessonDto createLesson(LessonDto lessonDto, List<MultipartFile> files, User instructor)
-    {
+    public LessonDto createLesson(LessonDto lessonDto, List<MultipartFile> files, User instructor) {
         Lesson lesson = lessonMapper.toEntity(lessonDto);
-
         lesson.setInstructor(instructor);
+
         if (files != null && !files.isEmpty()) {
             for (MultipartFile file : files) {
                 if (file != null && !file.isEmpty()) {
+
+                    // Kayıt yolu: uploads/resources/
+                    java.nio.file.Path folderPath = java.nio.file.Paths.get("uploads", "resources");
+
+                    String originalFilename = file.getOriginalFilename();
+                    String extension = "";
+                    int i = originalFilename.lastIndexOf('.');
+                    if (i > 0) {
+                        extension = originalFilename.substring(i);
+                    }
+                    String safeFileName = UUID.randomUUID().toString() + extension;
+                    java.nio.file.Path filePath = folderPath.resolve(safeFileName);
+
                     try {
-                        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-                        String filePath = "uploads/" + fileName;
+                        java.nio.file.Files.createDirectories(folderPath);
 
-                        java.nio.file.Path uploadPath = java.nio.file.Paths.get("uploads");
-                        java.nio.file.Files.createDirectories(uploadPath);
+                        java.nio.file.Files.copy(file.getInputStream(), filePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
-                        java.nio.file.Path destination = uploadPath.resolve(fileName);
-                        java.nio.file.Files.write(destination, file.getBytes());
-
-                        lesson.getResourcePaths().add(filePath);
-
+                        lesson.getResourcePaths().add(safeFileName);
                     } catch (IOException e) {
+                        e.printStackTrace();
                         throw new RuntimeException("Dosya kaydedilemedi: " + e.getMessage());
                     }
                 }
@@ -53,13 +62,11 @@ public class LessonService {
         return lessonMapper.toDto(saved);
     }
 
-    //tüm dersleri listelem
     public List<LessonDto> getAllLessons(){
         List<Lesson> lessons = lessonRepository.findAll();
         return lessonMapper.toDtoList(lessons);
     }
 
-    //dersleri filtreleme
     public List<LessonDto> filterLessons(
             String name,
             String instructor,
@@ -114,7 +121,7 @@ public class LessonService {
         return lessonMapper.toDtoList(lessons);
     }
 
-    // 🔹 Eğitmenin kendi dersini silmesi için
+    // Eğitmenin kendi dersini silmesi için
     public void deleteLesson(Long lessonId, User instructor) {
 
         Lesson lesson = lessonRepository.findById(lessonId)
@@ -144,9 +151,67 @@ public class LessonService {
         lesson.setPrice(dto.getPrice());
         lesson.setCategory(dto.getCategory());
         lesson.setLevel(dto.getLevel());
+        lesson.setResourcePaths(dto.getResourcePaths());
 
         Lesson saved = lessonRepository.save(lesson);
         return lessonMapper.toDto(saved);
     }
+
+    public String uploadResource(Long id, MultipartFile file, User instructor) {
+
+        Lesson lesson = lessonRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        if (!lesson.getInstructor().getUserID().equals(instructor.getUserID())) {
+            throw new RuntimeException("Bu dersi güncelleme yetkiniz yok!");
+        }
+
+        // Klasör yolu
+        java.nio.file.Path folderPath = java.nio.file.Paths.get("uploads", "resources");
+
+        // Güvenli dosya adı oluşturma
+        String originalFilename = file.getOriginalFilename();
+        String extension = "";
+        int i = originalFilename.lastIndexOf('.');
+        if (i > 0) {
+            extension = originalFilename.substring(i);
+        }
+
+        String safeFileName = UUID.randomUUID().toString() + extension;
+        java.nio.file.Path filePath = folderPath.resolve(safeFileName); // Tam dosya yolu
+
+        try {
+            java.nio.file.Files.createDirectories(folderPath);
+
+            java.nio.file.Files.copy(file.getInputStream(), filePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            throw new RuntimeException("Dosya yüklenirken hata oluştu: " + e.getMessage());
+        }
+
+        lesson.getResourcePaths().add(safeFileName);
+        lessonRepository.save(lesson);
+
+        return safeFileName;
+    }
+    public void deleteResource(Long id, String fileName, User instructor) {
+
+        Lesson lesson = lessonRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        if (!lesson.getInstructor().getUserID().equals(instructor.getUserID())) {
+            throw new RuntimeException("Yetkiniz yok!");
+        }
+
+        lesson.getResourcePaths().remove(fileName);
+        lessonRepository.save(lesson);
+
+        File file = new File("uploads/resources/" + fileName);
+        if (file.exists()) file.delete();
+    }
+
+
 
 }

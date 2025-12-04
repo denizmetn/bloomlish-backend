@@ -90,11 +90,17 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/payments/my-lessons").authenticated()
 
+                        //resource
+                        .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/uploads/resources/**").permitAll()
+
+                        // lesson resource upload/delete
+                        .requestMatchers(HttpMethod.POST, "/api/lessons/{lessonId}/upload-resource").hasRole("INSTRUCTOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/lessons/{lessonId}/resource/{fileName}").hasRole("INSTRUCTOR")
+
 
                         // Diğer her şey login ister
                         .anyRequest().authenticated()
-
-
 
                 )
                 .sessionManagement(session -> session
@@ -132,8 +138,6 @@ public class SecurityConfig {
 
         source.registerCorsConfiguration("/socket/**", wsConfig);
         source.registerCorsConfiguration("/socket", wsConfig);
-
-
 
 
         source.registerCorsConfiguration("/api/payments/lesson-callback", callbackConfig);
