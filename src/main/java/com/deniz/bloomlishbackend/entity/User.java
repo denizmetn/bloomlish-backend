@@ -31,6 +31,9 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "likedUsers")
     private Set<BlogPost> likedPosts = new HashSet<>();
 
+    @Enumerated(EnumType.STRING)
+    private Level currentLevel;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role));

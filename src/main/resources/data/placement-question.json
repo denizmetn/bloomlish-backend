@@ -1,0 +1,316 @@
+[
+  {
+    "questionText": "I ___ a student.",
+    "options": ["am", "is", "are", "be"],
+    "correctOption": "A",
+    "cefrLevel": "A1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "She ___ from Spain.",
+    "options": ["is", "are", "am", "be"],
+    "correctOption": "A",
+    "cefrLevel": "A1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "This is ___ apple.",
+    "options": ["a", "an", "the", "no article"],
+    "correctOption": "B",
+    "cefrLevel": "A1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "They ___ in a small house.",
+    "options": ["live", "lives", "living", "to live"],
+    "correctOption": "A",
+    "cefrLevel": "A1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "What ___ your name?",
+    "options": ["are", "is", "be", "am"],
+    "correctOption": "B",
+    "cefrLevel": "A1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "My brother has a ___ car.",
+    "options": ["blue", "slowly", "quickly", "carefully"],
+    "correctOption": "A",
+    "cefrLevel": "A1",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "We drink ___ in the morning.",
+    "options": ["bread", "coffee", "chair", "window"],
+    "correctOption": "B",
+    "cefrLevel": "A1",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "The opposite of 'big' is ___.",
+    "options": ["long", "short", "small", "tall"],
+    "correctOption": "C",
+    "cefrLevel": "A1",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "Choose the correct order: 'morning / every / I / run / the / in / .'",
+    "options": [
+      "Every I run in the morning.",
+      "I every morning run in the.",
+      "I run every morning in the.",
+      "I run every morning in the morning."
+    ],
+    "correctOption": "D",
+    "cefrLevel": "A1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "'Monday, Tuesday, ___, Thursday' Which word is missing?",
+    "options": ["Friday", "Sunday", "Wednesday", "Saturday"],
+    "correctOption": "C",
+    "cefrLevel": "A1",
+    "skill": "vocabulary"
+  },
+
+  {
+    "questionText": "Yesterday I ___ to the cinema.",
+    "options": ["go", "went", "gone", "was go"],
+    "correctOption": "B",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "We have ___ homework today.",
+    "options": ["many", "a lot of", "much", "any"],
+    "correctOption": "B",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "She is ___ than her sister.",
+    "options": ["more tall", "taller", "tallest", "most tall"],
+    "correctOption": "B",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "I am going ___ a new phone next week.",
+    "options": ["buy", "to buying", "to buy", "bought"],
+    "correctOption": "C",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "You should drink water when you are ___.",
+    "options": ["hungry", "sleepy", "thirsty", "boring"],
+    "correctOption": "C",
+    "cefrLevel": "A2",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "The opposite of 'early' is ___.",
+    "options": ["late", "fast", "soon", "slow"],
+    "correctOption": "A",
+    "cefrLevel": "A2",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "Choose the best option: 'I have lived here ___ five years.'",
+    "options": ["since", "for", "from", "during"],
+    "correctOption": "B",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "My friend is very ___; she always laughs.",
+    "options": ["serious", "funny", "angry", "quiet"],
+    "correctOption": "B",
+    "cefrLevel": "A2",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "I ___ my keys. Can you help me find them?",
+    "options": ["lose", "was losing", "have lost", "lost"],
+    "correctOption": "C",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "We arrived ___ the airport at 8 p.m.",
+    "options": ["in", "to", "at", "on"],
+    "correctOption": "C",
+    "cefrLevel": "A2",
+    "skill": "grammar"
+  },
+
+  {
+    "questionText": "I ___ English for three years.",
+    "options": ["am studying", "have studied", "studied", "had studied"],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "If it ___ tomorrow, we will stay at home.",
+    "options": ["rains", "rained", "will rain", "is raining"],
+    "correctOption": "A",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "She didn't come to the party ___ she was ill.",
+    "options": ["so", "because", "but", "although"],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "I wish I ___ more time to travel.",
+    "options": ["have", "had", "will have", "am having"],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "Can you ___ the music? It's too loud.",
+    "options": ["turn up", "turn off", "turn out", "turn in"],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "The film was very ___. I almost fell asleep.",
+    "options": ["excited", "boring", "interesting", "surprising"],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "Choose the correct sentence.",
+    "options": [
+      "He told that he was tired me.",
+      "He told me that he was tired.",
+      "He said me that he was tired.",
+      "He said that he was tired me."
+    ],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "“Although it was raining, we went for a walk.” What does this mean?",
+    "options": [
+      "We didn't go for a walk.",
+      "We waited until the rain stopped.",
+      "We went for a walk in the rain.",
+      "It stopped raining before we went out."
+    ],
+    "correctOption": "C",
+    "cefrLevel": "B1",
+    "skill": "reading"
+  },
+  {
+    "questionText": "Choose the best option: 'By the time we arrived, the movie ___.'",
+    "options": [
+      "already started",
+      "had already started",
+      "has already started",
+      "was already started"
+    ],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "I prefer working in a team ___ working alone.",
+    "options": ["than", "to", "for", "instead"],
+    "correctOption": "B",
+    "cefrLevel": "B1",
+    "skill": "grammar"
+  },
+
+  {
+    "questionText": "The report ___ by the manager before the meeting.",
+    "options": ["was reviewed", "reviewed", "has reviewing", "was review"],
+    "correctOption": "A",
+    "cefrLevel": "B2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "If I ___ more money, I would travel around the world.",
+    "options": ["have", "had", "would have", "was having"],
+    "correctOption": "B",
+    "cefrLevel": "B2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "He denied ___ the documents.",
+    "options": ["to steal", "stole", "stealing", "to have stole"],
+    "correctOption": "C",
+    "cefrLevel": "B2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "The results were not very ___; we need to repeat the experiment.",
+    "options": ["reliable", "comfortable", "available", "responsible"],
+    "correctOption": "A",
+    "cefrLevel": "B2",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "The book, ___ I bought yesterday, is already very popular.",
+    "options": ["that", "which", "where", "who"],
+    "correctOption": "B",
+    "cefrLevel": "B2",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "Despite the complexity of the task, the team managed to finish on time. What is true?",
+    "options": [
+      "The task was easy.",
+      "The team finished late.",
+      "The task was difficult but finished on time.",
+      "The team refused to do the task."
+    ],
+    "correctOption": "C",
+    "cefrLevel": "B2",
+    "skill": "reading"
+  },
+
+  {
+    "questionText": "Her presentation was so ___ that everyone stayed until the end, fully engaged.",
+    "options": ["monotonous", "compelling", "predictable", "ordinary"],
+    "correctOption": "B",
+    "cefrLevel": "C1",
+    "skill": "vocabulary"
+  },
+  {
+    "questionText": "If he ___ the deadlines more seriously, the project might have been successful.",
+    "options": ["would take", "took", "had taken", "takes"],
+    "correctOption": "C",
+    "cefrLevel": "C1",
+    "skill": "grammar"
+  },
+  {
+    "questionText": "Which sentence is the most formal?",
+    "options": [
+      "Can you send me the info ASAP?",
+      "Please send me the details when you can.",
+      "I would be grateful if you could provide the requested information at your earliest convenience.",
+      "Send me the information now."
+    ],
+    "correctOption": "C",
+    "cefrLevel": "C1",
+    "skill": "reading"
+  },
+  {
+    "questionText": "The new policy aims to ___ the gap between theory and practice.",
+    "options": ["bridge", "break", "widen", "separate"],
+    "correctOption": "A",
+    "cefrLevel": "C1",
+    "skill": "vocabulary"
+  }
+]

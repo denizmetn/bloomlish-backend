@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ResultsRepository extends JpaRepository<Results, Long> {
     List<Results> findByUserUserIDOrderByTakenAtAsc(Long userId);
+    List<Results> findByUserEmail(String email);
 }

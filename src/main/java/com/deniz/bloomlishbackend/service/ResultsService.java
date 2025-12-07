@@ -3,14 +3,17 @@ package com.deniz.bloomlishbackend.service;
 import com.deniz.bloomlishbackend.dto.DailyStatsDto;
 import com.deniz.bloomlishbackend.dto.LastResultDto;
 import com.deniz.bloomlishbackend.dto.ResultsSummaryDto;
+import com.deniz.bloomlishbackend.entity.Quiz;
 import com.deniz.bloomlishbackend.entity.Results;
 import com.deniz.bloomlishbackend.entity.User;
+import com.deniz.bloomlishbackend.repository.QuizRepository;
 import com.deniz.bloomlishbackend.repository.ResultsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -18,8 +21,9 @@ import java.util.*;
 @Slf4j
 public class ResultsService {
     private final ResultsRepository resultsRepository;
+    private final QuizRepository quizRepository;
 
-    public ResultsSummaryDto getSummmaryForUser(User user){
+    public ResultsSummaryDto getSummaryForUser(User user){
         log.info("🔍 getSummmaryForUser çağrıldı. userID = {}", user.getUserID());
         List<Results> results= resultsRepository.findByUserUserIDOrderByTakenAtAsc(user.getUserID());
 
@@ -95,16 +99,16 @@ public class ResultsService {
                 .build();
     }
 
-    private int difficultyToNumber(String difficulty) {
-        if (difficulty == null) return 2; // default: Orta
+    private int difficultyToNumber(Object difficulty) {
+        if (difficulty == null) return 2;
 
-        String value = difficulty.toLowerCase();
+        String value = difficulty.toString().toLowerCase();  // önemli!
 
         return switch (value) {
-            case "easy" -> 1;
-            case "medium" -> 2;
-            case "hard" -> 3;
-            default -> 2; // tanımsızsa Orta say
+            case "easy", "a1-a2" -> 1;
+            case "medium", "b1-b2" -> 2;
+            case "hard", "c1-c2" -> 3;
+            default -> 2;
         };
     }
 
@@ -116,6 +120,69 @@ public class ResultsService {
         if (avg < 2.5) return "Orta";
         return "Zor";
     }
+    public Results saveResult(User user,
+                              Long quizId,
+                              Integer score,
+                              Integer correct,
+                              Integer wrong,
+                              String level) {
+
+        System.out.println("➡️ saveResult çağrıldı. Gelen quizId = " + quizId);
+
+        Quiz quiz = null;
+
+        // 1) quizId doluysa DB'den bul
+        if (quizId != null) {
+            quiz = quizRepository.findById(quizId).orElse(null);
+        }
+
+        // 2) Eğer quizId null ise VEYA DB'de böyle bir quiz yoksa, yeni Quiz oluştur
+        if (quiz == null) {
+            System.out.println("⚠️ quizId null veya DB'de yok, yeni Quiz oluşturuluyor.");
+            quiz = createQuizFromLevel(level);
+        }
+
+        Results result = Results.builder()
+                .user(user)
+                .quiz(quiz)
+                .score(score)
+                .correct(correct)
+                .wrong(wrong)
+                .level(level)
+                .takenAt(LocalDateTime.now())
+                .build();
+
+        return resultsRepository.save(result);
+    }
+
+    /**
+     * quizId gelmemişse, level bilgisine göre temel bir Quiz kaydı açıyoruz.
+     */
+    private Quiz createQuizFromLevel(String level) {
+        String difficulty = mapLevelToDifficulty(level);
+
+        Quiz quiz = Quiz.builder()
+                .quizType("GENERIC")           // istersen "auto" vb. yap
+                .difficulty(difficulty)        // easy / medium / hard
+                .duration(0)                   // şimdilik 0
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        return quizRepository.save(quiz);
+    }
+
+    private String mapLevelToDifficulty(String level) {
+        if (level == null) return "medium";
+
+        String val = level.toLowerCase();
+        return switch (val) {
+            case "başlangıç", "baslangic" -> "easy";
+            case "orta" -> "medium";
+            case "ileri" -> "hard";
+            default -> "medium";
+        };
+    }
+
 }
 
 

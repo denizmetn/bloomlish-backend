@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // WebSocket → HERKESE AÇIK OLMALI
                         .requestMatchers("/socket/**").permitAll()
@@ -73,10 +74,12 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/api/quiz/start").authenticated()
                         .requestMatchers("/api/results/**").authenticated()
-                        .requestMatchers("/api/quiz/start").authenticated()
+                        .requestMatchers("/api/quiz/start/listening").authenticated()
                         .requestMatchers("/api/quiz/submit").authenticated()
                         .requestMatchers("/audio/**").permitAll()
                         .requestMatchers("/api/results/summary/me").authenticated()
+                        .requestMatchers("/api/results/summary/**").authenticated()
+                        .requestMatchers("/api/placement/**").permitAll()
 
 
                         .requestMatchers(HttpMethod.POST, "/api/lessons/create").hasRole("INSTRUCTOR")
