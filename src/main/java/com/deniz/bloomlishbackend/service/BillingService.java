@@ -4,16 +4,24 @@ import com.deniz.bloomlishbackend.dto.CheckoutRequest;
 import com.deniz.bloomlishbackend.dto.PaymentHistoryItemDto;
 import com.deniz.bloomlishbackend.dto.SubscriptionDto;
 import com.deniz.bloomlishbackend.entity.*;
-import com.deniz.bloomlishbackend.entity.Payment;
 import com.deniz.bloomlishbackend.repository.PaymentRepository;
 import com.deniz.bloomlishbackend.repository.SubscriptionRepository;
 import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.iyzipay.Options;
-import com.iyzipay.model.*;
+import com.iyzipay.model.Address;
+import com.iyzipay.model.BasketItem;
+import com.iyzipay.model.BasketItemType;
+import com.iyzipay.model.Buyer;
+import com.iyzipay.model.CheckoutForm;
+import com.iyzipay.model.CheckoutFormInitialize;
+import com.iyzipay.model.Locale;
 import com.iyzipay.request.CreateCheckoutFormInitializeRequest;
 import com.iyzipay.request.RetrieveCheckoutFormRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -41,17 +49,13 @@ public class BillingService {
 
         CreateCheckoutFormInitializeRequest iyzReq = new CreateCheckoutFormInitializeRequest();
         iyzReq.setLocale(Locale.TR.getValue());
-        // İstersek loglamak için yine set edebiliriz ama artık buna güvenmiyoruz.
         iyzReq.setConversationId("SUB-" + user.getUserID());
         iyzReq.setPrice(BigDecimal.valueOf(amount));
         iyzReq.setPaidPrice(BigDecimal.valueOf(amount));
         iyzReq.setCurrency("TRY");
 
-        // Iyzi ödeme bittikten sonra backend'e dönecek URL
-        // userId'yi query param olarak ekliyoruz
         iyzReq.setCallbackUrl("http://localhost:8080/api/billing/checkout-callback?userId=" + user.getUserID());
 
-        // Buyer
         Buyer buyer = new Buyer();
         buyer.setId(String.valueOf(user.getUserID()));
         buyer.setName(user.getUsername());
@@ -63,7 +67,6 @@ public class BillingService {
         buyer.setCountry("Türkiye");
         iyzReq.setBuyer(buyer);
 
-        // Adres
         Address addr = new Address();
         addr.setContactName(user.getUsername());
         addr.setCity("İstanbul");
@@ -72,7 +75,6 @@ public class BillingService {
         iyzReq.setBillingAddress(addr);
         iyzReq.setShippingAddress(addr);
 
-        // Basket item
         BasketItem item = new BasketItem();
         item.setId("SUB-" + planType);
         item.setName(planType.name() + " abonelik");
@@ -88,7 +90,6 @@ public class BillingService {
             throw new RuntimeException("Iyzico Hata → " + form.getErrorMessage());
         }
 
-        // ÖDEME SAYFASI LİNKİ
         return form.getPaymentPageUrl();
     }
 
@@ -107,7 +108,6 @@ public class BillingService {
             throw new RuntimeException("CheckoutForm null döndü!");
         }
 
-        // Debug log
         System.out.println("Iyzi status      = " + result.getStatus());
         System.out.println("Iyzi payStatus   = " + result.getPaymentStatus());
         System.out.println("Iyzi convId      = " + result.getConversationId());
@@ -119,20 +119,19 @@ public class BillingService {
             return;
         }
 
-        // 🔴 userId artık callback URL'den geliyor
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User bulunamadı: " + userId));
 
         int amount = result.getPaidPrice().intValue();
         PlanType planType = (amount == 200) ? PlanType.MONTHLY : PlanType.YEARLY;
 
-        // Eski aboneliği pasif yap
-        subscriptionRepository.findByUserAndActiveTrue(user).ifPresent(old -> {
+        // Eski aktif aboneliklerin hepsini pasif yap
+        List<Subscription> activeSubs = subscriptionRepository.findByUserAndActiveTrue(user);
+        for (Subscription old : activeSubs) {
             old.setActive(false);
             subscriptionRepository.save(old);
-        });
+        }
 
-        // Yeni abonelik aç
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = (planType == PlanType.MONTHLY)
                 ? start.plusMonths(1)
@@ -148,7 +147,7 @@ public class BillingService {
 
         subscriptionRepository.save(sub);
 
-        // Ödeme kaydı ekle
+        //  Burada artık bizim entity Payment kullanılıyor
         Payment payment = Payment.builder()
                 .user(user)
                 .planType(planType)
@@ -170,7 +169,8 @@ public class BillingService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User bulunamadı"));
 
-        return subscriptionRepository.findByUserAndActiveTrue(user)
+        return subscriptionRepository
+                .findFirstByUserAndActiveTrueOrderByEndDateDesc(user)
                 .map(sub -> SubscriptionDto.builder()
                         .hasActiveSubscription(true)
                         .planType(sub.getPlanType().name())
@@ -185,10 +185,14 @@ public class BillingService {
 
     private List<String> getFeatures(PlanType planType) {
         if (planType == PlanType.MONTHLY) {
-            return List.of("Günlük 40 Mesaj", "Kelime Ezber", "Görevler", "Reklamsız Kullanım");
+            return List.of("Günlük 40 Mesaj", "Kelime Ezber", "Görevler");
         }
-        return List.of("Günlük 40 Mesaj", "Kelime Ezber", "Görevler", "Reklamsız Kullanım",
-                "Yıllık Özel İstatistikler", "Premium Rozet");
+        if (planType == PlanType.TRIAL) {
+            return List.of("Günlük 40 Mesaj", "Kelime Ezber", "Görevler",
+                    "Reklamsız Kullanım", "Yıllık Özel İstatistikler", "Premium Rozet");
+        }
+        return List.of("Günlük 40 Mesaj", "Kelime Ezber", "Görevler",
+                "Reklamsız Kullanım", "Yıllık Özel İstatistikler", "Premium Rozet");
     }
 
     // -------------------------------------------------------
@@ -209,5 +213,52 @@ public class BillingService {
                         .status(p.getStatus().name())
                         .build())
                 .toList();
+    }
+
+    // -------------------------------------------------------
+    // 5) CURRENT USER YARDIMCI METODU
+    // -------------------------------------------------------
+    private User getCurrentUser() {
+        String email = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı: " + email));
+    }
+
+    // -------------------------------------------------------
+    // 6) 3 GÜNLÜK TRIAL BAŞLATMA
+    // -------------------------------------------------------
+    public void startTrialForCurrentUser() {
+        User user = getCurrentUser();
+
+        boolean hasUsedTrial = subscriptionRepository.existsByUserAndPlanType(user, PlanType.TRIAL);
+        if (hasUsedTrial) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Trial zaten kullanıldı");
+        }
+
+        boolean hasActiveSubscription =
+                subscriptionRepository.findFirstByUserAndActiveTrueOrderByEndDateDesc(user).isPresent();
+
+        if (hasActiveSubscription) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Aktif bir aboneliğin varken ücretsiz deneme kullanamazsın"
+            );
+        }
+
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = start.plusDays(3);
+
+        Subscription trial = Subscription.builder()
+                .user(user)
+                .planType(PlanType.TRIAL)
+                .startDate(start)
+                .endDate(end)
+                .active(true)
+                .build();
+
+        subscriptionRepository.save(trial);
     }
 }

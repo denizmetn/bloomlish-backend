@@ -89,6 +89,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson-callback").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/payments/lesson/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/payments/my-lessons").authenticated()
+                        // ÖDEME (abonelik / billing)
+                        .requestMatchers(HttpMethod.POST, "/api/billing/checkout").authenticated()
+                        .requestMatchers("/api/billing/checkout-callback").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/billing/start-trial").authenticated()
+
 
 
                         // Diğer her şey login ister
@@ -108,36 +113,48 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        // Frontend (Vite) için CORS
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOriginPattern("http://localhost:5173");
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS"));
+        config.setAllowedOriginPatterns(List.of(
+                "http://localhost:5173",
+                "http://127.0.0.1:5173"
+        ));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
-        // CALLBACK için full serbest CORS
+        //  İyzico callback'leri için full serbest CORS
         CorsConfiguration callbackConfig = new CorsConfiguration();
-        callbackConfig.addAllowedOriginPattern("*");
-        callbackConfig.setAllowedMethods(List.of("POST"));
+        callbackConfig.setAllowedOriginPatterns(List.of("*"));          // Hangi domainten gelirse gelsin
+        callbackConfig.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
         callbackConfig.setAllowedHeaders(List.of("*"));
-        callbackConfig.setAllowCredentials(false);
+        callbackConfig.setAllowCredentials(false);                      // server-to-server, cookie yok
 
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
+        //  WebSocket için CORS
         CorsConfiguration wsConfig = new CorsConfiguration();
         wsConfig.addAllowedOriginPattern("*");
         wsConfig.addAllowedMethod("*");
         wsConfig.addAllowedHeader("*");
         wsConfig.setAllowCredentials(true);
 
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        //  WEBSOCKET
         source.registerCorsConfiguration("/socket/**", wsConfig);
         source.registerCorsConfiguration("/socket", wsConfig);
 
-
-
-
+        // DERS ÖDEMESİ CALLBACK
         source.registerCorsConfiguration("/api/payments/lesson-callback", callbackConfig);
+
+        // ABONELİK (IYZICO) CALLBACK – BURASI EKSİKTİ
+        source.registerCorsConfiguration("/api/billing/checkout-callback", callbackConfig);
+        // istersen şöyle de yazabilirsin:
+        // source.registerCorsConfiguration("/api/billing/checkout-callback/**", callbackConfig);
+
+        // GENEL API → FRONTEND
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
+
 }
