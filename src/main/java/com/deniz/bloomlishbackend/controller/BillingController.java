@@ -59,6 +59,11 @@ public class BillingController {
                 .header("Content-Type", "text/html")
                 .body(html);
     }
+    @GetMapping("/checkout-callback")
+    public ResponseEntity<String> checkoutCallbackPage() {
+        return ResponseEntity.ok("Ödeme sonucu işlendi. Uygulamaya geri dönebilirsiniz.");
+    }
+
 
     // (İstersen bunu silebilirsin, debug için bırakılabilir)
     @PostMapping("/callback")
@@ -80,5 +85,11 @@ public class BillingController {
     ) {
         String email = userDetails.getUsername();
         return ResponseEntity.ok(billingService.getPaymentHistory(email));
+    }
+
+    @PostMapping("/start-trial")
+    public ResponseEntity<Void> startTrial() {
+        billingService.startTrialForCurrentUser();
+        return ResponseEntity.ok().build();
     }
 }
