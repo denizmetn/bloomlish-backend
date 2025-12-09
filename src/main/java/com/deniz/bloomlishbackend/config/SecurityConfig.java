@@ -39,6 +39,11 @@ public class SecurityConfig {
                         .requestMatchers("/socket/**").permitAll()
                         .requestMatchers("/socket").permitAll()
 
+                        //video
+                        .requestMatchers("/topic/**").permitAll()
+                        .requestMatchers("/app/**").permitAll()
+
+
                         // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
 

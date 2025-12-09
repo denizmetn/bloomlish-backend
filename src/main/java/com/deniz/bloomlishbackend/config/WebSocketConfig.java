@@ -14,7 +14,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     //mesajların nasıl yönlendirileceği
     @Override
     public void configureMessageBroker(MessageBrokerRegistry broker){
-        broker.enableSimpleBroker( "/user");
+        broker.enableSimpleBroker( "/user","/topic", "/queue");
         broker.setApplicationDestinationPrefixes("/app");
         broker.setUserDestinationPrefix("/user");
     }
