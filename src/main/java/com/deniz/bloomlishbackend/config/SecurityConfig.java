@@ -32,14 +32,15 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+
+                        .requestMatchers("/api/game/daily-word").permitAll()
+
                         // WebSocket → HERKESE AÇIK OLMALI
                         .requestMatchers("/socket/**").permitAll()
                         .requestMatchers("/socket").permitAll()
 
                         // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
-
-
 
                         .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")
@@ -97,6 +98,7 @@ public class SecurityConfig {
                         // lesson resource upload/delete
                         .requestMatchers(HttpMethod.POST, "/api/lessons/{lessonId}/upload-resource").hasRole("INSTRUCTOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/lessons/{lessonId}/resource/{fileName}").hasRole("INSTRUCTOR")
+
 
 
                         // Diğer her şey login ister

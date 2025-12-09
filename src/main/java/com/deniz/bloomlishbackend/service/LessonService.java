@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -63,8 +64,30 @@ public class LessonService {
     }
 
     public List<LessonDto> getAllLessons(){
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
         List<Lesson> lessons = lessonRepository.findAll();
-        return lessonMapper.toDtoList(lessons);
+
+        List<Lesson> filtered = lessons.stream()
+                .filter(lesson -> {
+
+                    LocalDate lessonDate = lesson.getDate();
+                    LocalTime startTime = lesson.getStartTime();
+
+                    if (lessonDate.isBefore(today)) {
+                        return false;
+                    }
+
+                    if (lessonDate.isEqual(today) && startTime.isBefore(now)) {
+                        return false;
+                    }
+
+                    return true;
+                })
+                .collect(Collectors.toList());
+
+        return lessonMapper.toDtoList(filtered);
     }
 
     public List<LessonDto> filterLessons(
@@ -82,6 +105,9 @@ public class LessonService {
 
         Double minP = (minPrice != null && !minPrice.isBlank()) ? Double.parseDouble(minPrice) : null;
         Double maxP = (maxPrice != null && !maxPrice.isBlank()) ? Double.parseDouble(maxPrice) : null;
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
 
         return lessonRepository.findAll().stream()
 
@@ -104,13 +130,39 @@ public class LessonService {
                 .filter(l -> minP == null || l.getPrice() >= minP)
                 .filter(l -> maxP == null || l.getPrice() <= maxP)
 
+                .filter(l -> {
+                    LocalDate lessonDate = l.getDate();
+                    LocalTime startTime = l.getStartTime();
+
+                    if (lessonDate.isBefore(today)) return false;
+                    if (lessonDate.isEqual(today) && startTime.isBefore(now)) return false;
+
+                    return true;
+                })
+
                 .map(lessonMapper::toDto)
                 .collect(Collectors.toList());
     }
     //tek ders detay
     public Optional <LessonDto> getLessonById(Long id){
-        return lessonRepository.findById(id)
-                .map(lessonMapper:: toDto);
+        Optional<Lesson> opt = lessonRepository.findById(id);
+
+        if (opt.isEmpty()) return Optional.empty();
+
+        Lesson lesson = opt.get();
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        if (lesson.getDate().isBefore(today)) {
+            return Optional.empty();
+        }
+
+        if (lesson.getDate().isEqual(today) && lesson.getStartTime().isBefore(now)) {
+            return Optional.empty();
+        }
+
+        return Optional.of(lessonMapper.toDto(lesson));
     }
 
     //eğitmenin kendi derslerini getir

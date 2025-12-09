@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -49,6 +51,17 @@ public class LessonPaymentService {
 
         Lesson lesson = lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new RuntimeException("Ders bulunamadı."));
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        if (lesson.getDate().isBefore(today)) {
+            throw new IllegalStateException("Geçmiş bir tarihteki ders satın alınamaz.");
+        }
+
+        if (lesson.getDate().isEqual(today) && lesson.getStartTime().isBefore(now)) {
+            throw new IllegalStateException("Bu dersin saati geçmiş. Satın alınamaz.");
+        }
 
         // Daha önce bu derse kayıt olmuş mu?
         if (enrollmentRepository.existsByLessonAndStudent(lesson, student)) {
