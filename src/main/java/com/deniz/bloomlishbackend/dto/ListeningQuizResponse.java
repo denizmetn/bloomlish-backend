@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ListeningQuizResponse {
+    private Long quizId;
     private String difficulty;
     private List<ListeningAudioGroupDto> audioGroups;
 }

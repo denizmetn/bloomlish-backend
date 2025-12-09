@@ -1,26 +1,32 @@
 package com.deniz.bloomlishbackend.controller;
 
-import com.deniz.bloomlishbackend.dto.ListeningQuizResponse;
-import com.deniz.bloomlishbackend.dto.QuestionDto;
-import com.deniz.bloomlishbackend.dto.QuizResultsDto;
-import com.deniz.bloomlishbackend.dto.QuizSubmitRequest;
+import com.deniz.bloomlishbackend.dto.*;
+import com.deniz.bloomlishbackend.entity.Quiz;
+import com.deniz.bloomlishbackend.entity.User;
+import com.deniz.bloomlishbackend.repository.QuizRepository;
 import com.deniz.bloomlishbackend.service.QuizService;
+import com.deniz.bloomlishbackend.service.ResultsService;
+import com.deniz.bloomlishbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/quiz")
+@RequestMapping("/api/quiz")
 @RequiredArgsConstructor
 public class QuizController {
     private final QuizService quizService;
+    private final UserService userService;
+    private final ResultsService resultsService;
+    private final QuizRepository  quizRepository;
 
     @GetMapping("/start")
-    public ResponseEntity<List<QuestionDto>> startQuiz(
+    public ResponseEntity<QuizStartResponse> startQuiz(
             @RequestParam String testType,
             @RequestParam String difficulty,
             @RequestParam Integer limit,
@@ -31,8 +37,34 @@ public class QuizController {
         }
         String username = userDetails.getUsername();
         System.out.println("Quiz başlatan kullanıcı: " + username);
-        return ResponseEntity.ok(quizService.startQuiz(testType, difficulty, limit));
+        User user = userService.findByEmail(username);
+
+        Quiz quiz = quizRepository.save(
+                Quiz.builder()
+                        .quizType(testType)
+                        .difficulty(difficulty)
+                        .duration(limit)
+                        .createdAt(LocalDateTime.now())
+                        .build()
+        );
+
+// 2) Soruları üret
+        List<QuestionDto> questions = quizService.startQuiz(testType, difficulty, limit);
+
+// 3) Her soruya quizId set et
+        questions.forEach(q -> q.setQuizId(quiz.getId()));
+        // 3) Frontend'e hem soruları hem quizId'yi gönder
+        QuizStartResponse response = QuizStartResponse.builder()
+                .quizId(quiz.getId())
+                .testType(testType)
+                .difficulty(difficulty)
+                .limit(limit)
+                .questions(questions)
+                .build();
+
+        return ResponseEntity.ok(response);
     }
+
 
     @GetMapping("/start/listening")
     public ResponseEntity<ListeningQuizResponse> startListeningQuiz(
@@ -46,9 +78,29 @@ public class QuizController {
         String username = userDetails.getUsername();
         System.out.println("Listening quiz başlatan kullanıcı: " + username);
 
+        User user = userService.findByEmail(username);
+
+        // 1) Quiz kaydı aç (tip "dinleme")
+        Quiz quiz = Quiz.builder()
+                .quizType("dinleme")
+                .difficulty(difficulty)
+                .duration(limit)
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        quiz = quizRepository.save(quiz);
+
+        // 2) Dinleme sorularını oluştur
         ListeningQuizResponse response = quizService.startListeningQuiz(difficulty, limit);
+
+        // 3) QuizId'yi response'a koy
+        response.setQuizId(quiz.getId());
+
+        // (istersen response içindeki QuestionDto'lara da quizId set edebilirsin)
+
         return ResponseEntity.ok(response);
     }
+
 
     @PostMapping("/submit")
     public ResponseEntity<QuizResultsDto> submitQuiz(
@@ -59,8 +111,24 @@ public class QuizController {
         }
         String username = userDetails.getUsername();
         System.out.println("Quiz çözen kullanıcı: " + username);
+        System.out.println("➡️ /submit request.quizId = " + request.getQuizId());
 
         QuizResultsDto result = quizService.evaluateQuiz(username, request.getAnswers());
+
+        result.setQuizId(request.getQuizId());
+        User user = userService.findByEmail(username);
+
+        // 3) DB'ye kaydet
+        resultsService.saveResult(
+                user,
+                result.getQuizId(),
+                result.getScore(),
+                result.getCorrectCount(),
+                result.getWrongCount(),
+                result.getLevel()
+
+        );
+
         return ResponseEntity.ok(result);
     }
 }

@@ -25,6 +25,9 @@ public class Question {
     @Column(nullable = true)
     private String type;
 
+    @Enumerated(EnumType.STRING)
+    private Level level;
+
     @Column(nullable = true)
     private String difficulty;
 

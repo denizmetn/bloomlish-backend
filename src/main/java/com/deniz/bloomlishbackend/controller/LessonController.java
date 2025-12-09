@@ -98,4 +98,27 @@ public class LessonController {
         return ResponseEntity.ok(updated);
     }
 
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @PostMapping("/{id}/upload-resource")
+    public ResponseEntity<String> uploadResource(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file,
+            @AuthenticationPrincipal User instructor
+    ) {
+        String savedPath = lessonService.uploadResource(id, file, instructor);
+        return ResponseEntity.ok(savedPath);
+    }
+
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @DeleteMapping("/{id}/resource/{fileName}")
+    public ResponseEntity<Void> deleteResource(
+            @PathVariable Long id,
+            @PathVariable String fileName,
+            @AuthenticationPrincipal User instructor
+    ) {
+        lessonService.deleteResource(id, fileName, instructor);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

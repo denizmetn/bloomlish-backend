@@ -25,14 +25,15 @@ public class QuizService {
     }
 
     public List<QuestionDto> startQuiz(String type, String difficulty, int count) {
+        String normalizedDifficulty = mapDifficulty(difficulty);
         // Eğer karışık test istendiyse özel metoda yönlendir
         if ("karisik".equalsIgnoreCase(type)) {
-            return startMixedQuiz(difficulty, count);
+            return startMixedQuiz(normalizedDifficulty, count);
         }
         // 1) Filtrele
         List<QuestionDto> filtered = datasets.getOrDefault(type, List.of()).stream()
                 .filter(q -> q.getDifficulty() != null &&
-                        q.getDifficulty().equalsIgnoreCase(difficulty))
+                        q.getDifficulty().equalsIgnoreCase(normalizedDifficulty))
                 .toList(); // immutable olabilir
 
         // 2) Mutable listeye kopyala
@@ -47,11 +48,12 @@ public class QuizService {
                 .toList();
     }
     public ListeningQuizResponse startListeningQuiz(String difficulty, int totalLimit) {
+        String normalizedDifficulty = mapDifficulty(difficulty);
         // 1) Sadece dinleme sorularını al ve zorluk filtresi uygula
         List<QuestionDto> listeningQs = datasets
                 .getOrDefault("dinleme", List.of()).stream()
                 .filter(q -> q.getDifficulty() != null &&
-                        q.getDifficulty().equalsIgnoreCase(difficulty))
+                        q.getDifficulty().equalsIgnoreCase(normalizedDifficulty))
                 .toList();
 
         // 2) Aynı audioUrl'e sahip soruları grupla
@@ -104,6 +106,7 @@ public class QuizService {
         return response;
     }
     public List<QuestionDto> startMixedQuiz(String difficulty, int limit) {
+        String normalizedDifficulty = mapDifficulty(difficulty);
         // Hangi tipler karışıkta olsun?
         List<String> types = List.of("kelime", "dilbilgisi", "okuma", "yazim", "dinleme");
 
@@ -112,7 +115,7 @@ public class QuizService {
         for (String type : types) {
             List<QuestionDto> list = datasets.getOrDefault(type, List.of()).stream()
                     .filter(q -> q.getDifficulty() != null &&
-                            q.getDifficulty().equalsIgnoreCase(difficulty))
+                            q.getDifficulty().equalsIgnoreCase(normalizedDifficulty))
                     .toList();
             pool.addAll(list);
         }
@@ -184,5 +187,16 @@ public class QuizService {
                 .build();
         return dto;
     }
+    private String mapDifficulty(String cefr) {
+        if (cefr == null) return "medium"; // default
+
+        return switch (cefr) {
+            case "A1-A2" -> "easy";
+            case "B1-B2" -> "medium";
+            case "C1-C2" -> "hard";
+            default -> cefr.toLowerCase();
+        };
+    }
+
 }
 
