@@ -37,18 +37,18 @@ public class CommentService {
         return comments.map(blogPostMapper::commentToDto);
     }
 
-    public void delete(Long id,String username){
+    public void delete(Long id,String email){
         Comment comment=commentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Yorum bulunamadı."));
-        if(!comment.getUsername().equals(username)){
+        if(!comment.getUser().getEmail().equals(email)){
             throw new AccessDeniedException("Bu yorumu silme yetkiniz yoktur!");
         }
         commentRepository.delete(comment);
     }
-    public CommentDto update(Long id,CommentDto commentDto,String username){
+    public CommentDto update(Long id,CommentDto commentDto,String email){
         Comment comment=commentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Yorum bulunamadı."));
-        if(!comment.getUsername().equals(username)){
+        if(!comment.getUser().getEmail().equals(email)){
             throw new AccessDeniedException("Bu yorumu silme yetkiniz yoktur!");
         }
         comment.setText(commentDto.getText());

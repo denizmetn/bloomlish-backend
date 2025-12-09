@@ -5,21 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class QuizDto {
-    private Long id;
-    private String quizType;
+public class QuizStartResponse {
+    private Long quizId;
+    private String testType;
     private String difficulty;
-    private Integer duration;
-    private LocalDateTime createdAt;
-
+    private Integer limit;
     private List<QuestionDto> questions;
-    private List<QuizResultsDto> results;
 }
-

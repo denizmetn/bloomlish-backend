@@ -23,7 +23,9 @@ public class BlogPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
     private String content;
     private int likes;
     private LocalDateTime createdAt= LocalDateTime.now();
@@ -31,6 +33,24 @@ public class BlogPost {
     @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @ElementCollection
-    private Set<String> likedUsers = new HashSet<>();//kimlerin beğendiğini tutar.
+    // likedUsers artık Set<User>
+    @ManyToMany
+    @JoinTable(
+            name = "blog_post_liked_users",
+            joinColumns = @JoinColumn(name = "blog_post_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> likedUsers = new HashSet<>();
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }

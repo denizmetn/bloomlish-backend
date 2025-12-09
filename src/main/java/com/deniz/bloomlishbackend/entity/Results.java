@@ -33,7 +33,15 @@ public class Results {
     private Integer wrong;
 
     private String level;
+    private Level currentLevel;
 
     @Column(name = "taken_at")
     private LocalDateTime takenAt = LocalDateTime.now();
+
+    @PrePersist
+    public void prePersist() {
+        if (this.takenAt == null) {
+            this.takenAt = LocalDateTime.now();
+        }
+    }
 }

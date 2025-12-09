@@ -30,5 +30,6 @@ public class QuestionDto {
     private Long quizId;
     private String audioUrl;
     private String topic;
+    private String level;
 
 }
