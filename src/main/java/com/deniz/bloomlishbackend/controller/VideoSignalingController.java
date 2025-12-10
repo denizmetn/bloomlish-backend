@@ -21,4 +21,5 @@ public class VideoSignalingController {
         // Frontend zaten senderId ile kendi mesajını ayıklıyor.
         messagingTemplate.convertAndSend("/topic/video/" + roomId, message);
     }
+
 }
