@@ -289,7 +289,7 @@ public class LessonService {
         if (now.isAfter(end))
             return "FINISHED";
 
-        // 4) Ders başladı → derse girebilir
+        // 4) Ders başladı → derse girebil∫ir
         if (now.isAfter(start))
             return "OK";
 
