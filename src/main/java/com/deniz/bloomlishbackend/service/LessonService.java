@@ -5,6 +5,7 @@ import com.deniz.bloomlishbackend.dto.LessonDto;
 import com.deniz.bloomlishbackend.entity.Lesson;
 import com.deniz.bloomlishbackend.entity.User;
 import com.deniz.bloomlishbackend.mapper.LessonMapper;
+import com.deniz.bloomlishbackend.repository.EnrollmentRepository;
 import com.deniz.bloomlishbackend.repository.LessonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class LessonService {
     private final LessonRepository lessonRepository;
     private final LessonMapper lessonMapper;
+    private final EnrollmentRepository enrollmentRepository;
 
     //yeni ders oluşturma
     public LessonDto createLesson(LessonDto lessonDto, List<MultipartFile> files, User instructor) {
@@ -262,6 +264,37 @@ public class LessonService {
 
         File file = new File("uploads/resources/" + fileName);
         if (file.exists()) file.delete();
+    }
+
+    public String canJoin(Long lessonId, User student) {
+
+        Lesson lesson = lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        // 1) Öğrenci derse kayıtlı mı?
+        boolean enrolled = enrollmentRepository.existsByLessonAndStudent(lesson, student);
+        if (!enrolled) return "NOT_ENROLLED";
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        // 2) Ders bugün değilse
+        if (!lesson.getDate().isEqual(today))
+            return "WRONG_DAY";
+
+        LocalTime start = lesson.getStartTime();
+        LocalTime end = lesson.getEndTime();
+
+        // 3) Ders zaten bitti
+        if (now.isAfter(end))
+            return "FINISHED";
+
+        // 4) Ders başladı → derse girebilir
+        if (now.isAfter(start))
+            return "OK";
+
+        // 5) Ders henüz başlamadı
+        return "NOT_STARTED";
     }
 
 

@@ -1,14 +1,9 @@
 package com.deniz.bloomlishbackend.controller;
 
 import com.deniz.bloomlishbackend.dto.LessonDto;
-import com.deniz.bloomlishbackend.entity.Lesson;
 import com.deniz.bloomlishbackend.entity.User;
-import com.deniz.bloomlishbackend.repository.LessonRepository;
-import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.deniz.bloomlishbackend.service.LessonService;
-import com.deniz.bloomlishbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,9 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/lessons")
@@ -119,6 +112,15 @@ public class LessonController {
         lessonService.deleteResource(id, fileName, instructor);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/join-check/{lessonId}")
+    public ResponseEntity<String> canJoinLesson(
+            @PathVariable Long lessonId,
+            @AuthenticationPrincipal User student
+    ) {
+        return ResponseEntity.ok(lessonService.canJoin(lessonId, student));
+    }
+
 
 
 }
