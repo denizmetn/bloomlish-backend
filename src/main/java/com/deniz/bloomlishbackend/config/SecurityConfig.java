@@ -132,14 +132,16 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         // Frontend (Vite) için CORS
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of(
+        config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
                 "http://127.0.0.1:5173",
+                "https://bloomlish-frontend.vercel.app",
                 "https://bloomlish-frontend-git-main-bloomlishs-projects.vercel.app"
         ));
+
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(false);
 
         //  İyzico callback'leri için full serbest CORS
         CorsConfiguration callbackConfig = new CorsConfiguration();
@@ -153,7 +155,7 @@ public class SecurityConfig {
         wsConfig.addAllowedOriginPattern("*");
         wsConfig.addAllowedMethod("*");
         wsConfig.addAllowedHeader("*");
-        wsConfig.setAllowCredentials(true);
+        wsConfig.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
