@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class BlogPostController {
     private final BlogPostService blogPostService;
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<BlogPostDto>  create(
             @RequestBody BlogPostDto blogPostDto,
             @AuthenticationPrincipal UserDetails userDetails ) {
@@ -53,7 +53,7 @@ public class BlogPostController {
         return ResponseEntity.ok( blogPostService.like(id,email));
     }
 
-    @PostMapping("{postID}/comment")
+    @PostMapping("/{postID}/comment")
     public ResponseEntity<CommentDto> createComment(
             @PathVariable Long postID,
             @RequestBody CommentDto commentDto,

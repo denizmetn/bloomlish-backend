@@ -113,6 +113,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/billing/checkout").authenticated()
                         .requestMatchers("/api/billing/checkout-callback").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/billing/start-trial").authenticated()
+                        .requestMatchers("/error").permitAll()
 
 
                         // Diğer her şey login ister
@@ -155,7 +156,7 @@ public class SecurityConfig {
         wsConfig.addAllowedOriginPattern("*");
         wsConfig.addAllowedMethod("*");
         wsConfig.addAllowedHeader("*");
-        wsConfig.setAllowCredentials(false);
+        wsConfig.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 

@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -66,23 +67,29 @@ public class BlogPostService {
         }
         blogPostRepository.delete(blogPost);
     }
+
+    @Transactional
     public BlogPostDto like(Long id,String email) {
         BlogPost blogPost = blogPostRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
         User currentUser = getUserByEmail(email);
         if(blogPost.getUser().getUserID().equals(currentUser.getUserID())){
-            throw new  RuntimeException("Kendi postunu beğenemezsin!");
+            throw new IllegalArgumentException("Kendi postunu beğenemezsin!");
         }
-        Set<User> likedUsers = blogPost.getLikedUsers();
-        if (likedUsers.contains(currentUser)) {
-            // zaten beğenmiş → geri çek
-           likedUsers.remove(currentUser);
-            blogPost.setLikes(blogPost.getLikes() - 1);
+        blogPost.getLikedUsers().size();
+
+        boolean alreadyLiked = blogPost.getLikedUsers().stream()
+                .anyMatch(u -> u.getUserID().equals(currentUser.getUserID()));
+
+        if (alreadyLiked) {
+            // güvenli remove
+            blogPost.getLikedUsers().removeIf(u -> u.getUserID().equals(currentUser.getUserID()));
         } else {
-            // ilk kez beğeniyor
-           likedUsers.add(currentUser);
-            blogPost.setLikes(blogPost.getLikes() + 1);
+            blogPost.getLikedUsers().add(currentUser);
         }
+
+        blogPost.setLikes(blogPost.getLikedUsers().size()); // like sayısını set'e bağla
+
 
         return blogPostMapper.toDto(  blogPostRepository.save(blogPost));
 
