@@ -7,7 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
-@Entity(name = "users")
+@Entity
+@Table(name = "\"user\"", schema = "uygulama")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -36,7 +37,8 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        String r = role.startsWith("ROLE_") ? role : "ROLE_" + role;
+        return List.of(new SimpleGrantedAuthority(r));
     }
 
     @Override
