@@ -4,6 +4,7 @@ import com.deniz.bloomlishbackend.dto.CheckoutRequest;
 import com.deniz.bloomlishbackend.dto.PaymentHistoryItemDto;
 import com.deniz.bloomlishbackend.dto.SubscriptionDto;
 import com.deniz.bloomlishbackend.entity.*;
+
 import com.deniz.bloomlishbackend.repository.PaymentRepository;
 import com.deniz.bloomlishbackend.repository.SubscriptionRepository;
 import com.deniz.bloomlishbackend.repository.UserRepository;
@@ -49,12 +50,16 @@ public class BillingService {
 
         CreateCheckoutFormInitializeRequest iyzReq = new CreateCheckoutFormInitializeRequest();
         iyzReq.setLocale(Locale.TR.getValue());
+
         iyzReq.setConversationId("SUB-" + user.getUserID());
         iyzReq.setPrice(BigDecimal.valueOf(amount));
         iyzReq.setPaidPrice(BigDecimal.valueOf(amount));
         iyzReq.setCurrency("TRY");
 
+
+
         iyzReq.setCallbackUrl("http://localhost:8080/api/billing/checkout-callback?userId=" + user.getUserID());
+
 
         Buyer buyer = new Buyer();
         buyer.setId(String.valueOf(user.getUserID()));
@@ -67,6 +72,7 @@ public class BillingService {
         buyer.setCountry("Türkiye");
         iyzReq.setBuyer(buyer);
 
+
         Address addr = new Address();
         addr.setContactName(user.getUsername());
         addr.setCity("İstanbul");
@@ -74,6 +80,7 @@ public class BillingService {
         addr.setAddress("Test adres");
         iyzReq.setBillingAddress(addr);
         iyzReq.setShippingAddress(addr);
+
 
         BasketItem item = new BasketItem();
         item.setId("SUB-" + planType);
@@ -89,6 +96,7 @@ public class BillingService {
         if (!"success".equalsIgnoreCase(form.getStatus())) {
             throw new RuntimeException("Iyzico Hata → " + form.getErrorMessage());
         }
+
 
         return form.getPaymentPageUrl();
     }
@@ -108,6 +116,7 @@ public class BillingService {
             throw new RuntimeException("CheckoutForm null döndü!");
         }
 
+
         System.out.println("Iyzi status      = " + result.getStatus());
         System.out.println("Iyzi payStatus   = " + result.getPaymentStatus());
         System.out.println("Iyzi convId      = " + result.getConversationId());
@@ -118,6 +127,7 @@ public class BillingService {
             System.out.println("Ödeme başarısız → " + result.getErrorMessage());
             return;
         }
+
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User bulunamadı: " + userId));
@@ -131,6 +141,7 @@ public class BillingService {
             old.setActive(false);
             subscriptionRepository.save(old);
         }
+
 
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = (planType == PlanType.MONTHLY)

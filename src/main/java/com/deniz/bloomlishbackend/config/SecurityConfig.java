@@ -130,6 +130,9 @@ public class SecurityConfig {
         callbackConfig.setAllowedHeaders(List.of("*"));
         callbackConfig.setAllowCredentials(false);                      // server-to-server, cookie yok
 
+
+
+
         //  WebSocket için CORS
         CorsConfiguration wsConfig = new CorsConfiguration();
         wsConfig.addAllowedOriginPattern("*");
@@ -152,6 +155,7 @@ public class SecurityConfig {
         // source.registerCorsConfiguration("/api/billing/checkout-callback/**", callbackConfig);
 
         // GENEL API → FRONTEND
+
         source.registerCorsConfiguration("/**", config);
 
         return source;
