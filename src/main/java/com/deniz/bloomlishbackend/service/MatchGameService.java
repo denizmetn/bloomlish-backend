@@ -1,6 +1,8 @@
 package com.deniz.bloomlishbackend.service;
 
 import com.deniz.bloomlishbackend.dto.MatchWordDto;
+import com.deniz.bloomlishbackend.entity.User;
+import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MatchGameService {
 
+    private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
 
     public Map<String, Object> getRound(String level, int count) {
@@ -57,5 +60,26 @@ public class MatchGameService {
         } catch (Exception e) {
             throw new RuntimeException("match-words.json okunamadı: " + e.getMessage(), e);
         }
+    }
+
+    public Map<String, Object> completeRound(String level, String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        int xp = switch (level.toUpperCase()) {
+            case "A1", "A2", "B1", "B2", "C1" -> 5;
+            default -> 5;
+        };
+
+        user.setTotalXp(user.getTotalXp() + xp);
+        user.setWeeklyXp(user.getWeeklyXp() + xp);
+        userRepository.save(user);
+
+        return Map.of(
+                "xpGained", xp,
+                "totalXp", user.getTotalXp(),
+                "weeklyXp", user.getWeeklyXp()
+        );
     }
 }

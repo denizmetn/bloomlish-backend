@@ -92,6 +92,13 @@ public class User implements UserDetails {
     public User(Long userID){
         this.userID=userID;
     }
+
+    @Column(nullable = false)
+    private int totalXp = 0;
+
+    @Column(nullable = false)
+    private int weeklyXp = 0;
+
 }
 
 

@@ -39,7 +39,9 @@ public class SecurityConfig {
                         // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
 
-
+                        .requestMatchers("/api/auth/me").authenticated()
+                        .requestMatchers("/api/auth/me/").authenticated()
+                        .requestMatchers("/api/auth/me/avatar/delete").authenticated()
 
                         .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")
@@ -78,7 +80,7 @@ public class SecurityConfig {
                         .requestMatchers("/audio/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/games/**").permitAll()
-                     
+
 
                         .requestMatchers("api/results/summary/me").authenticated()
 
