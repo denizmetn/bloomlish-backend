@@ -8,10 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Entity
+@Table(name = "\"user\"", schema = "uygulama")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +35,12 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Level currentLevel;
+    private String profileImageUrl;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        String r = role.startsWith("ROLE_") ? role : "ROLE_" + role;
+        return List.of(new SimpleGrantedAuthority(r));
     }
 
     @Override
@@ -69,7 +73,21 @@ public class User implements UserDetails {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return userID != null && userID.equals(user.userID);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(userID);
+    }
+    public String getDisplayName() {
+        return this.username;
+    }
 
     public User(Long userID){
         this.userID=userID;
