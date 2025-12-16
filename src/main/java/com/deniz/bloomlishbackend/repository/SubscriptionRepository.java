@@ -6,6 +6,7 @@ import com.deniz.bloomlishbackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +23,5 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     // En güncel aktif aboneliği getir (abonelik bilgisi sorgusunda kullandık)
     Optional<Subscription> findFirstByUserAndActiveTrueOrderByEndDateDesc(User user);
+    List<Subscription> findByUserAndActiveTrueAndEndDateBefore(User user, LocalDateTime now);
 }

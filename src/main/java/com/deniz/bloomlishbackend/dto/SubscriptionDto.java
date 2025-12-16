@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -20,7 +21,8 @@ public class SubscriptionDto {
     private String planType;   // "MONTHLY" / "YEARLY"
 
     // Ne zamana kadar geçerli?
-    private LocalDate expiresAt;
+
+    private LocalDateTime expiresAt;
 
     // Ekranda gösterilecek özellik listesi
     private List<String> features;

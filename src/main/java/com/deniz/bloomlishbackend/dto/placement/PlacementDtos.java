@@ -49,6 +49,8 @@ public class PlacementDtos {
         private int score; // % olarak: (totalCorrect / totalQuestions) * 100
         private Integer totalQuestions;
         private Double overallCorrectRate;
+        private List<PlacementQuestionResultDto> questionResults;
+
     }
 
     @Data
@@ -66,5 +68,17 @@ public class PlacementDtos {
         private String correctOption; // "A", "B", "C", "D"
         private String cefrLevel;     // "A1", "A2", "B1", ...
         private String skill;         // şimdilik kullanmıyoruz ama JSON’da dursa da olur
+    }
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class PlacementQuestionResultDto {
+        private Long questionId;
+        private String question;
+        private String selectedAnswer;
+        private String correctAnswer;
+        private boolean correct;
+        private String level;
     }
 }
