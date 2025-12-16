@@ -1,9 +1,6 @@
 package com.deniz.bloomlishbackend.service;
 
-import com.deniz.bloomlishbackend.dto.AuthResponse;
-import com.deniz.bloomlishbackend.dto.LoginRequest;
-import com.deniz.bloomlishbackend.dto.RegisterRequest;
-import com.deniz.bloomlishbackend.dto.UserDto;
+import com.deniz.bloomlishbackend.dto.*;
 import com.deniz.bloomlishbackend.entity.User;
 import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.deniz.bloomlishbackend.security.JwtService;
@@ -16,7 +13,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
@@ -98,5 +100,63 @@ public class UserService {
                 .map(u -> new UserDto(u.getUserID(), u.getUsername(), u.getEmail()))
                 .toList();
     }
+
+    public UserProfileDto getMyProfile(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User yok"));
+
+        return UserProfileDto.builder()
+                .id(user.getUserID())
+                .name(user.getDisplayName())
+                .email(user.getEmail())
+                .level(user.getCurrentLevel())
+                .profileImageUrl(user.getProfileImageUrl())
+                .build();
+    }
+    public UserProfileDto uploadAvatar(String email, MultipartFile file) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User yok"));
+
+        try {
+            Path dir = Paths.get("uploads/avatars");
+            Files.createDirectories(dir);
+
+            String filename = "user_" + user.getUserID() + ".png";
+            Path target = dir.resolve(filename);
+
+            Files.copy(
+                    file.getInputStream(),
+                    target,
+                    StandardCopyOption.REPLACE_EXISTING
+            );
+
+            String url = "http://localhost:8080/uploads/avatars/" + filename;
+            user.setProfileImageUrl(url);
+            userRepository.save(user);
+
+            return getMyProfile(email);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Avatar yüklenemedi");
+        }
+    }
+    public void removeAvatar(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User yok"));
+
+        // diskten sil (opsiyonel ama doğru)
+        if (user.getProfileImageUrl() != null) {
+            try {
+                Path path = Paths.get("uploads/avatars/user_" + user.getUserID() + ".png");
+                Files.deleteIfExists(path);
+            } catch (Exception e) {
+                // logla ama kullanıcıyı bozma
+            }
+        }
+
+        user.setProfileImageUrl(null);
+        userRepository.save(user);
+    }
+
 
 }

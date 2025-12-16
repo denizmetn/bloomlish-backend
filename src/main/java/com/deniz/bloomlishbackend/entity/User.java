@@ -35,6 +35,7 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Level currentLevel;
+    private String profileImageUrl;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -84,7 +85,9 @@ public class User implements UserDetails {
     public int hashCode() {
         return Objects.hash(userID);
     }
-
+    public String getDisplayName() {
+        return this.username;
+    }
 
     public User(Long userID){
         this.userID=userID;

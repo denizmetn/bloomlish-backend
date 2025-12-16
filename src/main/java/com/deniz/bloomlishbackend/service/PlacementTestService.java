@@ -131,7 +131,7 @@ public class PlacementTestService {
 
         String finalLevel = finalLevelEnum.name();
 
-        // Kullanıcının güncel seviyesini update et (istersen)
+
         user.setCurrentLevel(finalLevelEnum);
         userRepository.save(user);
 
