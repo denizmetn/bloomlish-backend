@@ -1,23 +1,32 @@
 package com.deniz.bloomlishbackend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "words")
+import java.time.LocalDateTime;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity
+@Table(
+        name = "words",
+        uniqueConstraints = @UniqueConstraint(columnNames = "word")
+)
 public class Word {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String word;
-    private String level;
+
+    @Column(columnDefinition = "TEXT")
+    private String meaning;
+
+    @Column(columnDefinition = "TEXT")
+    private String sentence;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
 
 }

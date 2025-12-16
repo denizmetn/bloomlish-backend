@@ -36,7 +36,8 @@ public class SecurityConfig {
 
                         .requestMatchers("/").permitAll()
 
-                        .requestMatchers("/api/game/daily-word").permitAll()
+                        .requestMatchers("/api/daily-word/**").authenticated()
+
 
                         // WebSocket → HERKESE AÇIK OLMALI
                         .requestMatchers("/socket/**").permitAll()
@@ -49,6 +50,9 @@ public class SecurityConfig {
 
                         // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
+
+                        // WORD SEED (SADECE DEV İÇİN)
+                        .requestMatchers("/api/words/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")
