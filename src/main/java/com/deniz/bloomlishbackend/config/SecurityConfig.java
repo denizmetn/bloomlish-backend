@@ -76,6 +76,10 @@ public class SecurityConfig {
                         .requestMatchers("api/quiz/start").authenticated()
                         .requestMatchers("api/quiz/submit").authenticated()
                         .requestMatchers("/audio/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/games/**").permitAll()
+                     
+
                         .requestMatchers("api/results/summary/me").authenticated()
 
 
