@@ -52,6 +52,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/me").authenticated()
                         .requestMatchers("/api/auth/me/").authenticated()
                         .requestMatchers("/api/auth/me/avatar/delete").authenticated()
+                        .requestMatchers("/api/profile/me").authenticated()
 
                         .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")
