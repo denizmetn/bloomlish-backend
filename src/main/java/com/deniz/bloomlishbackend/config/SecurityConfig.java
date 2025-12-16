@@ -87,7 +87,7 @@ public class SecurityConfig {
                         .requestMatchers("/audio/**").permitAll()
                         .requestMatchers("/api/results/summary/me").authenticated()
                         .requestMatchers("/api/results/summary/**").authenticated()
-                        .requestMatchers("/api/placement/**").permitAll()
+                        .requestMatchers("/api/placement/**").authenticated()
 
 
                         .requestMatchers(HttpMethod.POST, "/api/lessons/create").hasRole("INSTRUCTOR")

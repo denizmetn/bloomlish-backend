@@ -149,6 +149,7 @@ public class ResultsService {
                 .correct(correct)
                 .wrong(wrong)
                 .level(level)
+                .currentLevel(user.getCurrentLevel())
                 .takenAt(LocalDateTime.now())
                 .build();
 

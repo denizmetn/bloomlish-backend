@@ -21,17 +21,20 @@ public class PlacementTestService {
     private final ResultsRepository resultsRepository;
     private final PlacementQuestionRepository placementQuestionRepository;
 
-    // ✔ 1) Testi başlat
     public PlacementDtos.PlacementStartDto startPlacementTest(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı: " + email));
 
-        // Kullanıcının eski sonuçlarına bak
-        List<Results> userResults = resultsRepository.findByUserEmail(email);
+        // 1) Eğer kullanıcı daha önce placement ile seviyesini aldıysa onu kullan
+        Level estimatedLevel = user.getCurrentLevel();
 
-        Level estimatedLevel = estimateLevelFromHistory(userResults);
+        // 2) Eğer currentLevel yoksa geçmiş quiz sonuçlarından tahmin et
+        if (estimatedLevel == null) {
+            List<Results> userResults = resultsRepository.findByUserEmail(email);
+            estimatedLevel = estimateLevelFromHistory(userResults);
+        }
 
-        // Bu seviyeye göre soruları seç
+        // 3) Bu seviyeye göre soruları seç
         List<PlacementQuestion> questions = selectQuestionsForLevel(estimatedLevel, 10);
 
         List<PlacementDtos.PlacementQuestionDto> questionDtos = questions.stream()
@@ -65,24 +68,46 @@ public class PlacementTestService {
         // Level bazlı istatistik tutalım
         Map<Level, Integer> levelTotalMap = new EnumMap<>(Level.class);
         Map<Level, Integer> levelCorrectMap = new EnumMap<>(Level.class);
-
+        List<PlacementDtos.PlacementQuestionResultDto> questionResults = new ArrayList<>();
         for (Map.Entry<Long, String> entry : answers.entrySet()) {
             Long qId = entry.getKey();
             String selected = entry.getValue();
 
             PlacementQuestion q = questionMap.get(qId);
             if (q == null) continue;
-
             Level level = q.getLevel();
             levelTotalMap.put(level, levelTotalMap.getOrDefault(level, 0) + 1);
 
-            boolean isCorrect = q.getCorrectAnswer().equals(selected);
+            String correctLetter = q.getCorrectAnswer(); // ör: "B"
+            String correctText = correctLetter;          // default: harf
+
+            List<String> options = q.getOptions(); // ör: ["serious","funny","angry","quiet"]
+            if (correctLetter != null && correctLetter.matches("[ABCD]") && options != null) {
+                int idx = correctLetter.charAt(0) - 'A'; // A->0, B->1, C->2, D->3
+                if (idx >= 0 && idx < options.size()) {
+                    correctText = options.get(idx); // ör: "funny"
+                }
+            }
+
+            boolean isCorrect = Objects.equals(correctText, selected);
+
+            // Soru bazlı sonucu ekle (frontend burada doğru cevabı görecek)
+            questionResults.add(
+                    PlacementDtos.PlacementQuestionResultDto.builder()
+                            .questionId(qId)
+                            .question(q.getQuestion())
+                            .selectedAnswer(selected)
+                            .correctAnswer(correctText)
+                            .correct(isCorrect)
+                            .level(level.name())
+                            .build()
+            );
+
             if (isCorrect) {
                 totalCorrect++;
                 levelCorrectMap.put(level, levelCorrectMap.getOrDefault(level, 0) + 1);
             }
         }
-
         int totalWrong = totalQuestions - totalCorrect;
         int score = totalQuestions == 0 ? 0 : (int) Math.round((totalCorrect * 100.0) / totalQuestions);
 
@@ -101,8 +126,9 @@ public class PlacementTestService {
             }
         }
 
-        // ✅ Nihai seviye (basit algoritma: yüksek orana sahip en yüksek level)
-        Level finalLevelEnum = calculateFinalLevel(levelCorrectMap, levelTotalMap, score / 100.0);
+        Level finalLevelEnum =
+                calculateFinalLevel(user.getCurrentLevel(), score / 100.0);
+
         String finalLevel = finalLevelEnum.name();
 
         // Kullanıcının güncel seviyesini update et (istersen)
@@ -118,6 +144,7 @@ public class PlacementTestService {
                 .totalQuestions(totalQuestions)
                 .overallCorrectRate(totalQuestions == 0 ? 0 : (totalCorrect * 1.0 / totalQuestions))
                 .score(score)
+                .questionResults(questionResults)
                 .build();
     }
 
@@ -231,36 +258,31 @@ public class PlacementTestService {
                 .build();
     }
 
-    private Level calculateFinalLevel(Map<Level, Integer> levelCorrectMap,
-                                      Map<Level, Integer> levelTotalMap,
+    private Level calculateFinalLevel(Level lastFinalLevel,
                                       double overallRate) {
 
-        Level chosen = Level.A1;
+        // 🔧 Senin belirleyeceğin sınırlar
+        final double UST_SINIR = 0.75;  // bunu geçerse üst seviyeye çık
+        final double ALT_SINIR = 0.45;  // bunun altına düşerse alt seviyeye in
 
-        for (Level level : Level.values()) {
-            int total = levelTotalMap.getOrDefault(level, 0);
-            int correct = levelCorrectMap.getOrDefault(level, 0);
-
-            if (total == 0) continue;
-
-            double rate = (double) correct / total;
-
-            if (rate >= 0.7) { // %70 ve üstü ise o level'ı aday seç
-                chosen = level;
-            }
+        // 🛡 Güvenlik: hiç seviye yoksa A2 kabul edelim
+        if (lastFinalLevel == null) {
+            lastFinalLevel = Level.A2;
         }
 
-        // Genel oran çok kötüyse biraz düşür
-        if (overallRate < 0.4) {
-            chosen = demoteLevel(chosen);
+        // 🚀 Üst sınır → yükselt
+        if (overallRate >= UST_SINIR) {
+            return promoteLevel(lastFinalLevel);
         }
 
-        // Çok iyiyse bir tık yükselt
-        if (overallRate >= 0.85) {
-            chosen = promoteLevel(chosen);
+        // ⬇️ Alt sınır → düşür
+        if (overallRate < ALT_SINIR) {
+            return demoteLevel(lastFinalLevel);
         }
 
-        return chosen;
+        // ➖ Ortadaysa → AYNI KALSIN
+        return lastFinalLevel;
     }
+
 
 }
