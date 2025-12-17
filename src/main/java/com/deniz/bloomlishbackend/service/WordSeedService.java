@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.util.regex.Pattern;
+
 
 @Slf4j
 @Service
@@ -17,7 +19,7 @@ public class WordSeedService {
     private final DictionaryService dictionaryService;
     private final WordRepository wordRepository;
 
-    private static final int TARGET_COUNT = 300; // 🔥 ŞİMDİ 5
+    private static final int TARGET_COUNT = 100; // 🔥 ŞİMDİ 5
     private static final int DELAY_MS = 700;   // 🔥 RATE LIMIT YEMEZ
 
     @Transactional
@@ -35,10 +37,18 @@ public class WordSeedService {
             DictionaryResult dict = dictionaryService.fetch(word);
             if (dict == null) continue;
 
+            String sentence = dict.getExample();
+
+
+            if (!sentenceContainsExactWord(word, sentence)) {
+                log.info("SKIPPED ❌ '{}' not in sentence → {}", word, sentence);
+                continue;
+            }
+
             Word w = new Word();
-            w.setWord(word);
+            w.setWord(word);              // artık güvenli
             w.setMeaning(dict.getMeaning());
-            w.setSentence(dict.getExample());
+            w.setSentence(sentence);
 
             wordRepository.save(w);
             saved++;
@@ -54,4 +64,15 @@ public class WordSeedService {
 
         return saved;
     }
+    private boolean sentenceContainsExactWord(String word, String sentence) {
+        if (word == null || sentence == null) return false;
+
+        String lowerSentence = sentence.toLowerCase();
+        String lowerWord = word.toLowerCase();
+
+        return Pattern.compile("\\b" + Pattern.quote(lowerWord) + "\\b")
+                .matcher(lowerSentence)
+                .find();
+    }
+
 }

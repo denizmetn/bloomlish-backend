@@ -32,27 +32,36 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        .requestMatchers("/").permitAll()
-
-                        .requestMatchers("/api/daily-word/**").authenticated()
-
 
                         // WebSocket → HERKESE AÇIK OLMALI
                         .requestMatchers("/socket/**").permitAll()
                         .requestMatchers("/socket").permitAll()
+
+
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        .requestMatchers("/").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/api/words/seed-bulk").permitAll()
+
+                        .requestMatchers("/api/daily-word/**").authenticated()
+
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/me").authenticated()
+                        .requestMatchers("/api/auth/me/").authenticated()
+                        .requestMatchers("/api/auth/me/avatar/delete").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/games/**").permitAll()
+                        .requestMatchers("/api/leaderboard/weekly").authenticated()
+
 
                         //video
                         .requestMatchers("/topic/**").permitAll()
                         .requestMatchers("/app/**").permitAll()
 
 
-                        // Authentication & Register herkese açık
-                        .requestMatchers("/api/auth/**").permitAll()
-
                         // WORD SEED (SADECE DEV İÇİN)
                         .requestMatchers("/api/words/**").permitAll()
+
 
                         .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")

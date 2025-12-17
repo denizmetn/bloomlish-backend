@@ -2,7 +2,8 @@ package com.deniz.bloomlishbackend.controller;
 
 import com.deniz.bloomlishbackend.service.MatchGameService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -27,9 +28,9 @@ public class MatchGameController {
     @PostMapping("/complete")
     public Map<String, Object> complete(
             @RequestParam String level,
-            Principal principal
+            @AuthenticationPrincipal UserDetails userDetails
     ) {
-        return matchGameService.completeRound(level, principal.getName());
+        return matchGameService.completeRound(level, userDetails.getUsername());
     }
 
 }

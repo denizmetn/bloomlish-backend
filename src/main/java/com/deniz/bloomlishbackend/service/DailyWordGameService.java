@@ -21,6 +21,7 @@ public class DailyWordGameService {
     private final DailyWordRoundRepository roundRepo;
     private final DailyWordItemRepository itemRepo;
     private final WordRepository wordRepo;
+    private final UserRepository userRepo;
 
     /* ================= START (YENİ TUR) ================= */
 
@@ -121,21 +122,38 @@ public class DailyWordGameService {
             return buildResult(item);
         }
 
-        String correctForm = extractWordForm(item.getWord());
-        boolean correct = correctForm.equalsIgnoreCase(req.getSelected());
+        String actualWord =
+                findExactWordInSentence(
+                        item.getWord().getWord(),
+                        item.getWord().getSentence()
+                );
+
+        boolean correct =
+                actualWord.equalsIgnoreCase(req.getSelected());
 
         item.setAnsweredCorrect(correct);
         itemRepo.save(item);
+
+// ✅ XP EKLE
+        if (correct) {
+            User user = userRepo.findById(userId).orElseThrow();
+            user.setTotalXp(user.getTotalXp() + 1);
+            user.setWeeklyXp(user.getWeeklyXp() + 1);
+            userRepo.save(user);
+        }
+
 
         boolean finished =
                 itemRepo.findByRoundIdOrderByOrderIndex(round.getId())
                         .stream()
                         .allMatch(i -> i.getAnsweredCorrect() != null);
-
         if (finished) {
             round.setCompleted(true);
             roundRepo.save(round);
-            return buildSummaryResponse(round.getSession());
+
+            DailyWordGameResponse res = buildResult(item);
+            res.getResult().setCompleted(true); // 🔥 BU ÇOK ÖNEMLİ
+            return res;
         }
 
         return buildResult(item);
@@ -177,17 +195,21 @@ public class DailyWordGameService {
             DailyWordRound round,
             DailyWordItem item
     ) {
-
         Word word = item.getWord();
-        String correctForm = extractWordForm(word);
-        String blankSentence = blankOut(word.getSentence(), correctForm);
+        String sentence = word.getSentence();
+
+        String actualWord =
+                findExactWordInSentence(word.getWord(), sentence);
+
+        String blankSentence =
+                sentence.replace(actualWord, "_____");
 
         Set<String> options = new HashSet<>();
-        options.add(correctForm);
+        options.add(actualWord);
 
         while (options.size() < OPTION_COUNT) {
             Word w = wordRepo.getRandomWord();
-            if (w != null && !w.getWord().equalsIgnoreCase(correctForm)) {
+            if (w != null && !w.getWord().equalsIgnoreCase(actualWord)) {
                 options.add(w.getWord());
             }
         }
@@ -254,6 +276,27 @@ public class DailyWordGameService {
 
 
     /* ================= HELPERS ================= */
+
+
+    private String findExactWordInSentence(String baseWord, String sentence) {
+        if (sentence == null) return baseWord;
+
+        for (String raw : sentence.split("\\s+")) {
+            String cleaned = raw.replaceAll("[^a-zA-Z']", "");
+
+            if (cleaned.equalsIgnoreCase(baseWord)) {
+                return cleaned;
+            }
+
+            // precede → precedes / preceded / preceding
+            if (cleaned.toLowerCase().startsWith(baseWord.toLowerCase())) {
+                return cleaned;
+            }
+        }
+
+        return baseWord;
+    }
+
 
     private String extractWordForm(Word word) {
         return extractWordFormFromSentence(
