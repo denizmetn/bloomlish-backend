@@ -78,7 +78,6 @@ public class UserService {
     public List<UserDto> getAllUsers() {
         List<User> userList = userRepository.findAll();
 
-        // Şifre veya hassas alanları göndermiyoruz
         return userList.stream()
                 .map(u -> new UserDto(u.getUserID(), u.getUsername(), u.getEmail()))
                 .toList();

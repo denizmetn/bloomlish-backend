@@ -49,10 +49,11 @@ public class SecurityConfig {
 
                         // Authentication & Register herkese açık
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/auth/me").authenticated()
-                        .requestMatchers("/api/auth/me/").authenticated()
-                        .requestMatchers("/api/auth/me/avatar/delete").authenticated()
+                        .requestMatchers("/api/profile/me/avatar/delete").authenticated()
                         .requestMatchers("/api/profile/me").authenticated()
+                        .requestMatchers("/api/profile/**").authenticated()
+                        .requestMatchers("/api/profile/rozet").authenticated()
+
 
                         .requestMatchers(HttpMethod.POST, "/api/messages/send").hasRole("STUDENT")
                         .requestMatchers(HttpMethod.GET, "/api/messages/get/**").hasRole("STUDENT")
@@ -119,8 +120,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/billing/start-trial").authenticated()
                         .requestMatchers("/error").permitAll()
 
-
-                        // Diğer her şey login ister
                         .anyRequest().authenticated()
 
                 )

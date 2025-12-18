@@ -1,9 +1,10 @@
 package com.deniz.bloomlishbackend.controller;
 
-import com.deniz.bloomlishbackend.dto.UpdateProfileRequest;
-import com.deniz.bloomlishbackend.dto.UpdateProfileResponse;
-import com.deniz.bloomlishbackend.dto.UserProfileDto;
+import com.deniz.bloomlishbackend.dto.*;
+import com.deniz.bloomlishbackend.entity.User;
+import com.deniz.bloomlishbackend.service.BadgeService;
 import com.deniz.bloomlishbackend.service.ProfileService;
+import com.deniz.bloomlishbackend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -14,14 +15,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/profile")
 @RequiredArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
+    private final BadgeService badgeService;
+    private  final UserService userService;
 
     @GetMapping("/get")
-    public ResponseEntity<UserProfileDto> me(
+    public ResponseEntity<UserProfileDto> getMyProfileDto(
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         String email = userDetails.getUsername();
@@ -33,12 +38,24 @@ public class ProfileController {
             value = "/me/avatar",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public ResponseEntity<UserProfileDto> uploadAvatar(
+    public ProfileMeResponse uploadAvatar(
             @AuthenticationPrincipal UserDetails ud,
             @RequestPart("file") MultipartFile file
     ) {
-        return ResponseEntity.ok(
-                profileService.uploadAvatar(ud.getUsername(), file)
+        profileService.uploadAvatar(ud.getUsername(), file); // sadece upload işlemi
+
+        User user = userService.findByEmail(ud.getUsername());
+        List<BadgeDto> badges = badgeService.getBadgesForUser(user.getUserID());
+        String aiTip = profileService.buildAiTip(user);
+
+        return new ProfileMeResponse(
+                user.getUserID(),
+                user.getDisplayName(),
+                user.getEmail(),
+                user.getCurrentLevel(),
+                user.getProfileImageUrl(),
+                badges,
+                aiTip
         );
     }
 
@@ -53,12 +70,28 @@ public class ProfileController {
     @PutMapping("/me")
     public UpdateProfileResponse updateMe(@Valid @RequestBody UpdateProfileRequest req,
                                           Authentication auth) {
-        String currentEmail = auth.getName(); // token subject (email)
+        String currentEmail = auth.getName();
         return profileService.updateMe(currentEmail, req);
     }
 
     @GetMapping("/me")
-    public UpdateProfileResponse me(Authentication auth) {
-        return profileService.me(auth.getName());
+    public ProfileMeResponse me(@AuthenticationPrincipal UserDetails userDetails) {
+
+        String email = userDetails.getUsername();
+        User user = userService.findByEmail(email);
+
+        List<BadgeDto> badges = badgeService.getBadgesForUser(user.getUserID());
+        String aiTip = profileService.buildAiTip(user);
+
+        return new ProfileMeResponse(
+                user.getUserID(),
+                user.getDisplayName(),
+                user.getEmail(),
+                user.getCurrentLevel(),
+                user.getProfileImageUrl(),
+                badges,
+                aiTip
+        );
     }
+
 }

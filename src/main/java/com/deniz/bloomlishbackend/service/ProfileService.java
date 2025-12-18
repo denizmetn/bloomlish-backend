@@ -3,7 +3,9 @@ package com.deniz.bloomlishbackend.service;
 import com.deniz.bloomlishbackend.dto.UpdateProfileRequest;
 import com.deniz.bloomlishbackend.dto.UpdateProfileResponse;
 import com.deniz.bloomlishbackend.dto.UserProfileDto;
+import com.deniz.bloomlishbackend.entity.Results;
 import com.deniz.bloomlishbackend.entity.User;
+import com.deniz.bloomlishbackend.repository.ResultsRepository;
 import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.deniz.bloomlishbackend.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +29,7 @@ public class ProfileService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final ResultsRepository resultsRepository;
 
     public UserProfileDto getMyProfile(String email) {
         User user = userRepository.findByEmail(email)
@@ -67,13 +74,11 @@ public class ProfileService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User yok"));
 
-        // diskten sil (opsiyonel ama doğru)
         if (user.getProfileImageUrl() != null) {
             try {
                 Path path = Paths.get("uploads/avatars/user_" + user.getUserID() + ".png");
                 Files.deleteIfExists(path);
             } catch (Exception e) {
-                // logla ama kullanıcıyı bozma
             }
         }
 
@@ -85,7 +90,6 @@ public class ProfileService {
         User user = userRepository.findByEmail(currentEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // email değişiyorsa unique kontrol
         String newEmail = req.email().toLowerCase();
         if (!user.getEmail().equalsIgnoreCase(newEmail) && userRepository.existsByEmail(newEmail)) {
             throw new RuntimeException("Bu email zaten kullanılıyor");
@@ -93,8 +97,6 @@ public class ProfileService {
 
         user.setEmail(newEmail);
         user.setUsername(req.username());
-
-        // şifre boşsa değiştirme
         if (req.password() != null && !req.password().isBlank()) {
             if (req.password().length() < 6) {
                 throw new RuntimeException("Şifre en az 6 karakter olmalı");
@@ -103,14 +105,12 @@ public class ProfileService {
         }
 
         userRepository.save(user);
-
-        // subject=email olduğu için yeni token şart
         String newToken = jwtService.generateToken(user);
 
         return new UpdateProfileResponse(
                 user.getUserID(),
                 user.getEmail(),
-                user.getDisplayName(), // veya user.getUsernameField() gibi
+                user.getDisplayName(),
                 newToken
         );
     }
@@ -119,7 +119,94 @@ public class ProfileService {
         User user = userRepository.findByEmail(currentEmail)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        String token = jwtService.generateToken(user); // istersen burada token dönme, optional
+        String token = jwtService.generateToken(user);
         return new UpdateProfileResponse(user.getUserID(), user.getEmail(), user.getDisplayName(), token);
+    }
+    public String buildAiTip(User user) {
+        // Son 7 gün
+        LocalDateTime from = LocalDateTime.now().minusDays(7);
+        List<Results> recent = resultsRepository.findRecentResultsWithQuiz(user.getUserID(), from);
+
+        if (recent.isEmpty()) {
+            return "Henüz yeni başladın ✨ Bugün 1 kelime + 1 okuma testiyle seri başlatabilirsin.";
+        }
+
+        // Quiz type bazlı doğruluk: correct / (correct+wrong)
+        Map<String, int[]> agg = new HashMap<>(); // type -> [correctSum, totalSum]
+        int totalCorrect = 0, totalWrong = 0;
+
+        for (Results r : recent) {
+            String type = (r.getQuiz() != null && r.getQuiz().getQuizType() != null)
+                    ? r.getQuiz().getQuizType()
+                    : "genel";
+
+            int c = r.getCorrect() != null ? r.getCorrect() : 0;
+            int w = r.getWrong() != null ? r.getWrong() : 0;
+
+            totalCorrect += c;
+            totalWrong += w;
+
+            agg.putIfAbsent(type, new int[]{0, 0});
+            agg.get(type)[0] += c;
+            agg.get(type)[1] += (c + w);
+        }
+
+        // En güçlü ve en zayıf tipi bul
+        String weakestType = null;
+        double weakestAcc = 2.0;
+
+        String strongestType = null;
+        double strongestAcc = -1.0;
+
+        for (var e : agg.entrySet()) {
+            int correctSum = e.getValue()[0];
+            int totalSum = e.getValue()[1];
+            if (totalSum == 0) continue;
+
+            double acc = (double) correctSum / totalSum;
+
+            if (acc < weakestAcc) {
+                weakestAcc = acc;
+                weakestType = e.getKey();
+            }
+            if (acc > strongestAcc) {
+                strongestAcc = acc;
+                strongestType = e.getKey();
+            }
+        }
+
+        double overallAcc = (totalCorrect + totalWrong) == 0
+                ? 0
+                : (double) totalCorrect / (totalCorrect + totalWrong);
+
+        // Basit ama “AI gibi” kural seti
+        if (overallAcc < 0.45) {
+            return "Bu hafta biraz zorlanmışsın. Zorluk seviyesini 1 kademe düşürüp kısa testlerle tekrar güçlenelim 💪";
+        }
+
+        if (weakestType != null && weakestAcc < 0.55) {
+            return String.format(
+                    "%s tarafın çok iyi gidiyor! Bu hafta %s pratiğine günde 10 dk ekleyerek daha hızlı ilerlersin ✨",
+                    prettifyType(strongestType),
+                    prettifyType(weakestType)
+            );
+        }
+
+        return String.format(
+                "Harika gidiyorsun! Bu hafta seviyeni korumak için %s + %s karışık 2 kısa test öneriyorum ✅",
+                prettifyType(strongestType),
+                (weakestType != null ? prettifyType(weakestType) : "kelime")
+        );
+    }
+
+    private String prettifyType(String t) {
+        if (t == null) return "Genel";
+        return switch (t.toLowerCase()) {
+            case "dinleme" -> "Dinleme";
+            case "okuma" -> "Okuma";
+            case "kelime" -> "Kelime";
+            case "dilbilgisi" -> "Dilbilgisi";
+            default -> t.substring(0, 1).toUpperCase() + t.substring(1);
+        };
     }
 }
