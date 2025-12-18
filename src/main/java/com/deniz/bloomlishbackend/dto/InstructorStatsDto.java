@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 public class InstructorStatsDto {
-    private int totalStudents;
+    private int totalSoldLessons;
     private BigDecimal totalRevenue;
+    private BigDecimal thisMonthRevenue;
 }

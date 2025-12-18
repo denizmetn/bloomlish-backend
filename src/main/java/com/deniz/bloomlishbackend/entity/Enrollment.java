@@ -33,5 +33,4 @@ public class Enrollment {
 
     private LocalDateTime enrolledAt;
 
-
 }

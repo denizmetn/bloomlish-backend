@@ -20,18 +20,18 @@ public class LessonPaymentController {
     private final LessonPaymentService lessonPaymentService;
 
     @PostMapping("/lesson/{lessonId}")
-    public ResponseEntity<Map<String, String>> startLessonPayment(
+    public ResponseEntity<?> startLessonPayment(
             @PathVariable Long lessonId,
             @AuthenticationPrincipal User student
     ) {
-        String paymentUrl = lessonPaymentService.startLessonPayment(lessonId, student);
-
-        if (paymentUrl == null) {
-            return ResponseEntity.status(500).body(Map.of("error", "Ödeme linki üretilemedi"));
+        try {
+            String paymentUrl = lessonPaymentService.startLessonPayment(lessonId, student);
+            return ResponseEntity.ok(Map.of("paymentUrl", paymentUrl));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
-
-        return ResponseEntity.ok(Map.of("paymentUrl", paymentUrl));
     }
+
 
     @PostMapping("/lesson-callback")
     public ResponseEntity<String> lessonCallback(@RequestParam String token) {

@@ -101,9 +101,6 @@ public class DailyWordGameService {
     }
 
 
-
-
-    /* ================= ANSWER ================= */
     public DailyWordGameResponse answer(Long userId, DailyWordAnswerRequest req) {
 
         DailyWordItem item = itemRepo.findById(req.getWordId())
@@ -115,17 +112,16 @@ public class DailyWordGameService {
             throw new RuntimeException("Forbidden");
         }
 
-        // Eğer round zaten bitmişse → summary dön
+        // Round zaten bitmişse → direkt summary
         if (round.isCompleted()) {
             return buildSummaryResponse(round.getSession());
         }
 
-        // Aynı soruya ikinci kez cevap verilirse → eski sonuç dön
+        // Aynı soruya tekrar cevap veriyorsa → XP verme
         if (item.getAnsweredCorrect() != null) {
             return attachXp(buildResult(item), userId, 0);
         }
 
-        // Doğru kelimeyi belirle
         String actualWord = findExactWordInSentence(
                 item.getWord().getWord(),
                 item.getWord().getSentence()
@@ -133,60 +129,60 @@ public class DailyWordGameService {
 
         boolean correct = actualWord.equalsIgnoreCase(req.getSelected());
 
+        // Cevabı kaydet
         item.setAnsweredCorrect(correct);
         itemRepo.save(item);
-
-        // Round bitti mi?
-        boolean finished = itemRepo.findByRoundIdOrderByOrderIndex(round.getId())
-                .stream()
-                .allMatch(i -> i.getAnsweredCorrect() != null);
-
-        DailyWordGameResponse response = buildResult(item);
 
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // 1) Bu sorudan kazanılan XP (her doğru cevap = 1 XP)
+        int gainedForThisQuestion = correct ? 1 : 0;
+
+        if (gainedForThisQuestion > 0) {
+            user.setTotalXp(user.getTotalXp() + gainedForThisQuestion);
+            user.setWeeklyXp(user.getWeeklyXp() + gainedForThisQuestion);
+            userRepo.save(user);
+        }
+
+        // 2) Bu round'daki tüm soruları çek
+        List<DailyWordItem> roundItems =
+                itemRepo.findByRoundIdOrderByOrderIndex(round.getId());
+
+        boolean finished = roundItems.stream()
+                .allMatch(i -> i.getAnsweredCorrect() != null);
+
+        // 3) Round bittiyse → o rounddaki toplam doğru sayısı ( = bu tur XP )
+        int gainedXpForRound = 0;
         if (finished) {
+            long correctCount = roundItems.stream()
+                    .filter(i -> Boolean.TRUE.equals(i.getAnsweredCorrect()))
+                    .count();
+
+            gainedXpForRound = (int) correctCount;
 
             round.setCompleted(true);
             roundRepo.save(round);
+        }
 
-            // ✔️ Turdaki toplam doğruları hesapla
-            long totalCorrect =
-                    itemRepo.findByRoundIdOrderByOrderIndex(round.getId())
-                            .stream()
-                            .filter(i -> Boolean.TRUE.equals(i.getAnsweredCorrect()))
-                            .count();
+        DailyWordGameResponse response = buildResult(item);
 
-            // ✔️ XP ekle
-            user.setTotalXp(user.getTotalXp() + (int) totalCorrect);
-            user.setWeeklyXp(user.getWeeklyXp() + (int) totalCorrect);
-            userRepo.save(user);
-
-            // ✔️ Result flag
+        if (finished) {
             response.getResult().setCompleted(true);
-
-            // ✔️ XP response’a ekle
-            response.setGainedXp((int) totalCorrect);
-            response.setTotalXp(user.getTotalXp());
-
-            return response;
         }
 
-        // Eğer round bitmediyse sadece doğru soruya XP ver
-        int gainedXp = correct ? 1 : 0;
-
-        if (gainedXp > 0) {
-            user.setTotalXp(user.getTotalXp() + 1);
-            user.setWeeklyXp(user.getWeeklyXp() + 1);
-            userRepo.save(user);
-        }
-
-        response.setGainedXp(gainedXp);
+        response.setGainedXp(gainedXpForRound);
         response.setTotalXp(user.getTotalXp());
+
+        if (response.getResult() != null) {
+            response.getResult().setGainedXp(gainedXpForRound);
+            response.getResult().setTotalXp(user.getTotalXp());
+        }
 
         return response;
     }
+
+
 
     private DailyWordGameResponse attachXp(DailyWordGameResponse res, Long userId, int gained) {
 
@@ -205,12 +201,6 @@ public class DailyWordGameService {
 
         return res;
     }
-
-
-
-
-
-
 
     /* ================= CREATE WORDS ================= */
 

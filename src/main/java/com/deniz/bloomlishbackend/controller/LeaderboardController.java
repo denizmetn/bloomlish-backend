@@ -25,7 +25,7 @@ public class LeaderboardController {
                                         ? u.getDisplayName()
                                         : u.getUsername()
                         )
-                        .weeklyXp(u.getWeeklyXp()) // ✅ int zaten 0 veya değer
+                        .weeklyXp(u.getWeeklyXp()) //
                         .build())
                 .toList();
     }
