@@ -154,7 +154,7 @@ public class SecurityConfig {
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(false);
+        config.setAllowCredentials(true);
 
         //  İyzico callback'leri için full serbest CORS
         CorsConfiguration callbackConfig = new CorsConfiguration();
@@ -164,13 +164,18 @@ public class SecurityConfig {
         callbackConfig.setAllowCredentials(false);                      // server-to-server, cookie yok
 
         //  WebSocket için CORS
-        CorsConfiguration wsConfig = new CorsConfiguration();
-        wsConfig.addAllowedOriginPattern("*");
-        wsConfig.addAllowedMethod("*");
-        wsConfig.addAllowedHeader("*");
-        wsConfig.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration wsConfig = new CorsConfiguration();
+        wsConfig.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "https://bloomlish-frontend.vercel.app",
+                "https://bloomlish-frontend-git-main-bloomlishs-projects.vercel.app"
+        ));
+        wsConfig.addAllowedMethod("*");
+        wsConfig.addAllowedHeader("*");
+        wsConfig.setAllowCredentials(true);
 
         //  WEBSOCKET
         source.registerCorsConfiguration("/socket/**", wsConfig);

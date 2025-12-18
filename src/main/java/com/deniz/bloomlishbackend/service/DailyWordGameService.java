@@ -106,58 +106,106 @@ public class DailyWordGameService {
     /* ================= ANSWER ================= */
     public DailyWordGameResponse answer(Long userId, DailyWordAnswerRequest req) {
 
-        DailyWordItem item = itemRepo.findById(req.getWordId()).orElseThrow();
+        DailyWordItem item = itemRepo.findById(req.getWordId())
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
         DailyWordRound round = item.getRound();
 
         if (!round.getSession().getUserId().equals(userId)) {
             throw new RuntimeException("Forbidden");
         }
 
+        // Eğer round zaten bitmişse → summary dön
         if (round.isCompleted()) {
             return buildSummaryResponse(round.getSession());
         }
 
-        // 🔹 aynı item daha önce cevaplandıysa: tekrar işlem yapma
+        // Aynı soruya ikinci kez cevap verilirse → eski sonuç dön
         if (item.getAnsweredCorrect() != null) {
-            return buildResult(item);
+            return attachXp(buildResult(item), userId, 0);
         }
 
-        String actualWord =
-                findExactWordInSentence(
-                        item.getWord().getWord(),
-                        item.getWord().getSentence()
-                );
+        // Doğru kelimeyi belirle
+        String actualWord = findExactWordInSentence(
+                item.getWord().getWord(),
+                item.getWord().getSentence()
+        );
 
-        boolean correct =
-                actualWord.equalsIgnoreCase(req.getSelected());
+        boolean correct = actualWord.equalsIgnoreCase(req.getSelected());
 
         item.setAnsweredCorrect(correct);
         itemRepo.save(item);
 
-// ✅ XP EKLE
-        if (correct) {
-            User user = userRepo.findById(userId).orElseThrow();
+        // Round bitti mi?
+        boolean finished = itemRepo.findByRoundIdOrderByOrderIndex(round.getId())
+                .stream()
+                .allMatch(i -> i.getAnsweredCorrect() != null);
+
+        DailyWordGameResponse response = buildResult(item);
+
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (finished) {
+
+            round.setCompleted(true);
+            roundRepo.save(round);
+
+            // ✔️ Turdaki toplam doğruları hesapla
+            long totalCorrect =
+                    itemRepo.findByRoundIdOrderByOrderIndex(round.getId())
+                            .stream()
+                            .filter(i -> Boolean.TRUE.equals(i.getAnsweredCorrect()))
+                            .count();
+
+            // ✔️ XP ekle
+            user.setTotalXp(user.getTotalXp() + (int) totalCorrect);
+            user.setWeeklyXp(user.getWeeklyXp() + (int) totalCorrect);
+            userRepo.save(user);
+
+            // ✔️ Result flag
+            response.getResult().setCompleted(true);
+
+            // ✔️ XP response’a ekle
+            response.setGainedXp((int) totalCorrect);
+            response.setTotalXp(user.getTotalXp());
+
+            return response;
+        }
+
+        // Eğer round bitmediyse sadece doğru soruya XP ver
+        int gainedXp = correct ? 1 : 0;
+
+        if (gainedXp > 0) {
             user.setTotalXp(user.getTotalXp() + 1);
             user.setWeeklyXp(user.getWeeklyXp() + 1);
             userRepo.save(user);
         }
 
+        response.setGainedXp(gainedXp);
+        response.setTotalXp(user.getTotalXp());
 
-        boolean finished =
-                itemRepo.findByRoundIdOrderByOrderIndex(round.getId())
-                        .stream()
-                        .allMatch(i -> i.getAnsweredCorrect() != null);
-        if (finished) {
-            round.setCompleted(true);
-            roundRepo.save(round);
+        return response;
+    }
 
-            DailyWordGameResponse res = buildResult(item);
-            res.getResult().setCompleted(true); // 🔥 BU ÇOK ÖNEMLİ
-            return res;
+    private DailyWordGameResponse attachXp(DailyWordGameResponse res, Long userId, int gained) {
+
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // RESULT DTO içine ekleyelim
+        if (res.getResult() != null) {
+            res.getResult().setGainedXp(gained);
+            res.getResult().setTotalXp(user.getTotalXp());
         }
 
-        return buildResult(item);
+        // ROOT RESPONSE içine de ekleyelim
+        res.setGainedXp(gained);
+        res.setTotalXp(user.getTotalXp());
+
+        return res;
     }
+
 
 
 

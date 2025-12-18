@@ -19,4 +19,7 @@ public class DailyWordGameResponse {
     private List<WordSummaryDto> summary;
 
     private List<RoundSummaryDto> rounds;
+
+    private Integer gainedXp;
+    private Integer totalXp;
 }

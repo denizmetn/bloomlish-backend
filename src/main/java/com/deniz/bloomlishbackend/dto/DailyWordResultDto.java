@@ -8,4 +8,7 @@ public class DailyWordResultDto {
     private boolean completed;
     private String word;
     private String meaning;
+
+    private int gainedXp;   // ⭐ EKLE
+    private int totalXp;
 }
