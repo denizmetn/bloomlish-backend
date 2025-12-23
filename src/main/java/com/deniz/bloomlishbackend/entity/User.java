@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -37,6 +38,13 @@ public class User implements UserDetails {
     private Level currentLevel;
     private String profileImageUrl;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="account_status",nullable = false)
+    private AccountStatus accountStatus = AccountStatus.ACTIVE;
+
+    @Column(name="premium",nullable = false)
+    private boolean premium = false;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String r = role.startsWith("ROLE_") ? role : "ROLE_" + role;
@@ -60,17 +68,16 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountStatus != AccountStatus.BANNED;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
-        return true;
+        return accountStatus == AccountStatus.ACTIVE;
     }
 
     @Override
@@ -98,7 +105,13 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private int weeklyXp = 0;
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }
 
 

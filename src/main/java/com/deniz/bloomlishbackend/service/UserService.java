@@ -4,6 +4,7 @@ import com.deniz.bloomlishbackend.dto.AuthResponse;
 import com.deniz.bloomlishbackend.dto.LoginRequest;
 import com.deniz.bloomlishbackend.dto.RegisterRequest;
 import com.deniz.bloomlishbackend.dto.UserDto;
+import com.deniz.bloomlishbackend.entity.AccountStatus;
 import com.deniz.bloomlishbackend.entity.User;
 import com.deniz.bloomlishbackend.repository.UserRepository;
 import com.deniz.bloomlishbackend.security.JwtService;
@@ -42,6 +43,7 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .username(request.getUsername())
                 .role(role)
+                .accountStatus(AccountStatus.ACTIVE)
                 .build();
         User savedUser = userRepository.save(user);
         System.out.println("Saved user ID: " + savedUser.getUserID());
@@ -51,6 +53,7 @@ public class UserService {
                 .userId(savedUser.getUserID())
                 .username(savedUser.getUsername())
                 .email(savedUser.getEmail())
+                .role(savedUser.getRole())
                 .build();
 
     }
@@ -72,6 +75,7 @@ public class UserService {
                 .userId(loginUser.getUserID())
                 .username(loginUser.getUsername())
                 .email(loginUser.getEmail())
+                .role(loginUser.getRole())
                 .build();
     }
 
