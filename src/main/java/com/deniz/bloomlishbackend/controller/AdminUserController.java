@@ -1,8 +1,12 @@
 package com.deniz.bloomlishbackend.controller;
 
+import com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto;
+import com.deniz.bloomlishbackend.dto.AdminPaymentRowDto;
 import com.deniz.bloomlishbackend.entity.AccountStatus;
+import com.deniz.bloomlishbackend.entity.PaymentStatus;
 import com.deniz.bloomlishbackend.service.AdminUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +57,17 @@ public class AdminUserController {
 
     public record ChangeStatusRequest(AccountStatus status) {}
     public record SetPremiumRequest(boolean premium) {}
+
+    @GetMapping("/payments")
+    public Page<AdminPaymentRowDto> list(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) PaymentStatus status,
+            @RequestParam(required = false) String query
+    ) {
+        return adminService.listPayments(status, query, page, size);
+
+    }
+
 }
 

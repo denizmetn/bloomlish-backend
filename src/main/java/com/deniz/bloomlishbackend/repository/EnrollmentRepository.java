@@ -1,5 +1,6 @@
 package com.deniz.bloomlishbackend.repository;
 
+import com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto;
 import com.deniz.bloomlishbackend.entity.Enrollment;
 import com.deniz.bloomlishbackend.entity.Lesson;
 import com.deniz.bloomlishbackend.entity.User;
@@ -10,53 +11,105 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
+
     boolean existsByLessonAndStudent(Lesson lesson, User student);
 
     List<Enrollment> findByStudent(User student);
     List<Enrollment> findByLesson(Lesson lesson);
 
-    @Query("""
-        select e from Enrollment e
-        join fetch e.student s
-        join fetch e.lesson l
-        """)
-    Page<Enrollment> findAllWithStudentAndLesson(Pageable pageable);
+    Optional<Enrollment> findByLessonIdAndStudentUserID(Long lessonId, Long studentId);
 
-    //  ADMIN: paid filtreli, sayfalı liste
+
+    // ✅ ADMIN: hepsi (DTO)
     @Query("""
-        select e from Enrollment e
-        join fetch e.student s
-        join fetch e.lesson l
+        select new com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto(
+            e.id,
+            s.userID,
+            s.username,
+            s.email,
+            l.id,
+            l.name,
+            l.price,
+            case when e.paid = true then 'PAID' else 'UNPAID' end,
+            e.enrolledAt
+        )
+        from Enrollment e
+        join e.student s
+        join e.lesson l
+    """)
+    Page<AdminEnrollmentRowDto> findAdminRows(Pageable pageable);
+
+    // ✅ ADMIN: paid filtre (DTO)
+    @Query("""
+        select new com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto(
+            e.id,
+            s.userID,
+            s.username,
+            s.email,
+            l.id,
+            l.name,
+            l.price,
+            case when e.paid = true then 'PAID' else 'UNPAID' end,
+            e.enrolledAt
+        )
+        from Enrollment e
+        join e.student s
+        join e.lesson l
         where e.paid = :paid
-        """)
-    Page<Enrollment> findByPaidWithStudentAndLesson(@Param("paid") boolean paid, Pageable pageable);
+    """)
+    Page<AdminEnrollmentRowDto> findAdminRowsByPaid(@Param("paid") boolean paid, Pageable pageable);
 
-    //  ADMIN: arama (email/username/lesson)
+    // ✅ ADMIN: search (DTO)
     @Query("""
-        select e from Enrollment e
-        join fetch e.student s
-        join fetch e.lesson l
+        select new com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto(
+            e.id,
+            s.userID,
+            s.username,
+            s.email,
+            l.id,
+            l.name,
+            l.price,
+            case when e.paid = true then 'PAID' else 'UNPAID' end,
+            e.enrolledAt
+        )
+        from Enrollment e
+        join e.student s
+        join e.lesson l
         where (:q is null or :q = '' 
                or lower(s.email) like lower(concat('%', :q, '%'))
                or lower(s.username) like lower(concat('%', :q, '%'))
                or lower(l.name) like lower(concat('%', :q, '%')))
-        """)
-    Page<Enrollment> searchWithStudentAndLesson(@Param("q") String q, Pageable pageable);
+    """)
+    Page<AdminEnrollmentRowDto> searchAdminRows(@Param("q") String q, Pageable pageable);
 
-    // paid + arama birlikte
+    // ✅ ADMIN: paid + search (DTO)
     @Query("""
-        select e from Enrollment e
-        join fetch e.student s
-        join fetch e.lesson l
+        select new com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto(
+            e.id,
+            s.userID,
+            s.username,
+            s.email,
+            l.id,
+            l.name,
+            l.price,
+            case when e.paid = true then 'PAID' else 'UNPAID' end,
+            e.enrolledAt
+        )
+        from Enrollment e
+        join e.student s
+        join e.lesson l
         where e.paid = :paid
           and (:q is null or :q = '' 
                or lower(s.email) like lower(concat('%', :q, '%'))
                or lower(s.username) like lower(concat('%', :q, '%'))
                or lower(l.name) like lower(concat('%', :q, '%')))
-        """)
-    Page<Enrollment> searchByPaidWithStudentAndLesson(@Param("paid") boolean paid,
-                                                      @Param("q") String q,
-                                                      Pageable pageable);
+    """)
+    Page<AdminEnrollmentRowDto> searchAdminRowsByPaid(
+            @Param("paid") boolean paid,
+            @Param("q") String q,
+            Pageable pageable
+    );
 }
