@@ -47,11 +47,14 @@ public class SecurityConfig {
                         .requestMatchers("/api/daily-word/**").authenticated()
 
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/auth/me").authenticated()
-                        .requestMatchers("/api/auth/me/").authenticated()
-                        .requestMatchers("/api/auth/me/avatar/delete").authenticated()
+                        .requestMatchers("/api/profile/me/avatar/delete").authenticated()
+                        .requestMatchers("/api/profile/me").authenticated()
+                        .requestMatchers("/api/profile/**").authenticated()
+                        .requestMatchers("/api/profile/rozet").authenticated()
+
                         .requestMatchers(HttpMethod.GET, "/api/games/**").permitAll()
                         .requestMatchers("/api/leaderboard/weekly").authenticated()
+
 
 
                         //video
