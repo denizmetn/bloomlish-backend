@@ -37,9 +37,9 @@ public class BillingService {
     private final SubscriptionRepository subscriptionRepository;
     private final PaymentRepository paymentRepository;
 
-    // -------------------------------------------------------
+
     // 1) CHECKOUT FORM OLUŞTURMA → ÖDEME SAYFASI LİNKİ DÖNER
-    // -------------------------------------------------------
+
     public String createCheckoutFormToken(CheckoutRequest request, String email) {
 
         User user = userRepository.findByEmail(email)
@@ -101,9 +101,9 @@ public class BillingService {
         return form.getPaymentPageUrl();
     }
 
-    // -------------------------------------------------------
+
     // 2) CHECKOUT CALLBACK – Iyzi ödeme sonucunu geri yollar
-    // -------------------------------------------------------
+
     public void handleCheckoutResult(String token, Long userId) {
 
         RetrieveCheckoutFormRequest req = new RetrieveCheckoutFormRequest();
@@ -173,9 +173,8 @@ public class BillingService {
         System.out.println("Ödeme + abonelik başarılı → " + user.getEmail());
     }
 
-    // -------------------------------------------------------
     // 3) ABONELİK BİLGİSİ
-    // -------------------------------------------------------
+
     public SubscriptionDto getCurrentSubscription(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User bulunamadı"));
@@ -228,9 +227,8 @@ public class BillingService {
                 .toList();
     }
 
-    // -------------------------------------------------------
     // 5) CURRENT USER YARDIMCI METODU
-    // -------------------------------------------------------
+
     private User getCurrentUser() {
         String email = SecurityContextHolder.getContext()
                 .getAuthentication()
@@ -240,9 +238,9 @@ public class BillingService {
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı: " + email));
     }
 
-    // -------------------------------------------------------
+
     // 6) 3 GÜNLÜK TRIAL BAŞLATMA
-    // -------------------------------------------------------
+
     public void startTrialForCurrentUser() {
         User user = getCurrentUser();
 
