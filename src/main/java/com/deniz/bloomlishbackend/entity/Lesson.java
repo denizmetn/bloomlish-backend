@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,9 @@ public class Lesson {
     private double price;
     private String category;
     private String level;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
     @ElementCollection
     @CollectionTable(name = "lesson_resources", joinColumns = @JoinColumn(name = "lesson_id"))
     @Column(name = "resource_path")

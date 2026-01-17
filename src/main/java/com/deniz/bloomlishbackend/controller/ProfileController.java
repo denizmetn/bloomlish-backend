@@ -55,7 +55,8 @@ public class ProfileController {
                 user.getCurrentLevel(),
                 user.getProfileImageUrl(),
                 badges,
-                aiTip
+                aiTip,
+                user.getRole().toString()
         );
     }
 
@@ -90,7 +91,8 @@ public class ProfileController {
                 user.getCurrentLevel(),
                 user.getProfileImageUrl(),
                 badges,
-                aiTip
+                aiTip,
+                user.getRole().toString()
         );
     }
 

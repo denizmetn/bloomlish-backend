@@ -11,6 +11,7 @@ public record ProfileMeResponse(
         Level currentLevel,
         String profileImageUrl,
         List<BadgeDto> badges,
-        String aiTip
+        String aiTip,
+        String role
 ) {}
 

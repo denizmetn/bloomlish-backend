@@ -1,6 +1,5 @@
 package com.deniz.bloomlishbackend.controller;
 
-import com.deniz.bloomlishbackend.dto.AdminEnrollmentRowDto;
 import com.deniz.bloomlishbackend.dto.AdminPaymentRowDto;
 import com.deniz.bloomlishbackend.entity.AccountStatus;
 import com.deniz.bloomlishbackend.entity.PaymentStatus;

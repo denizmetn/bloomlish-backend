@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
     List<Lesson> findByInstructor(User instructor);
+    List<Lesson> findByInstructorOrderByCreatedAtDesc(User instructor);
+
 }

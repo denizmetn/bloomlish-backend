@@ -121,6 +121,16 @@ public class LessonController {
         return ResponseEntity.ok(lessonService.canJoin(lessonId, student));
     }
 
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @GetMapping("/instructor-join-check/{lessonId}")
+    public ResponseEntity<String> canInstructorJoin(
+            @PathVariable Long lessonId,
+            @AuthenticationPrincipal User instructor
+    ) {
+        return ResponseEntity.ok(lessonService.canInstructorJoin(lessonId, instructor));
+    }
+
+
 
 
 }

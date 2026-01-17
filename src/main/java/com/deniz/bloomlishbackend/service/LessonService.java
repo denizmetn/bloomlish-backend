@@ -167,13 +167,13 @@ public class LessonService {
         return Optional.of(lessonMapper.toDto(lesson));
     }
 
-    //eğitmenin kendi derslerini getir
     public List<LessonDto> getLessonsByInstructor(User instructor) {
-
-        List<Lesson> lessons = lessonRepository.findByInstructor(instructor);
-
-        return lessonMapper.toDtoList(lessons);
+        return lessonMapper.toDtoList(
+                lessonRepository.findByInstructorOrderByCreatedAtDesc(instructor)
+        );
     }
+
+
 
     // Eğitmenin kendi dersini silmesi için
     public void deleteLesson(Long lessonId, User instructor) {
@@ -285,18 +285,38 @@ public class LessonService {
         LocalTime start = lesson.getStartTime();
         LocalTime end = lesson.getEndTime();
 
-        // 3) Ders zaten bitti
-        if (now.isAfter(end))
+        if (!now.isBefore(end) )   // now >= end
             return "FINISHED";
 
-        // 4) Ders başladı → derse girebil∫ir
-        if (now.isAfter(start))
+        if (!now.isBefore(start))  // now >= start
             return "OK";
 
         // 5) Ders henüz başlamadı
         return "NOT_STARTED";
     }
 
+    public String canInstructorJoin(Long lessonId, User instructor) {
+        Lesson lesson = lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        // ders bu hocanın mı?
+        if (!lesson.getInstructor().getUserID().equals(instructor.getUserID()))
+            return "NOT_OWNER";
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        if (!lesson.getDate().isEqual(today))
+            return "WRONG_DAY";
+
+        if (!now.isBefore(lesson.getEndTime()))  // now >= end
+            return "FINISHED";
+
+        if (!now.isBefore(lesson.getStartTime())) // now >= start
+            return "OK";
+
+        return "NOT_STARTED";
+    }
 
 
 }
