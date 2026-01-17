@@ -65,7 +65,8 @@ public class LessonService {
         return lessonMapper.toDto(saved);
     }
 
-    public List<LessonDto> getAllLessons(){
+    public List<LessonDto> getAllLessons() {
+
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
 
@@ -73,6 +74,11 @@ public class LessonService {
 
         List<Lesson> filtered = lessons.stream()
                 .filter(lesson -> {
+
+
+                    if (enrollmentRepository.existsByLesson(lesson)) {
+                        return false;
+                    }
 
                     LocalDate lessonDate = lesson.getDate();
                     LocalTime startTime = lesson.getStartTime();
@@ -87,10 +93,11 @@ public class LessonService {
 
                     return true;
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         return lessonMapper.toDtoList(filtered);
     }
+
 
     public List<LessonDto> filterLessons(
             String name,
@@ -113,12 +120,13 @@ public class LessonService {
 
         return lessonRepository.findAll().stream()
 
+                .filter(l -> !enrollmentRepository.existsByLesson(l))
+
                 .filter(l -> name == null || name.isBlank() ||
                         l.getName().toLowerCase().contains(name.toLowerCase()))
 
                 .filter(l -> instructor == null || instructor.isBlank() ||
                         l.getInstructor().getUsername().equalsIgnoreCase(instructor))
-
 
                 .filter(l -> level == null || level.isBlank() ||
                         l.getLevel().equalsIgnoreCase(level))
@@ -146,12 +154,15 @@ public class LessonService {
                 .collect(Collectors.toList());
     }
     //tek ders detay
-    public Optional <LessonDto> getLessonById(Long id){
+    public Optional<LessonDto> getLessonById(Long id){
         Optional<Lesson> opt = lessonRepository.findById(id);
-
         if (opt.isEmpty()) return Optional.empty();
 
         Lesson lesson = opt.get();
+
+        if (enrollmentRepository.existsByLesson(lesson)) {
+            return Optional.empty();
+        }
 
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
@@ -166,6 +177,7 @@ public class LessonService {
 
         return Optional.of(lessonMapper.toDto(lesson));
     }
+
 
     //eğitmenin kendi derslerini getir
     public List<LessonDto> getLessonsByInstructor(User instructor) {

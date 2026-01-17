@@ -19,8 +19,8 @@ public class WordSeedService {
     private final DictionaryService dictionaryService;
     private final WordRepository wordRepository;
 
-    private static final int TARGET_COUNT = 100; // 🔥 ŞİMDİ 5
-    private static final int DELAY_MS = 700;   // 🔥 RATE LIMIT YEMEZ
+    private static final int TARGET_COUNT = 10; //  ŞİMDİ 5
+    private static final int DELAY_MS = 700;   //  RATE LIMIT YEMEZ
 
     @Transactional
     public int seed() {

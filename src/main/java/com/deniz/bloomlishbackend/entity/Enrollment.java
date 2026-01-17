@@ -10,6 +10,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(
+        name = "enrollment",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_enrollment_lesson", columnNames = {"lesson_id"})
+        }
+)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

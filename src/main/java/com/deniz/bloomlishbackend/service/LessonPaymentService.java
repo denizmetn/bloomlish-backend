@@ -14,8 +14,11 @@ import com.iyzipay.request.CreateCheckoutFormInitializeRequest;
 import com.iyzipay.request.RetrieveCheckoutFormRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -41,36 +44,41 @@ public class LessonPaymentService {
     @Value("${app.backend.url:http://localhost:8080}")
     private String backendUrl;
 
-    //ÖDEME BAŞLAT
-
+    // =========================
+    // ÖDEME BAŞLAT
+    // =========================
     public String startLessonPayment(Long lessonId, User student) {
 
         if (student == null) {
-            throw new RuntimeException("Öğrenci bulunamadı. JWT gönderilmiyor olabilir!");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED");
         }
 
         Lesson lesson = lessonRepository.findById(lessonId)
-                .orElseThrow(() -> new RuntimeException("Ders bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "LESSON_NOT_FOUND"));
 
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
 
         if (lesson.getDate().isBefore(today)) {
-            throw new IllegalStateException("Geçmiş bir tarihteki ders satın alınamaz.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "LESSON_DATE_PASSED");
         }
 
         if (lesson.getDate().isEqual(today) && lesson.getStartTime().isBefore(now)) {
-            throw new IllegalStateException("Bu dersin saati geçmiş. Satın alınamaz.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "LESSON_TIME_PASSED");
         }
 
-        // Daha önce bu derse kayıt olmuş mu?
+        // ✅ Ders dolu mu? (tek kişilik)
+        if (enrollmentRepository.existsByLesson(lesson)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "LESSON_FULL");
+        }
+
+        // ✅ Öğrenci zaten kayıtlı mı?
         if (enrollmentRepository.existsByLessonAndStudent(lesson, student)) {
-            throw new IllegalStateException("Bu derse zaten kayıt olmuşsunuz.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "ALREADY_ENROLLED");
         }
 
         BigDecimal price = BigDecimal.valueOf(lesson.getPrice());
 
-        // Iyzico checkout request
         CreateCheckoutFormInitializeRequest request = new CreateCheckoutFormInitializeRequest();
         request.setLocale(Locale.TR.getValue());
         request.setConversationId(UUID.randomUUID().toString());
@@ -85,7 +93,7 @@ public class LessonPaymentService {
         String callbackUrl = backendUrl + "/api/payments/lesson-callback";
         request.setCallbackUrl(callbackUrl);
 
-        // Buyer bilgileri
+        // Buyer
         Buyer buyer = new Buyer();
         buyer.setId(student.getUserID().toString());
         buyer.setName(student.getUsername());
@@ -99,7 +107,7 @@ public class LessonPaymentService {
         buyer.setZipCode("34000");
         request.setBuyer(buyer);
 
-        // Tek basket item (ders)
+        // Basket item
         BasketItem item = new BasketItem();
         item.setId(lesson.getId().toString());
         item.setName(lesson.getName());
@@ -108,7 +116,7 @@ public class LessonPaymentService {
         item.setPrice(price);
         request.setBasketItems(List.of(item));
 
-        // Fatura adresi
+        // Billing
         Address billingAddress = new Address();
         billingAddress.setContactName(student.getUsername());
         billingAddress.setCity("Istanbul");
@@ -117,7 +125,7 @@ public class LessonPaymentService {
         billingAddress.setZipCode("34000");
         request.setBillingAddress(billingAddress);
 
-        // Teslimat adresi
+        // Shipping
         Address shippingAddress = new Address();
         shippingAddress.setContactName(student.getUsername());
         shippingAddress.setCity("Istanbul");
@@ -126,27 +134,26 @@ public class LessonPaymentService {
         shippingAddress.setZipCode("34000");
         request.setShippingAddress(shippingAddress);
 
-
         CheckoutFormInitialize checkoutForm = CheckoutFormInitialize.create(request, iyzicoOptions);
 
-        // Hata kontrolü
         if (checkoutForm == null || checkoutForm.getPaymentPageUrl() == null) {
-            throw new RuntimeException("Ödeme sayfası oluşturulamadı: " +
-                    (checkoutForm != null ? checkoutForm.getErrorMessage() : "null"));
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "IYZICO_ERROR:" + (checkoutForm != null ? checkoutForm.getErrorMessage() : "null"));
         }
 
         return checkoutForm.getPaymentPageUrl();
     }
 
-
+    // =========================
+    // CALLBACK (ÖDEME SONRASI)
+    // =========================
     @Transactional
     public void handleLessonPaymentCallback(String token) {
 
         if (token == null || token.isEmpty()) {
-            throw new IllegalArgumentException("Token boş olamaz.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "TOKEN_EMPTY");
         }
 
-        // Iyzico doğrulama isteği
         RetrieveCheckoutFormRequest request = new RetrieveCheckoutFormRequest();
         request.setLocale(Locale.TR.getValue());
         request.setToken(token);
@@ -154,35 +161,44 @@ public class LessonPaymentService {
         CheckoutForm checkoutForm = CheckoutForm.retrieve(request, iyzicoOptions);
 
         if (checkoutForm == null) {
-            throw new IllegalStateException("Ödeme sonucu alınamadı (checkoutForm null döndü).");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CHECKOUTFORM_NULL");
         }
 
-
         if (!"SUCCESS".equalsIgnoreCase(checkoutForm.getPaymentStatus())) {
-            throw new IllegalStateException("Ödeme başarısız. Status: " + checkoutForm.getPaymentStatus());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "PAYMENT_FAILED");
         }
 
         String[] parts = checkoutForm.getBasketId().split(":");
         if (parts.length != 2) {
-            throw new IllegalStateException("Geçersiz basketId formatı: " + checkoutForm.getBasketId());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BASKETID_INVALID");
         }
 
         Long lessonId = Long.parseLong(parts[0]);
         Long studentId = Long.parseLong(parts[1]);
 
         Lesson lesson = lessonRepository.findById(lessonId)
-                .orElseThrow(() -> new RuntimeException("Ders bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "LESSON_NOT_FOUND"));
 
         User student = userRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("Öğrenci bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "STUDENT_NOT_FOUND"));
 
-        // Önceden kayıt varsa tekrar ekleme
+        // ✅ (opsiyonel) ders geçmiş/başlamışsa kayıt oluşturma
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+        if (lesson.getDate().isBefore(today) || (lesson.getDate().isEqual(today) && lesson.getStartTime().isBefore(now))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "LESSON_NOT_AVAILABLE");
+        }
+
+        // ✅ öğrenci zaten kayıtlı ise tekrar ekleme
         if (enrollmentRepository.existsByLessonAndStudent(lesson, student)) {
-            System.out.println("Enrollment zaten var, tekrar oluşturulmadı.");
             return;
         }
 
-        // Kayıt oluştur
+        // ✅ ders dolu mu? (başkası aldıysa)
+        if (enrollmentRepository.existsByLesson(lesson)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "LESSON_FULL");
+        }
+
         Enrollment enrollment = Enrollment.builder()
                 .lesson(lesson)
                 .student(student)
@@ -190,11 +206,17 @@ public class LessonPaymentService {
                 .enrolledAt(LocalDateTime.now())
                 .build();
 
-        enrollmentRepository.save(enrollment);
-
+        try {
+            enrollmentRepository.save(enrollment);
+        } catch (DataIntegrityViolationException ex) {
+            // unique constraint uk_enrollment_lesson patladıysa
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "LESSON_FULL");
+        }
     }
 
-//öğrencinin kayıt olduğu dersler
+    // =========================
+    // ÖĞRENCİNİN DERSLERİ
+    // =========================
     public List<LessonDto> getMyLessons(User student) {
         List<Enrollment> enrollments = enrollmentRepository.findByStudent(student);
         return enrollments.stream()

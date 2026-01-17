@@ -1,6 +1,5 @@
 package com.deniz.bloomlishbackend.controller;
 
-import com.deniz.bloomlishbackend.dto.InstructorStatsDto;
 import com.deniz.bloomlishbackend.dto.LessonDto;
 import com.deniz.bloomlishbackend.entity.User;
 import com.deniz.bloomlishbackend.service.LessonPaymentService;
@@ -8,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -27,11 +27,19 @@ public class LessonPaymentController {
         try {
             String paymentUrl = lessonPaymentService.startLessonPayment(lessonId, student);
             return ResponseEntity.ok(Map.of("paymentUrl", paymentUrl));
+        } catch (ResponseStatusException e) {
+            // ✅ HER ZAMAN JSON DÖN
+            // örnek: { "code": "LESSON_FULL" }
+            return ResponseEntity
+                    .status(e.getStatusCode())
+                    .body(Map.of("code", e.getReason()));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+            // ✅ beklenmeyen hatalar da JSON
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("code", "PAYMENT_START_FAILED", "message", e.getMessage()));
         }
     }
-
 
     @PostMapping("/lesson-callback")
     public ResponseEntity<String> lessonCallback(@RequestParam String token) {
@@ -46,7 +54,7 @@ public class LessonPaymentController {
                 <p>Ödeme başarılı, yönlendiriliyorsunuz...</p>
             </body>
         </html>
-    """;
+        """;
 
         return ResponseEntity.ok().header("Content-Type", "text/html").body(html);
     }
@@ -55,6 +63,4 @@ public class LessonPaymentController {
     public ResponseEntity<List<LessonDto>> myLessons(@AuthenticationPrincipal User student) {
         return ResponseEntity.ok(lessonPaymentService.getMyLessons(student));
     }
-
-    
 }
