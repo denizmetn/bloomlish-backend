@@ -20,7 +20,7 @@ public class BillingController {
 
     private final BillingService billingService;
 
-    // ⭐ 1) ÖDEME SAYFASI LİNKİ OLUŞTURMA (IYZICO CHECKOUT)
+    // 1) ÖDEME SAYFASI LİNKİ OLUŞTURMA (IYZICO CHECKOUT)
     @PostMapping("/start-checkout")
     public ResponseEntity<?> startCheckout(
             @RequestBody CheckoutRequest request,
@@ -33,7 +33,7 @@ public class BillingController {
         return ResponseEntity.ok(Map.of("paymentUrl", paymentUrl));
     }
 
-    // ⭐ 2) Iyzico callback → ödeme sonucu
+    //2) Iyzico callback → ödeme sonucu
     // Iyzico bu endpoint'e POST ile token gönderir, userId URL'den gelir
     @PostMapping("/checkout-callback")
     public ResponseEntity<?> checkoutCallback(
