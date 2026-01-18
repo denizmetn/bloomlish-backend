@@ -51,7 +51,7 @@ public class Payment {
             currency = "TRY"; // Varsayılan para birimi
         }
         if (status == null) {
-            status = PaymentStatus.PAID; // Varsayılan ödeme durumu
+            status = PaymentStatus.PENDING; // Varsayılan ödeme durumu
         }
     }
 }

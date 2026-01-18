@@ -164,7 +164,7 @@ public class BillingService {
                 .planType(planType)
                 .amount(amount)
                 .currency("TRY")
-                .status(PaymentStatus.PAID)
+                .status(PaymentStatus.SUCCESS)
                 .paidAt(LocalDateTime.now())
                 .build();
 

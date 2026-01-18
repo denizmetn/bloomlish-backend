@@ -125,6 +125,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/lessons/{lessonId}/upload-resource").hasRole("INSTRUCTOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/lessons/{lessonId}/resource/{fileName}").hasRole("INSTRUCTOR")
 
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+
                         // ÖDEME (abonelik / billing)
                         .requestMatchers(HttpMethod.POST, "/api/billing/checkout").authenticated()
                         .requestMatchers("/api/billing/checkout-callback").permitAll()
