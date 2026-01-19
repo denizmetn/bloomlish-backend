@@ -130,7 +130,4 @@ public class LessonController {
         return ResponseEntity.ok(lessonService.canInstructorJoin(lessonId, instructor));
     }
 
-
-
-
 }

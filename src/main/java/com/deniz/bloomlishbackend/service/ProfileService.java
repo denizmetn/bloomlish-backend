@@ -128,7 +128,7 @@ public class ProfileService {
         List<Results> recent = resultsRepository.findRecentResultsWithQuiz(user.getUserID(), from);
 
         if (recent.isEmpty()) {
-            return "Henüz yeni başladın ✨ Bugün 1 kelime + 1 okuma testiyle seri başlatabilirsin.";
+            return "Henüz yeni başladın  Bugün 1 kelime + 1 okuma testiyle seri başlatabilirsin.";
         }
 
         // Quiz type bazlı doğruluk: correct / (correct+wrong)
@@ -181,19 +181,19 @@ public class ProfileService {
 
         // Basit ama “AI gibi” kural seti
         if (overallAcc < 0.45) {
-            return "Bu hafta biraz zorlanmışsın. Zorluk seviyesini 1 kademe düşürüp kısa testlerle tekrar güçlenelim 💪";
+            return "Bu hafta biraz zorlanmışsın. Zorluk seviyesini 1 kademe düşürüp kısa testlerle tekrar güçlenelim ";
         }
 
         if (weakestType != null && weakestAcc < 0.55) {
             return String.format(
-                    "%s tarafın çok iyi gidiyor! Bu hafta %s pratiğine günde 10 dk ekleyerek daha hızlı ilerlersin ✨",
+                    "%s tarafın çok iyi gidiyor! Bu hafta %s pratiğine günde 10 dk ekleyerek daha hızlı ilerlersin ",
                     prettifyType(strongestType),
                     prettifyType(weakestType)
             );
         }
 
         return String.format(
-                "Harika gidiyorsun! Bu hafta seviyeni korumak için %s + %s karışık 2 kısa test öneriyorum ✅",
+                "Harika gidiyorsun! Bu hafta seviyeni korumak için %s + %s karışık 2 kısa test öneriyorum ",
                 prettifyType(strongestType),
                 (weakestType != null ? prettifyType(weakestType) : "kelime")
         );
