@@ -250,20 +250,16 @@ public class BillingService {
         if (hasUsedTrial) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Trial zaten kullanıldı");
         }
-
         boolean hasActiveSubscription =
                 subscriptionRepository.findFirstByUserAndActiveTrueOrderByEndDateDesc(user).isPresent();
-
         if (hasActiveSubscription) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Aktif bir aboneliğin varken ücretsiz deneme kullanamazsın"
             );
         }
-
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = start.plusDays(3);
-
         Subscription trial = Subscription.builder()
                 .user(user)
                 .planType(PlanType.TRIAL)

@@ -176,13 +176,7 @@ public class QuizService {
         else level = "Başlangıç";
 
         QuizResultsDto dto = QuizResultsDto.builder()
-                .id(null)
-                .userId(null)
-                .quizId(null)
-                .score(score)
-                .correctCount(correct)
-                .wrongCount(wrong)
-                .level(level)
+                .id(null).userId(null).quizId(null).score(score).correctCount(correct).wrongCount(wrong).level(level)
                 .takenAt(LocalDateTime.now())
                 .build();
         return dto;

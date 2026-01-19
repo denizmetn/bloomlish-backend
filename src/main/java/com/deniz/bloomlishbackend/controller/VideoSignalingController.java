@@ -16,9 +16,6 @@ public class VideoSignalingController {
     @MessageMapping("/video/{roomId}")
     public void handleSignal(@DestinationVariable String roomId, SignalMessage message) {
 
-        // 1-1 oda için en basit model:
-        // Odaya gelen HER sinyali /topic/video/{roomId} üzerinden herkese gönder.
-        // Frontend zaten senderId ile kendi mesajını ayıklıyor.
         messagingTemplate.convertAndSend("/topic/video/" + roomId, message);
     }
 

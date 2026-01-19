@@ -34,7 +34,7 @@ public class LessonScheduleService {
             LocalTime start = lesson.getStartTime();
             LocalTime end = lesson.getEndTime();
 
-            // 1️⃣ DERSE 1 DAKİKA KALA UYARI
+            //  DERSE 1 DAKİKA KALA UYARI
             if (now.isAfter(end.minusMinutes(1)) && now.isBefore(end)) {
                 messaging.convertAndSend(
                         "/topic/video/room-" + lesson.getId(),
@@ -42,7 +42,7 @@ public class LessonScheduleService {
                 );
             }
 
-            // 2️⃣ DERS BİTER BİTMEZ OTOMATİK AT
+            //  DERS BİTER BİTMEZ OTOMATİK AT
             if (now.isAfter(end)) {
                 messaging.convertAndSend(
                         "/topic/video/room-" + lesson.getId(),

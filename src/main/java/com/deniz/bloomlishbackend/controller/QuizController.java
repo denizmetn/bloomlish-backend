@@ -24,7 +24,6 @@ public class QuizController {
     private final UserService userService;
     private final ResultsService resultsService;
     private final QuizRepository  quizRepository;
-
     @GetMapping("/start")
     public ResponseEntity<QuizStartResponse> startQuiz(
             @RequestParam String testType,
@@ -38,19 +37,13 @@ public class QuizController {
         String username = userDetails.getUsername();
         System.out.println("Quiz başlatan kullanıcı: " + username);
         User user = userService.findByEmail(username);
-
         Quiz quiz = quizRepository.save(
                 Quiz.builder()
-                        .quizType(testType)
-                        .difficulty(difficulty)
-                        .duration(limit)
-                        .createdAt(LocalDateTime.now())
+                        .quizType(testType).difficulty(difficulty).duration(limit).createdAt(LocalDateTime.now())
                         .build()
         );
-
 // 2) Soruları üret
         List<QuestionDto> questions = quizService.startQuiz(testType, difficulty, limit);
-
 // 3) Her soruya quizId set et
         questions.forEach(q -> q.setQuizId(quiz.getId()));
         // 3) Frontend'e hem soruları hem quizId'yi gönder
@@ -61,7 +54,6 @@ public class QuizController {
                 .limit(limit)
                 .questions(questions)
                 .build();
-
         return ResponseEntity.ok(response);
     }
 

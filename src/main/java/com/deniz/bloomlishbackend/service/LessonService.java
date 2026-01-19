@@ -76,19 +76,15 @@ public class LessonService {
 
                     LocalDate lessonDate = lesson.getDate();
                     LocalTime startTime = lesson.getStartTime();
-
                     if (lessonDate.isBefore(today)) {
                         return false;
                     }
-
                     if (lessonDate.isEqual(today) && startTime.isBefore(now)) {
                         return false;
                     }
-
                     return true;
                 })
                 .collect(Collectors.toList());
-
         return lessonMapper.toDtoList(filtered);
     }
 
