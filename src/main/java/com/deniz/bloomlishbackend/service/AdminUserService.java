@@ -102,7 +102,6 @@ public class AdminUserService {
                 PaymentSpecifications.hasStatus(status)
                         .and(PaymentSpecifications.queryLikeEmailOrPlan(q));
 
-
         return paymentRepository.findAll(spec, pageable)
                 .map(p -> AdminPaymentRowDto.builder()
                         .id(p.getId())

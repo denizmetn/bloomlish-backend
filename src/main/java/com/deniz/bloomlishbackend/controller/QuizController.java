@@ -38,7 +38,6 @@ public class QuizController {
         String username = userDetails.getUsername();
         System.out.println("Quiz başlatan kullanıcı: " + username);
         User user = userService.findByEmail(username);
-
         Quiz quiz = quizRepository.save(
                 Quiz.builder()
                         .quizType(testType)
@@ -47,13 +46,8 @@ public class QuizController {
                         .createdAt(LocalDateTime.now())
                         .build()
         );
-
-// 2) Soruları üret
         List<QuestionDto> questions = quizService.startQuiz(testType, difficulty, limit);
-
-// 3) Her soruya quizId set et
         questions.forEach(q -> q.setQuizId(quiz.getId()));
-        // 3) Frontend'e hem soruları hem quizId'yi gönder
         QuizStartResponse response = QuizStartResponse.builder()
                 .quizId(quiz.getId())
                 .testType(testType)
@@ -61,7 +55,6 @@ public class QuizController {
                 .limit(limit)
                 .questions(questions)
                 .build();
-
         return ResponseEntity.ok(response);
     }
 

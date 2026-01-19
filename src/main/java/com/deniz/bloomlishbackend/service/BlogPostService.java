@@ -17,6 +17,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -56,12 +59,12 @@ public class BlogPostService {
     }
     public BlogPostDto getById(Long id) {
         BlogPost blogPost = blogPostRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Post bulunmadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post bulunamadı."));
         return blogPostMapper.toDto(blogPost);
     }
     public void delete(Long id,String email) {
         BlogPost blogPost=blogPostRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post bulunamadı."));
         if(!blogPost.getUser().getEmail().equals(email)){
             throw new AccessDeniedException("Bu postu silme yetkiniz yoktur!");
         }
@@ -71,10 +74,11 @@ public class BlogPostService {
     @Transactional
     public BlogPostDto like(Long id,String email) {
         BlogPost blogPost = blogPostRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post bulunamadı."));
         User currentUser = getUserByEmail(email);
         if(blogPost.getUser().getUserID().equals(currentUser.getUserID())){
-            throw new IllegalArgumentException("Kendi postunu beğenemezsin!");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Kendi postunu beğenemezsin!");
+
         }
         blogPost.getLikedUsers().size();
 
@@ -96,7 +100,7 @@ public class BlogPostService {
     }
     public CommentDto createComment(Long postId,CommentDto commentDto,String email) {
         BlogPost post=blogPostRepository.findById(postId)
-                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post bulunamadı."));
         User user = getUserByEmail(email);
         Comment comment=Comment.builder()
                 .text(commentDto.getText())
@@ -110,7 +114,7 @@ public class BlogPostService {
     }
     public BlogPostDto update(Long id,BlogPostDto blogPostDto,String email) {
         BlogPost post= blogPostRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Post bulunamadı."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post bulunamadı."));
         if(!post.getUser().getEmail().equals(email)){
             throw new AccessDeniedException("Bu postu değiştirme yetkiniz yoktur!");
         }

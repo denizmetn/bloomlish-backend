@@ -26,7 +26,7 @@ public class QuizService {
 
     public List<QuestionDto> startQuiz(String type, String difficulty, int count) {
         String normalizedDifficulty = mapDifficulty(difficulty);
-        // Eğer karışık test istendiyse özel metoda yönlendir
+
         if ("karisik".equalsIgnoreCase(type)) {
             return startMixedQuiz(normalizedDifficulty, count);
         }
@@ -35,14 +35,10 @@ public class QuizService {
                 .filter(q -> q.getDifficulty() != null &&
                         q.getDifficulty().equalsIgnoreCase(normalizedDifficulty))
                 .toList(); // immutable olabilir
-
-        // 2) Mutable listeye kopyala
         List<QuestionDto> all = new ArrayList<>(filtered);
 
-        // 3) Shuffle artık güvenli
         Collections.shuffle(all);
 
-        // 4) İlk 'count' kadarını dön
         return all.stream()
                 .limit(count)
                 .toList();

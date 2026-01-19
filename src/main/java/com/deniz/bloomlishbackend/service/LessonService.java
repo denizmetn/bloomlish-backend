@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -26,28 +27,24 @@ public class LessonService {
     private final LessonRepository lessonRepository;
     private final LessonMapper lessonMapper;
     private final EnrollmentRepository enrollmentRepository;
-
-    //yeni ders oluşturma
+    private Clock clock = Clock.systemDefaultZone();
+    void setClock(Clock clock) {
+        this.clock = clock;
+    }
     public LessonDto createLesson(LessonDto lessonDto, List<MultipartFile> files, User instructor) {
         Lesson lesson = lessonMapper.toEntity(lessonDto);
         lesson.setInstructor(instructor);
-
         if (files != null && !files.isEmpty()) {
             for (MultipartFile file : files) {
                 if (file != null && !file.isEmpty()) {
-
-                    // Kayıt yolu: uploads/resources/
                     java.nio.file.Path folderPath = java.nio.file.Paths.get("uploads", "resources");
-
                     String originalFilename = file.getOriginalFilename();
                     String extension = "";
                     int i = originalFilename.lastIndexOf('.');
                     if (i > 0) {
-                        extension = originalFilename.substring(i);
-                    }
+                        extension = originalFilename.substring(i);}
                     String safeFileName = UUID.randomUUID().toString() + extension;
                     java.nio.file.Path filePath = folderPath.resolve(safeFileName);
-
                     try {
                         java.nio.file.Files.createDirectories(folderPath);
 
@@ -284,30 +281,24 @@ public class LessonService {
 
         Lesson lesson = lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
-
-        // 1) Öğrenci derse kayıtlı mı?
         boolean enrolled = enrollmentRepository.existsByLessonAndStudent(lesson, student);
         if (!enrolled) return "NOT_ENROLLED";
 
-        LocalDate today = LocalDate.now();
-        LocalTime now = LocalTime.now();
+        LocalDate today = LocalDate.now(clock);
+        LocalTime now = LocalTime.now(clock);
 
-        // 2) Ders bugün değilse
         if (!lesson.getDate().isEqual(today))
             return "WRONG_DAY";
 
         LocalTime start = lesson.getStartTime();
         LocalTime end = lesson.getEndTime();
 
-        // 3) Ders zaten bitti
         if (now.isAfter(end))
             return "FINISHED";
 
-        // 4) Ders başladı → derse girebil∫ir
         if (now.isAfter(start))
             return "OK";
 
-        // 5) Ders henüz başlamadı
         return "NOT_STARTED";
     }
     public String canInstructorJoin(Long lessonId, User instructor) {
@@ -318,8 +309,8 @@ public class LessonService {
         if (!lesson.getInstructor().getUserID().equals(instructor.getUserID()))
             return "NOT_OWNER";
 
-        LocalDate today = LocalDate.now();
-        LocalTime now = LocalTime.now();
+        LocalDate today = LocalDate.now(clock);
+        LocalTime now = LocalTime.now(clock);
 
         if (!lesson.getDate().isEqual(today))
             return "WRONG_DAY";

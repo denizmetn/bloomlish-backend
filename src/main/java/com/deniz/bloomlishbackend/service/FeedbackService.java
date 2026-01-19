@@ -28,36 +28,21 @@ public class FeedbackService {
     public FeedbackResponse create(String studentEmail, FeedbackCreateRequest req) {
         User student = userRepository.findByEmail(studentEmail)
                 .orElseThrow(() -> new RuntimeException("User yok"));
-
         Lesson lesson = lessonRepository.findById(req.lessonId())
                 .orElseThrow(() -> new RuntimeException("Lesson yok"));
-
-        // 1) öğrenci bu derse kayıtlı mı + paid mi?
         Enrollment enrollment = enrollmentRepository.findByLessonAndStudent(lesson, student)
                 .orElseThrow(() -> new RuntimeException("Bu derse kayıtlı değilsiniz"));
-
         if (!enrollment.isPaid()) {
-            throw new RuntimeException("Ödeme yapılmamış");
-        }
-
-        // 2) ders bitmiş mi? (en kolayı: bitiş anı < now)
+            throw new RuntimeException("Ödeme yapılmamış");}
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime lessonEnd = lesson.getDate().atTime(lesson.getEndTime()); // date=LocalDate, endTime=LocalTime varsayımı
-
+        LocalDateTime lessonEnd = lesson.getDate().atTime(lesson.getEndTime());
         if (now.isBefore(lessonEnd)) {
-            throw new RuntimeException("Ders bitmeden geri bildirim veremezsiniz");
-        }
-
-        // 3) aynı derse 1 kez
+            throw new RuntimeException("Ders bitmeden geri bildirim veremezsiniz");}
         if (feedbackRepository.existsByLessonAndStudent(lesson, student)) {
-            throw new RuntimeException("Bu ders için zaten geri bildirim verdiniz");
-        }
-
-        // 4) validation
+            throw new RuntimeException("Bu ders için zaten geri bildirim verdiniz");}
         int rating = req.rating() == null ? 5 : req.rating();
         if (rating < 1 || rating > 5) throw new RuntimeException("Puan 1-5 arasında olmalı");
         if (req.comment() == null || req.comment().trim().isEmpty()) throw new RuntimeException("Yorum boş olamaz");
-
         LessonFeedback saved = feedbackRepository.save(
                 LessonFeedback.builder()
                         .lesson(lesson)
@@ -68,7 +53,6 @@ public class FeedbackService {
                         .createdAt(LocalDateTime.now())
                         .build()
         );
-
         return toResponse(saved);
     }
 
