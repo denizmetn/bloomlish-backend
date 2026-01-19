@@ -184,7 +184,8 @@ public class LessonService {
 
         List<Lesson> lessons = lessonRepository.findByInstructor(instructor);
 
-        return lessonMapper.toDtoList(lessons);
+        return lessonMapper.toDtoList(
+                lessonRepository.findByInstructorOrderByCreatedAtDesc(instructor));
     }
 
     // Eğitmenin kendi dersini silmesi için
@@ -306,6 +307,28 @@ public class LessonService {
             return "OK";
 
         // 5) Ders henüz başlamadı
+        return "NOT_STARTED";
+    }
+    public String canInstructorJoin(Long lessonId, User instructor) {
+        Lesson lesson = lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new RuntimeException("Ders bulunamadı"));
+
+        // ders bu hocanın mı?
+        if (!lesson.getInstructor().getUserID().equals(instructor.getUserID()))
+            return "NOT_OWNER";
+
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
+
+        if (!lesson.getDate().isEqual(today))
+            return "WRONG_DAY";
+
+        if (!now.isBefore(lesson.getEndTime()))  // now >= end
+            return "FINISHED";
+
+        if (!now.isBefore(lesson.getStartTime())) // now >= start
+            return "OK";
+
         return "NOT_STARTED";
     }
 

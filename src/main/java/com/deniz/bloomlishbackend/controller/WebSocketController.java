@@ -1,6 +1,5 @@
 package com.deniz.bloomlishbackend.controller;
 
-
 import com.deniz.bloomlishbackend.dto.MessageDto;
 import com.deniz.bloomlishbackend.entity.User;
 import com.deniz.bloomlishbackend.repository.UserRepository;

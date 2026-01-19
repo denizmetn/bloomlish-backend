@@ -54,8 +54,6 @@ public class MessageService {
         }
        List<Message> conversation= messageRepository.findConversation(user1Id, user2Id);
         return messageMapper.messageToDtoList(conversation);
-
     }
-
 }
 

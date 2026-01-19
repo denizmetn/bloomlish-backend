@@ -23,4 +23,5 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
         )
     """)
     List<Lesson> findAllAvailable();
+    List<Lesson> findByInstructorOrderByCreatedAtDesc(User instructor);
 }
