@@ -182,19 +182,19 @@ public class LessonPaymentService {
         User student = userRepository.findById(studentId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "STUDENT_NOT_FOUND"));
 
-        // ✅ (opsiyonel) ders geçmiş/başlamışsa kayıt oluşturma
+        // (opsiyonel) ders geçmiş/başlamışsa kayıt oluşturma
         LocalDate today = LocalDate.now();
         LocalTime now = LocalTime.now();
         if (lesson.getDate().isBefore(today) || (lesson.getDate().isEqual(today) && lesson.getStartTime().isBefore(now))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "LESSON_NOT_AVAILABLE");
         }
 
-        // ✅ öğrenci zaten kayıtlı ise tekrar ekleme
+        // öğrenci zaten kayıtlı ise tekrar ekleme
         if (enrollmentRepository.existsByLessonAndStudent(lesson, student)) {
             return;
         }
 
-        // ✅ ders dolu mu? (başkası aldıysa)
+        //  ders dolu mu? (başkası aldıysa)
         if (enrollmentRepository.existsByLesson(lesson)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "LESSON_FULL");
         }

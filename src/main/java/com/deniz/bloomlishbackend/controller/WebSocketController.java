@@ -29,7 +29,7 @@ public class WebSocketController {
         if (sender == null) return;
 
         if (!"STUDENT".equals(sender.getRole())) {
-            System.out.println("⛔ WS BLOKLANDI: ÖĞRENCİ DIŞI KULLANICI MESAJ GÖNDERMEYE ÇALIŞTI.");
+            System.out.println("WS BLOKLANDI: ÖĞRENCİ DIŞI KULLANICI MESAJ GÖNDERMEYE ÇALIŞTI.");
             return;
         }
 
@@ -40,3 +40,4 @@ public class WebSocketController {
         );
     }
 }
+

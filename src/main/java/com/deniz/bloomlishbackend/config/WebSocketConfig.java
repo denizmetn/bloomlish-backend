@@ -10,7 +10,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    //mesajların nasıl yönlendirileceği
     @Override
     public void configureMessageBroker(MessageBrokerRegistry broker){
         broker.enableSimpleBroker( "/user","/topic", "/queue");
@@ -26,3 +25,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     }
 }
+

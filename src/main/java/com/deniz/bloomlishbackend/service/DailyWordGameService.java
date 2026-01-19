@@ -129,14 +129,12 @@ public class DailyWordGameService {
 
         boolean correct = actualWord.equalsIgnoreCase(req.getSelected());
 
-        // Cevabı kaydet
         item.setAnsweredCorrect(correct);
         itemRepo.save(item);
 
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // 1) Bu sorudan kazanılan XP (her doğru cevap = 1 XP)
         int gainedForThisQuestion = correct ? 1 : 0;
 
         if (gainedForThisQuestion > 0) {

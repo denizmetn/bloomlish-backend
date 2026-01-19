@@ -86,11 +86,9 @@ public class LessonService {
                     if (lessonDate.isBefore(today)) {
                         return false;
                     }
-
                     if (lessonDate.isEqual(today) && startTime.isBefore(now)) {
                         return false;
                     }
-
                     return true;
                 })
                 .toList();
