@@ -23,7 +23,6 @@ public class PlacementTestController {
         return ResponseEntity.ok(response);
     }
 
-    // ✔ Cevapları gönder
     @PostMapping("/submit")
     public ResponseEntity<PlacementDtos.PlacementResultDto> submitPlacementTest(
             @AuthenticationPrincipal UserDetails userDetails,

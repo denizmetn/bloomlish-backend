@@ -45,14 +45,12 @@ public class QuizService {
     }
     public ListeningQuizResponse startListeningQuiz(String difficulty, int totalLimit) {
         String normalizedDifficulty = mapDifficulty(difficulty);
-        // 1) Sadece dinleme sorularını al ve zorluk filtresi uygula
         List<QuestionDto> listeningQs = datasets
                 .getOrDefault("dinleme", List.of()).stream()
                 .filter(q -> q.getDifficulty() != null &&
                         q.getDifficulty().equalsIgnoreCase(normalizedDifficulty))
                 .toList();
 
-        // 2) Aynı audioUrl'e sahip soruları grupla
         Map<String, List<QuestionDto>> groupedByAudio =
                 listeningQs.stream()
                         .filter(q -> q.getAudioUrl() != null)
@@ -61,7 +59,6 @@ public class QuizService {
         List<ListeningAudioGroupDto> audioGroups = new ArrayList<>();
         long audioIdCounter = 1L;
 
-        // 3) toplam soru limitini kaba şekilde uygula (istersen ilerde ince ayar yaparız)
         int remaining = totalLimit > 0 ? totalLimit : Integer.MAX_VALUE;
         List<Map.Entry<String, List<QuestionDto>>> groupEntries =
                 new ArrayList<>(groupedByAudio.entrySet());
@@ -103,7 +100,6 @@ public class QuizService {
     }
     public List<QuestionDto> startMixedQuiz(String difficulty, int limit) {
         String normalizedDifficulty = mapDifficulty(difficulty);
-        // Hangi tipler karışıkta olsun?
         List<String> types = List.of("kelime", "dilbilgisi", "okuma", "yazim", "dinleme");
 
         List<QuestionDto> pool = new ArrayList<>();
@@ -116,7 +112,6 @@ public class QuizService {
             pool.addAll(list);
         }
 
-        // Karıştır ve ilk limit kadarını dön
         Collections.shuffle(pool);
 
         return pool.stream()
@@ -184,7 +179,7 @@ public class QuizService {
         return dto;
     }
     private String mapDifficulty(String cefr) {
-        if (cefr == null) return "medium"; // default
+        if (cefr == null) return "medium";
 
         return switch (cefr) {
             case "A1-A2" -> "easy";

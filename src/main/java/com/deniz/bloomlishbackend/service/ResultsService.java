@@ -24,13 +24,13 @@ public class ResultsService {
     private final QuizRepository quizRepository;
 
     public ResultsSummaryDto getSummaryForUser(User user){
-        log.info("🔍 getSummmaryForUser çağrıldı. userID = {}", user.getUserID());
+        log.info(" getSummmaryForUser çağrıldı. userID = {}", user.getUserID());
         List<Results> results= resultsRepository.findByUserUserIDOrderByTakenAtAsc(user.getUserID());
 
-        log.info("🔍 DB'den gelen sonuç sayısı = {}", results.size());
+        log.info(" DB'den gelen sonuç sayısı = {}", results.size());
 
         if(results.isEmpty()){
-            log.info("📭 Kullanıcının hiç sonucu yok, boş summary dönüyoruz.");
+            log.info(" Kullanıcının hiç sonucu yok, boş summary dönüyoruz.");
             return ResultsSummaryDto.builder()
                     .averageScore(0)
                     .averageLevel("Bilinmiyor")
@@ -57,12 +57,12 @@ public class ResultsService {
 
         // 3) Son sonuç
         Results last = results.get(results.size() - 1);
-        log.info("✅ Son sonuç -> score={}, level={}, correct={}, wrong={}, takenAt={}",
+        log.info(" Son sonuç -> score={}, level={}, correct={}, wrong={}, takenAt={}",
                 last.getScore(), last.getLevel(), last.getCorrect(), last.getWrong(), last.getTakenAt());
 
         LastResultDto lastResultDto = LastResultDto.builder()
                 .score(last.getScore())
-                .level(last.getLevel())   // istersen burada da 'averageLevel' kullanabilirsin
+                .level(last.getLevel())
                 .correct(last.getCorrect())
                 .wrong(last.getWrong())
                 .takenAt(last.getTakenAt())
@@ -127,18 +127,17 @@ public class ResultsService {
                               Integer wrong,
                               String level) {
 
-        System.out.println("➡️ saveResult çağrıldı. Gelen quizId = " + quizId);
+        System.out.println("saveResult çağrıldı. Gelen quizId = " + quizId);
 
         Quiz quiz = null;
 
-        // 1) quizId doluysa DB'den bul
         if (quizId != null) {
             quiz = quizRepository.findById(quizId).orElse(null);
         }
 
         // 2) Eğer quizId null ise VEYA DB'de böyle bir quiz yoksa, yeni Quiz oluştur
         if (quiz == null) {
-            System.out.println("⚠️ quizId null veya DB'de yok, yeni Quiz oluşturuluyor.");
+            System.out.println(" quizId null veya DB'de yok, yeni Quiz oluşturuluyor.");
             quiz = createQuizFromLevel(level);
         }
 
@@ -156,16 +155,13 @@ public class ResultsService {
         return resultsRepository.save(result);
     }
 
-    /**
-     * quizId gelmemişse, level bilgisine göre temel bir Quiz kaydı açıyoruz.
-     */
     private Quiz createQuizFromLevel(String level) {
         String difficulty = mapLevelToDifficulty(level);
 
         Quiz quiz = Quiz.builder()
-                .quizType("GENERIC")           // istersen "auto" vb. yap
-                .difficulty(difficulty)        // easy / medium / hard
-                .duration(0)                   // şimdilik 0
+                .quizType("GENERIC")
+                .difficulty(difficulty)
+                .duration(0)
                 .createdAt(LocalDateTime.now())
                 .build();
 

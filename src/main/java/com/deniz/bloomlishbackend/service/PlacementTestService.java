@@ -25,10 +25,10 @@ public class PlacementTestService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı: " + email));
 
-        // 1) Eğer kullanıcı daha önce placement ile seviyesini aldıysa onu kullan
+        // Eğer kullanıcı daha önce placement ile seviyesini aldıysa onu kullan
         Level estimatedLevel = user.getCurrentLevel();
 
-        // 2) Eğer currentLevel yoksa geçmiş quiz sonuçlarından tahmin et
+        // Eğer currentLevel yoksa geçmiş quiz sonuçlarından tahmin et
         if (estimatedLevel == null) {
             List<Results> userResults = resultsRepository.findByUserEmail(email);
             estimatedLevel = estimateLevelFromHistory(userResults);
@@ -57,7 +57,7 @@ public class PlacementTestService {
 
         Map<Long, String> answers = request.getAnswers();
         List<Long> questionIds = new ArrayList<>(answers.keySet());
-        // Soruları DB'den çek
+
         Map<Long, PlacementQuestion> questionMap = placementQuestionRepository.findAllById(questionIds)
                 .stream()
                 .collect(Collectors.toMap(PlacementQuestion::getId, q -> q));
@@ -65,7 +65,7 @@ public class PlacementTestService {
         int totalCorrect = 0;
         int totalQuestions = request.getAnswers().size();
 
-        // Level bazlı istatistik tutalım
+        // Level bazlı istatistik tut
         Map<Level, Integer> levelTotalMap = new EnumMap<>(Level.class);
         Map<Level, Integer> levelCorrectMap = new EnumMap<>(Level.class);
         List<PlacementDtos.PlacementQuestionResultDto> questionResults = new ArrayList<>();
@@ -78,20 +78,19 @@ public class PlacementTestService {
             Level level = q.getLevel();
             levelTotalMap.put(level, levelTotalMap.getOrDefault(level, 0) + 1);
 
-            String correctLetter = q.getCorrectAnswer(); // ör: "B"
-            String correctText = correctLetter;          // default: harf
+            String correctLetter = q.getCorrectAnswer();
+            String correctText = correctLetter;
 
-            List<String> options = q.getOptions(); // ör: ["serious","funny","angry","quiet"]
+            List<String> options = q.getOptions();
             if (correctLetter != null && correctLetter.matches("[ABCD]") && options != null) {
-                int idx = correctLetter.charAt(0) - 'A'; // A->0, B->1, C->2, D->3
+                int idx = correctLetter.charAt(0) - 'A';
                 if (idx >= 0 && idx < options.size()) {
-                    correctText = options.get(idx); // ör: "funny"
+                    correctText = options.get(idx);
                 }
             }
 
             boolean isCorrect = Objects.equals(correctText, selected);
 
-            // Soru bazlı sonucu ekle (frontend burada doğru cevabı görecek)
             questionResults.add(
                     PlacementDtos.PlacementQuestionResultDto.builder()
                             .questionId(qId)
@@ -111,7 +110,6 @@ public class PlacementTestService {
         int totalWrong = totalQuestions - totalCorrect;
         int score = totalQuestions == 0 ? 0 : (int) Math.round((totalCorrect * 100.0) / totalQuestions);
 
-        // 🔍 Level bazlı istatistikleri String map'lere dönüştür (DTO öyle istiyor çünkü)
         Map<String, Integer> correctPerLevel = new HashMap<>();
         Map<String, Integer> totalPerLevel = new HashMap<>();
 
@@ -149,35 +147,29 @@ public class PlacementTestService {
     }
 
 
-    // ✔ Tahmini level (geçmiş sonuçlardan)
-    // ✔ Tahmini level (geçmiş sonuçlardan)
     private Level estimateLevelFromHistory(List<Results> results) {
         if (results == null || results.isEmpty()) {
-            // Hiç sonuç yoksa ortadan başlayalım
             return Level.A2;
         }
 
         Map<Level, List<Integer>> scoreByLevel = new EnumMap<>(Level.class);
 
         for (Results r : results) {
-            // 1) Önce Enum olan currentLevel'ı dene
             Level level = r.getCurrentLevel();
 
-            // 2) Eğer o null'sa, String level alanından dönüştürmeyi dene
             if (level == null) {
-                String str = r.getLevel(); // "A1", "B2" vs eski kayıtlar
+                String str = r.getLevel();
                 if (str == null) {
-                    continue; // hiç level bilgisi yoksa bu sonucu skip et
+                    continue;
                 }
                 try {
                     level = Level.valueOf(str.toUpperCase());
                 } catch (IllegalArgumentException e) {
-                    // Geçersiz değer ise yine skip
+
                     continue;
                 }
             }
 
-            // 3) Skor null ise yine atlatalım, yoksa ortalama hesaplarken patlar
             Integer score = r.getScore();
             if (score == null) {
                 continue;
@@ -188,7 +180,6 @@ public class PlacementTestService {
                     .add(score);
         }
 
-        // Hiç düzgün veri toplanamadıysa varsayılan seviye
         if (scoreByLevel.isEmpty()) {
             return Level.A2;
         }
@@ -205,11 +196,10 @@ public class PlacementTestService {
             }
         }
 
-        // Örn: eğer ortalama çok yüksekse (>= 80) bir üst seviyeye zıplat
         if (bestAverage >= 80) {
             return promoteLevel(bestLevel);
         }
-        // çok düşükse bir alt seviyeye indir
+
         if (bestAverage < 50) {
             return demoteLevel(bestLevel);
         }
@@ -240,9 +230,7 @@ public class PlacementTestService {
         };
     }
 
-    // Seçilecek sorular
     private List<PlacementQuestion> selectQuestionsForLevel(Level level, int count) {
-        // Basit versiyon: sadece o level’dan çek
         List<PlacementQuestion> all = placementQuestionRepository.findByLevel(level);
         Collections.shuffle(all);
         if (all.size() <= count) return all;
@@ -261,26 +249,21 @@ public class PlacementTestService {
     private Level calculateFinalLevel(Level lastFinalLevel,
                                       double overallRate) {
 
-        // 🔧 Senin belirleyeceğin sınırlar
-        final double UST_SINIR = 0.75;  // bunu geçerse üst seviyeye çık
-        final double ALT_SINIR = 0.45;  // bunun altına düşerse alt seviyeye in
+        final double UST_SINIR = 0.75;
+        final double ALT_SINIR = 0.45;
 
-        // 🛡 Güvenlik: hiç seviye yoksa A2 kabul edelim
         if (lastFinalLevel == null) {
             lastFinalLevel = Level.A2;
         }
 
-        // 🚀 Üst sınır → yükselt
         if (overallRate >= UST_SINIR) {
             return promoteLevel(lastFinalLevel);
         }
 
-        // ⬇️ Alt sınır → düşür
         if (overallRate < ALT_SINIR) {
             return demoteLevel(lastFinalLevel);
         }
 
-        // ➖ Ortadaysa → AYNI KALSIN
         return lastFinalLevel;
     }
 

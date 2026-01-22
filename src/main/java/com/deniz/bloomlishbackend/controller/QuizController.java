@@ -44,6 +44,7 @@ public class QuizController {
                         .difficulty(difficulty)
                         .duration(limit)
                         .createdAt(LocalDateTime.now())
+                        .user(user)
                         .build()
         );
         List<QuestionDto> questions = quizService.startQuiz(testType, difficulty, limit);
@@ -70,26 +71,22 @@ public class QuizController {
         }
         String username = userDetails.getUsername();
         System.out.println("Listening quiz başlatan kullanıcı: " + username);
-
         User user = userService.findByEmail(username);
 
-        // 1) Quiz kaydı aç (tip "dinleme")
+        // 1) Quiz kaydı
         Quiz quiz = Quiz.builder()
                 .quizType("dinleme")
                 .difficulty(difficulty)
                 .duration(limit)
                 .createdAt(LocalDateTime.now())
+                .user(user)
                 .build();
 
         quiz = quizRepository.save(quiz);
 
-        // 2) Dinleme sorularını oluştur
         ListeningQuizResponse response = quizService.startListeningQuiz(difficulty, limit);
 
-        // 3) QuizId'yi response'a koy
         response.setQuizId(quiz.getId());
-
-        // (istersen response içindeki QuestionDto'lara da quizId set edebilirsin)
 
         return ResponseEntity.ok(response);
     }
@@ -104,14 +101,13 @@ public class QuizController {
         }
         String username = userDetails.getUsername();
         System.out.println("Quiz çözen kullanıcı: " + username);
-        System.out.println("➡️ /submit request.quizId = " + request.getQuizId());
+        System.out.println(" /submit request.quizId = " + request.getQuizId());
 
         QuizResultsDto result = quizService.evaluateQuiz(username, request.getAnswers());
 
         result.setQuizId(request.getQuizId());
         User user = userService.findByEmail(username);
 
-        // 3) DB'ye kaydet
         resultsService.saveResult(
                 user,
                 result.getQuizId(),

@@ -21,7 +21,7 @@ public class Question {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    // Sorunun tipi: "multiple_choice", "short_answer", "listening" vb.
+    // Sorunun tipi
     @Column(nullable = true)
     private String type;
 
@@ -31,15 +31,15 @@ public class Question {
     @Column(nullable = true)
     private String difficulty;
 
-    // Soruya ipucu eklemek için
+    // Soruya ipucu
     @Column(nullable = true)
     private String hint;
 
-    // Çözüm açıklaması / öğrenme amaçlı
+    // Çözüm açıklaması
     @Column(nullable = true, columnDefinition = "TEXT")
     private String solutionExplanation;
 
-    // Tahmini süre (saniye cinsinden)
+    // Tahmini süre
     @Column(nullable = true)
     private Integer estimatedTimeSec;
 
